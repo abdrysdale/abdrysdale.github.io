@@ -7,10 +7,10 @@
 
 ---  # Site Settings
 locale            : "en-GB"
-title             : "Alex Drysdale / PhD Candidate"
+title             : "Alex Drysdale / PhD Student"
 title_separator   : "-"
 name              : &name "Alex Drysdale"
-description       : &description "PhD Candidate at Swansea University"
+description       : &description "PhD Student at Swansea University"
 url               : https://abdrysdale.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl           : "" # the subpath of your site, e.g. "/blog"
 repository        : "abdrysdale/abdrysdale.github.io"
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Alex Drysdale"
   avatar           : "profile.png"
-  bio              : "PhD Candidate in AI, fluid flow and biomedical engineering"
+  bio              : "PhD Student in AI, fluid flow and biomedical engineering"
   location         : "Swansea"
   employer         :
   pubmed           :

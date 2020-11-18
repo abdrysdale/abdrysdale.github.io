@@ -10,8 +10,6 @@ redirect_from:
 
 I am a biomedical engineering PhD student focussing on machine learning, bio-fluids and data science.
 
-In my free time I create incomplete personal websites.
-
 ## Interests
 
 - Machine Learning

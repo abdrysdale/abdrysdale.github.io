@@ -8,13 +8,13 @@ redirect_from:
   - /about.html
 ---
 
-I am a biomedical engineering PhD student focussing on machine learning, bio-fluids and data science.
+I am a biomedical engineering PhD student focussing on machine learning, bio-fluids and computational modelling.
 
 ## Interests
 
 - Machine Learning
 - Bio-fluids
-- Data Science
+- Computational Modelling
 
 ## Education
 

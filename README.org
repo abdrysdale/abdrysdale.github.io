@@ -1,17 +1,18 @@
 #+title: My Personal Website
 #+author: Alex Drysdale
 
-Hosted on GitHub pages - built with org-mode.
+Hosted on GitHub pages - built with =org-mode=.
 
 * Build
 
-#+begin_src elisp :results none
+#+begin_src elisp
   (let ((org-publish-project-alist
          '(("blog"
             :base-directory "src"
-            :publishing-directory "build"))))
-    (org-publish "blog")
-    (message "Site built!"))
+            :publishing-directory "docs"))))
+    (org-publish-all)
+    (message "Site built at %s" (format-time-string "%Y-%m-%d %H:%M:%S")))
 #+end_src
 
 #+RESULTS:
+: Site built at 2025-04-19 13:57:12

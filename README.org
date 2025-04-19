@@ -41,6 +41,16 @@ Next the home page (=index.org=) is built. Currently this is really simple and j
       (with-current-buffer (find-file-noselect index)
         (erase-buffer)
         (insert (format "#+title: %s's Personal Website\n" author))
+        (insert "\nThank you for visiting my little patch of the internet.")
+        (insert "  All views are my own and not that of my employer.\n")
+        (insert "  You can expect content on programming, Emacs, philosophy,")
+        (insert " ethics, magnets and bread.")
+        (insert "\n\n/This site is intentionally minimal")
+        (insert " and is left as an exercise to the reader./\n")
+        (insert "\n* Copying\n")
+        (insert "All material is licensed under the GNU/GPLv3 license")
+        (insert " - which can be found")
+        (insert " [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/LICENSE][here]]")
         (insert "\n* Articles\n")
         (save-buffer))
       (dolist (result (get-titles-from-org-files dir))
@@ -91,7 +101,7 @@ Finally, the site is published using =ox-publish= with this article (the =README
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 19:42:39
+: Site built at 2025-04-19 22:49:39
 
 
 * Git Hooks

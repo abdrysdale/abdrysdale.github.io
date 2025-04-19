@@ -1,3 +1,0 @@
-#+TITLE: Sitemap for project blog
-
-- [[file:index.org][Alex Drysdale's Personal Website]]

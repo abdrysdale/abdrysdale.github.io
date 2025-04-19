@@ -1,4 +1,4 @@
 #+title: Alex Drysdale's Personal Website
-#+author: Alex Drysdale
 
-/Currently a WIP/
+* Articles
+- [[file:build-process.org][Current Build Process For This Site]]

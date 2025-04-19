@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Current Build Process For This Site</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet"href="resources/style.css"type="text/css" /><header><a href="index.html">Home</a></header>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Current Build Process For This Site</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org93715cd">1. Building the Home Page</a></li>
+<li><a href="#org2f51877">2. Publishing the Site</a></li>
+<li><a href="#orga6086fd">3. Git Hooks</a></li>
+</ul>
+</div>
+</div>
+<p>
+This website is built with <code>org-mode</code> and hosted through GitHub pages.
+</p>
+
+<p>
+GitHub pages expects only a single <code>index.html</code> file and builds the site the from the <code>docs</code> directory - making the build process extremely simple.
+</p>
+
+<div id="outline-container-org93715cd" class="outline-2">
+<h2 id="org93715cd"><span class="section-number-2">1.</span> Building the Home Page</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The first thing I want on the home page is a list of articles with the article title as the description.
+To do this, I create a cons list of <code>(title . path)</code> of each article in the <code>src/</code> directory that isn't <code>index.org</code>.
+</p>
+
+<p>
+Currently, just getting the title via a regular expression seems to work well.
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #b6a0ff;">defun</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #feacd0;">get-titles-from-org-files</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(directory)
+<span style="color: #aa9e9f; background-color: #101424;">  </span><span style="color: #b0d6f5;">"Extract</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">titles</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">from</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">org</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">files</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">in</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">DIRECTORY."</span>
+<span style="color: #aa9e9f; background-color: #101424;">  </span>(<span style="color: #b6a0ff;">let</span><span style="color: #aa9e9f; background-color: #101424;"> </span>((files<span style="color: #aa9e9f; background-color: #101424;"> </span>(directory-files<span style="color: #aa9e9f; background-color: #101424;"> </span>directory<span style="color: #aa9e9f; background-color: #101424;"> </span>t<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"\\.org$"</span>)))
+<span style="color: #aa9e9f; background-color: #101424;">    </span>(mapcar<span style="color: #aa9e9f; background-color: #101424;"> </span>(<span style="color: #b6a0ff;">lambda</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(file)
+<span style="color: #aa9e9f; background-color: #101424;">              </span>(<span style="color: #b6a0ff;">let</span><span style="color: #aa9e9f; background-color: #101424;"> </span>((rel-file<span style="color: #aa9e9f; background-color: #101424;"> </span>(file-relative-name
+<span style="color: #aa9e9f; background-color: #101424;">                               </span>file<span style="color: #aa9e9f; background-color: #101424;"> </span>(expand-file-name<span style="color: #aa9e9f; background-color: #101424;"> </span>directory))))
+<span style="color: #aa9e9f; background-color: #101424;">                </span>(<span style="color: #b6a0ff;">with-temp-buffer</span>
+<span style="color: #aa9e9f; background-color: #101424;">                  </span>(insert-file-contents<span style="color: #aa9e9f; background-color: #101424;"> </span>file)
+<span style="color: #aa9e9f; background-color: #101424;">                  </span>(goto-char<span style="color: #aa9e9f; background-color: #101424;"> </span>(point-min))
+<span style="color: #aa9e9f; background-color: #101424;">                  </span>(<span style="color: #b6a0ff;">if</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(re-search-forward<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"^#\\+title:</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #abab00;">\\</span><span style="color: #e7a59a;">(</span><span style="color: #79a8ff;">.*</span><span style="color: #abab00;">\\</span><span style="color: #e7a59a;">)</span><span style="color: #79a8ff;">$"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>nil<span style="color: #aa9e9f; background-color: #101424;"> </span>t)
+<span style="color: #aa9e9f; background-color: #101424;">                      </span>(cons<span style="color: #aa9e9f; background-color: #101424;"> </span>rel-file<span style="color: #aa9e9f; background-color: #101424;"> </span>(match-string<span style="color: #aa9e9f; background-color: #101424;"> </span>1))
+<span style="color: #aa9e9f; background-color: #101424;">                    </span>(cons<span style="color: #aa9e9f; background-color: #101424;"> </span>rel-file<span style="color: #aa9e9f; background-color: #101424;"> </span>nil)))))
+<span style="color: #aa9e9f; background-color: #101424;">              </span>files))<span style="color: #000000; background-color: #d0d040;">)</span>
+</pre>
+</div>
+
+<p>
+Next the home page (<code>index.org</code>) is built. Currently this is really simple and just includes the author's name and a list of the all the articles.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #b6a0ff;">defun</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #feacd0;">build-index</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(author)
+<span style="color: #aa9e9f; background-color: #101424;">  </span><span style="color: #b0d6f5;">"Build</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">the</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">index</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">in</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">DIR."</span>
+<span style="color: #aa9e9f; background-color: #101424;">  </span><span style="color: #a8a8a8;">;;</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">Copies</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">the</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">README.org</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">to</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">the</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">index.</span>
+<span style="color: #aa9e9f; background-color: #101424;">  </span>(<span style="color: #b6a0ff;">let</span><span style="color: #aa9e9f; background-color: #101424;"> </span>((dir<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"src"</span>)
+<span style="color: #aa9e9f; background-color: #101424;">        </span>(index<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"src/index.org"</span>))
+<span style="color: #aa9e9f; background-color: #101424;">    </span>(<span style="color: #b6a0ff;">with-current-buffer</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(find-file-noselect<span style="color: #aa9e9f; background-color: #101424;"> </span>index)
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(erase-buffer)
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(insert<span style="color: #aa9e9f; background-color: #101424;"> </span>(format<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"#+title:</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">%s's</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">Personal</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">Website\n"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>author))
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(insert<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"\n*</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">Articles\n"</span>)
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(save-buffer))
+<span style="color: #aa9e9f; background-color: #101424;">    </span>(<span style="color: #b6a0ff;">dolist</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(result<span style="color: #aa9e9f; background-color: #101424;"> </span>(get-titles-from-org-files<span style="color: #aa9e9f; background-color: #101424;"> </span>dir))
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(<span style="color: #b6a0ff;">let</span><span style="color: #aa9e9f; background-color: #101424;"> </span>((path<span style="color: #aa9e9f; background-color: #101424;"> </span>(car<span style="color: #aa9e9f; background-color: #101424;"> </span>result))
+<span style="color: #aa9e9f; background-color: #101424;">            </span>(title<span style="color: #aa9e9f; background-color: #101424;"> </span>(cdr<span style="color: #aa9e9f; background-color: #101424;"> </span>result)))
+<span style="color: #aa9e9f; background-color: #101424;">        </span>(<span style="color: #b6a0ff;">with-current-buffer</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(find-file-noselect<span style="color: #aa9e9f; background-color: #101424;"> </span>index)
+<span style="color: #aa9e9f; background-color: #101424;">          </span>(goto-char<span style="color: #aa9e9f; background-color: #101424;"> </span>(point-max))
+<span style="color: #aa9e9f; background-color: #101424;">          </span>(<span style="color: #b6a0ff;">unless</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(string=<span style="color: #aa9e9f; background-color: #101424;"> </span>(concat<span style="color: #aa9e9f; background-color: #101424;"> </span>dir<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"/"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>path)<span style="color: #aa9e9f; background-color: #101424;"> </span>index)
+<span style="color: #aa9e9f; background-color: #101424;">            </span>(insert<span style="color: #aa9e9f; background-color: #101424;"> </span>(format<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"-</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">[[file:%s][%s]]\n"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>path<span style="color: #aa9e9f; background-color: #101424;"> </span>title))
+<span style="color: #aa9e9f; background-color: #101424;">            </span>(save-buffer))))))<span style="color: #000000; background-color: #d0d040;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2f51877" class="outline-2">
+<h2 id="org2f51877"><span class="section-number-2">2.</span> Publishing the Site</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #b6a0ff;">require</span><span style="color: #aa9e9f; background-color: #101424;"> </span>'<span style="color: #00bcff;">ox-publish</span>)
+(<span style="color: #b6a0ff;">let</span><span style="color: #aa9e9f; background-color: #101424;"> </span>((org-html-validation-link<span style="color: #aa9e9f; background-color: #101424;"> </span>nil)
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(org-html-head-include-scripts<span style="color: #aa9e9f; background-color: #101424;"> </span>nil)
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(org-html-head-include-default-style<span style="color: #aa9e9f; background-color: #101424;"> </span>nil)
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(org-html-head<span style="color: #aa9e9f; background-color: #101424;"> </span>(concat
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;link</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">rel=\"stylesheet\""</span>
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"href=\"resources/style.css\""</span>
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"type=\"text/css\"</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">/&gt;"</span>
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;header&gt;&lt;a</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">href=\"index.html\"&gt;Home&lt;/a&gt;&lt;/header&gt;\n"</span>
+<span style="color: #aa9e9f; background-color: #101424;">                      </span>))
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(org-src-fontify-natively<span style="color: #aa9e9f; background-color: #101424;"> </span>t)
+<span style="color: #aa9e9f; background-color: #101424;">      </span>(org-publish-project-alist
+<span style="color: #aa9e9f; background-color: #101424;">       </span>'((<span style="color: #79a8ff;">"blog"</span>
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:base-directory</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"src"</span>
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:publishing-directory</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"docs"</span>
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:auto-sitemap</span><span style="color: #aa9e9f; background-color: #101424;"> </span>nil
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:recursive</span><span style="color: #aa9e9f; background-color: #101424;"> </span>t
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:with-author</span><span style="color: #aa9e9f; background-color: #101424;"> </span>nil
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:with-creator</span><span style="color: #aa9e9f; background-color: #101424;"> </span>t
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:with-toc</span><span style="color: #aa9e9f; background-color: #101424;"> </span>t
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:time-stamp-file</span><span style="color: #aa9e9f; background-color: #101424;"> </span>nil
+<span style="color: #aa9e9f; background-color: #101424;">          </span><span style="color: #f78fe7;">:publishing-function</span><span style="color: #aa9e9f; background-color: #101424;"> </span>org-html-publish-to-html))))
+<span style="color: #aa9e9f; background-color: #101424;">  </span>(copy-file<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"README.org"</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"src/build-process.org"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>t)
+<span style="color: #aa9e9f; background-color: #101424;">  </span>(build-index<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"Alex</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">Drysdale"</span>)
+<span style="color: #aa9e9f; background-color: #101424;">  </span>(org-publish-all<span style="color: #aa9e9f; background-color: #101424;"> </span>t)
+<span style="color: #aa9e9f; background-color: #101424;">  </span>(message<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"Site</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">built</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">at</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">%s"</span>
+<span style="color: #aa9e9f; background-color: #101424;">           </span>(format-time-string<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"%Y-%m-%d</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">%H:%M:%S"</span>))<span style="color: #000000; background-color: #d0d040;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga6086fd" class="outline-2">
+<h2 id="orga6086fd"><span class="section-number-2">3.</span> Git Hooks</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #a8a8a8;">#</span><span style="color: #a8a8a8;">!/bin/</span><span style="color: #b6a0ff;">sh</span>
+emacs<span style="color: #aa9e9f; background-color: #101424;"> </span>--batch<span style="color: #aa9e9f; background-color: #101424;"> </span>-Q<span style="color: #aa9e9f; background-color: #101424;"> </span>--script<span style="color: #aa9e9f; background-color: #101424;"> </span>build.e<span style="color: #000000; background-color: #d0d040;">l</span>
+</pre>
+</div>
+
+<p>
+and make that file executable:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">chmod<span style="color: #aa9e9f; background-color: #101424;"> </span>+x<span style="color: #aa9e9f; background-color: #101424;"> </span>.git/hooks/pre-commi<span style="color: #000000; background-color: #d0d040;">t</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2025-04-19 Sat 00:00</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.4 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</p>
+</div>
+</body>
+</html>

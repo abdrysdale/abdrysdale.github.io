@@ -7,7 +7,11 @@ Hosted on GitHub pages - built with =org-mode=.
 
 #+begin_src elisp
   (require 'ox-publish)
-  (let ((org-publish-project-alist
+  (let ((org-html-validation-link nil)
+        (org-html-head-include-scripts nil)
+        (org-html-head-include-default-style nil)
+        (org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+        (org-publish-project-alist
          '(("blog"
             :base-directory "src"
             :publishing-directory "docs"
@@ -23,4 +27,4 @@ Hosted on GitHub pages - built with =org-mode=.
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 14:14:22
+: Site built at 2025-04-19 14:17:22

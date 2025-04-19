@@ -16,7 +16,8 @@
   "Build the index in DIR."
   ;; Copies the README.org to the index.
   (let ((dir "src")
-        (index "src/index.org"))
+        (index "src/index.org")
+        (ignore-files '("index.org" "aboutme.org")))
     (with-current-buffer (find-file-noselect index)
       (erase-buffer)
       (insert (format "#+title: %s's Personal Website\n" author))
@@ -27,7 +28,7 @@
             (title (cdr result)))
         (with-current-buffer (find-file-noselect index)
           (goto-char (point-max))
-          (unless (string= (concat dir "/" path) index)
+          (unless (member path ignore-files)
             (insert (format "- [[file:%s][%s]]\n" path title))
             (save-buffer)))))))
 
@@ -39,8 +40,10 @@
                       "<link rel=\"stylesheet\""
                       "href=\"resources/style.css\""
                       "type=\"text/css\" />"
-                      "<header><a href=\"index.html\">Home</a></header>\n"
-                      ))
+                      "<header>"
+                      "<a href=\"index.html\">Home</a>&emsp;"
+                      "<a href=\"aboutme.html\">About Me</a>"
+                      "</header>\n"))
       (org-src-fontify-natively t)
       (org-publish-project-alist
        '(("blog"

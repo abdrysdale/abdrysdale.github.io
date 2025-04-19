@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Current Build Process For This Site</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet"href="resources/style.css"type="text/css" /><header><a href="index.html">Home</a></header>
+<link rel="stylesheet"href="resources/style.css"type="text/css" /><header><a href="index.html">Home</a>&emsp;<a href="aboutme.html">About Me</a></header>
 </head>
 <body>
 <div id="content" class="content">
@@ -16,9 +16,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org935b895">Building the Home Page</a></li>
-<li><a href="#org8d05279">Publishing the Site</a></li>
-<li><a href="#org83030f6">Git Hooks</a></li>
+<li><a href="#orgf9b24d9">Building the Home Page</a></li>
+<li><a href="#orge5b32ab">Publishing the Site</a></li>
+<li><a href="#org5a0a566">Git Hooks</a></li>
 </ul>
 </div>
 </div>
@@ -30,9 +30,9 @@ This website is built with <code>org-mode</code> and hosted through GitHub pages
 GitHub pages expects only a single <code>index.html</code> file and builds the site the from the <code>docs</code> directory - making the build process extremely simple.
 </p>
 
-<div id="outline-container-org935b895" class="outline-2">
-<h2 id="org935b895">Building the Home Page</h2>
-<div class="outline-text-2" id="text-org935b895">
+<div id="outline-container-orgf9b24d9" class="outline-2">
+<h2 id="orgf9b24d9">Building the Home Page</h2>
+<div class="outline-text-2" id="text-orgf9b24d9">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 To do this, I create a cons list of <code>(title . path)</code> of each article in the <code>src/</code> directory that isn't <code>index.org</code>.
@@ -67,7 +67,8 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
 <span style="color: #aa9e9f; background-color: #101424;">  </span><span style="color: #b0d6f5;">"Build</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">the</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">index</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">in</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #b0d6f5;">DIR."</span>
 <span style="color: #aa9e9f; background-color: #101424;">  </span><span style="color: #a8a8a8;">;;</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">Copies</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">the</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">README.org</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">to</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">the</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #a8a8a8;">index.</span>
 <span style="color: #aa9e9f; background-color: #101424;">  </span>(<span style="color: #b6a0ff;">let</span><span style="color: #aa9e9f; background-color: #101424;"> </span>((dir<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"src"</span>)
-<span style="color: #aa9e9f; background-color: #101424;">        </span>(index<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"src/index.org"</span>))
+<span style="color: #aa9e9f; background-color: #101424;">        </span>(index<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"src/index.org"</span>)
+<span style="color: #aa9e9f; background-color: #101424;">        </span>(ignore-files<span style="color: #aa9e9f; background-color: #101424;"> </span>'(<span style="color: #79a8ff;">"index.org"</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"aboutme.org"</span>)))
 <span style="color: #aa9e9f; background-color: #101424;">    </span>(<span style="color: #b6a0ff;">with-current-buffer</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(find-file-noselect<span style="color: #aa9e9f; background-color: #101424;"> </span>index)
 <span style="color: #aa9e9f; background-color: #101424;">      </span>(erase-buffer)
 <span style="color: #aa9e9f; background-color: #101424;">      </span>(insert<span style="color: #aa9e9f; background-color: #101424;"> </span>(format<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"#+title:</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">%s's</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">Personal</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">Website\n"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>author))
@@ -78,7 +79,7 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
 <span style="color: #aa9e9f; background-color: #101424;">            </span>(title<span style="color: #aa9e9f; background-color: #101424;"> </span>(cdr<span style="color: #aa9e9f; background-color: #101424;"> </span>result)))
 <span style="color: #aa9e9f; background-color: #101424;">        </span>(<span style="color: #b6a0ff;">with-current-buffer</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(find-file-noselect<span style="color: #aa9e9f; background-color: #101424;"> </span>index)
 <span style="color: #aa9e9f; background-color: #101424;">          </span>(goto-char<span style="color: #aa9e9f; background-color: #101424;"> </span>(point-max))
-<span style="color: #aa9e9f; background-color: #101424;">          </span>(<span style="color: #b6a0ff;">unless</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(string=<span style="color: #aa9e9f; background-color: #101424;"> </span>(concat<span style="color: #aa9e9f; background-color: #101424;"> </span>dir<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"/"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>path)<span style="color: #aa9e9f; background-color: #101424;"> </span>index)
+<span style="color: #aa9e9f; background-color: #101424;">          </span>(<span style="color: #b6a0ff;">unless</span><span style="color: #aa9e9f; background-color: #101424;"> </span>(member<span style="color: #aa9e9f; background-color: #101424;"> </span>path<span style="color: #aa9e9f; background-color: #101424;"> </span>ignore-files)
 <span style="color: #aa9e9f; background-color: #101424;">            </span>(insert<span style="color: #aa9e9f; background-color: #101424;"> </span>(format<span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">"-</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">[[file:%s][%s]]\n"</span><span style="color: #aa9e9f; background-color: #101424;"> </span>path<span style="color: #aa9e9f; background-color: #101424;"> </span>title))
 <span style="color: #aa9e9f; background-color: #101424;">            </span>(save-buffer))))))<span style="color: #000000; background-color: #d0d040;">)</span>
 </pre>
@@ -86,9 +87,9 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
 </div>
 </div>
 
-<div id="outline-container-org8d05279" class="outline-2">
-<h2 id="org8d05279">Publishing the Site</h2>
-<div class="outline-text-2" id="text-org8d05279">
+<div id="outline-container-orge5b32ab" class="outline-2">
+<h2 id="orge5b32ab">Publishing the Site</h2>
+<div class="outline-text-2" id="text-orge5b32ab">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -102,8 +103,10 @@ Finally, the site is published using <code>ox-publish</code> with this article (
 <span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;link</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">rel=\"stylesheet\""</span>
 <span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"href=\"resources/style.css\""</span>
 <span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"type=\"text/css\"</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">/&gt;"</span>
-<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;header&gt;&lt;a</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">href=\"index.html\"&gt;Home&lt;/a&gt;&lt;/header&gt;\n"</span>
-<span style="color: #aa9e9f; background-color: #101424;">                      </span>))
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;header&gt;"</span>
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;a</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">href=\"index.html\"&gt;Home&lt;/a&gt;&amp;emsp;"</span>
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;a</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">href=\"aboutme.html\"&gt;About</span><span style="color: #aa9e9f; background-color: #101424;"> </span><span style="color: #79a8ff;">Me&lt;/a&gt;"</span>
+<span style="color: #aa9e9f; background-color: #101424;">                      </span><span style="color: #79a8ff;">"&lt;/header&gt;\n"</span>))
 <span style="color: #aa9e9f; background-color: #101424;">      </span>(org-src-fontify-natively<span style="color: #aa9e9f; background-color: #101424;"> </span>t)
 <span style="color: #aa9e9f; background-color: #101424;">      </span>(org-publish-project-alist
 <span style="color: #aa9e9f; background-color: #101424;">       </span>'((<span style="color: #79a8ff;">"blog"</span>
@@ -128,9 +131,9 @@ Finally, the site is published using <code>ox-publish</code> with this article (
 </div>
 
 
-<div id="outline-container-org83030f6" class="outline-2">
-<h2 id="org83030f6">Git Hooks</h2>
-<div class="outline-text-2" id="text-org83030f6">
+<div id="outline-container-org5a0a566" class="outline-2">
+<h2 id="org5a0a566">Git Hooks</h2>
+<div class="outline-text-2" id="text-org5a0a566">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>

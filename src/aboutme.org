@@ -1,0 +1,27 @@
+#+title: About Me
+#+author: Alex Drysdale
+#+date: <2025-04-19 Sat>
+
+I'm currently a trainee Magnetic Resonance Physicist for NHS Wales working with =Python=, =Elisp=, =SQL= and big magnets.
+
+Outwith employment, I dabble in many programming languages - mainly =Forth=, =Common Lisp=, =R=, =Fortran= and =Perl=.
+
+In addition to turning coffee into bugs, I read a lot and bake bread.
+
+* Education
+
+- Physics BSc :: University of Glasgow -First Class Honours
+- PhD (in progress) :: Swansea University - Deep Residual Graph Convolutional Neural Networks for Real Time Uncertainty Quantification of 1D Haemodynamic Vessel System Metrics
+
+* Papers
+
+- [[https://doi.org/10.48550/arXiv.2411.09046][A new computational model for quantifying blood flow dynamics across myogenically-active cerebral arterial networks - A Coccarelli, I Polydoros, A Drysdale, OF Harraz, C Kadapa]]
+- [[https://doi.org/10.1038/s41598-024-72832-y][Development of non-invasive biomarkers for pre-eclampsia through data-driven cardiovascular network models - Claudia Popp, Jason M Carson, Alex B Drysdale, Hari Arora, Edward D Johnstone, Jenny E Myers, Raoul van Loon]]
+
+* Conferences
+
+- UK Association for Computational Mechanics, 2022 :: Neural Network Solvers from Synthetically Generated Data
+- BioMedEng, 2022 :: Physics Informed 1D Haemodynamic Neural Network Solvers
+- European Society of Mechanical Engineering, 2023 :: Deep Residual Ambivalent Graph-convolutional Neural Networks (DRAGNN) for Biomarker Prediction in Large Vessel Networks
+- BioMedEng, 2023 :: Machine Learning for Large Vessel Networks
+

@@ -52,7 +52,8 @@
                       "type=\"text/css\" />"
                       "<header>"
                       "<a href=\"index.html\">Home</a>&emsp;"
-                      "<a href=\"aboutme.html\">About Me</a>"
+                      "<a href=\"aboutme.html\">About Me</a>&emsp;"
+                      "<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
                       "</header>\n"))
       (org-src-fontify-natively t)
       (org-publish-project-alist

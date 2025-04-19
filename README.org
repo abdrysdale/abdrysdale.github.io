@@ -13,10 +13,14 @@ Hosted on GitHub pages - built with =org-mode=.
             :publishing-directory "docs"
             :auto-sitemap t
             :recursive t
+            :with-author nil
+            :with-creator t
+            :with-toc t
+            :time-stamp-file nil
             :publishing-function org-html-publish-to-html))))
     (org-publish-all t)
     (message "Site built at %s" (format-time-string "%Y-%m-%d %H:%M:%S")))
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 14:12:31
+: Site built at 2025-04-19 14:14:22

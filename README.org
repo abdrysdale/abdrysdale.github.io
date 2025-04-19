@@ -10,7 +10,10 @@ Hosted on GitHub pages - built with =org-mode=.
   (let ((org-html-validation-link nil)
         (org-html-head-include-scripts nil)
         (org-html-head-include-default-style nil)
-        (org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+        (org-html-head (concat
+                        "<link rel=\"stylesheet\""
+                        "href=\"../resources/style.css\""
+                        "type=\"text/css\" />"))
         (org-publish-project-alist
          '(("blog"
             :base-directory "src"

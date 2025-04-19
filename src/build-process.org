@@ -87,7 +87,7 @@ Finally, the site is published using =ox-publish= with this article (the =README
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 16:22:40
+: Site built at 2025-04-19 16:25:42
 
 
 * Git Hooks

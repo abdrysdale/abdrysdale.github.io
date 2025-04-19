@@ -6,13 +6,17 @@ Hosted on GitHub pages - built with =org-mode=.
 * Build
 
 #+begin_src elisp
+  (require 'ox-publish)
   (let ((org-publish-project-alist
          '(("blog"
             :base-directory "src"
-            :publishing-directory "docs"))))
-    (org-publish-all)
+            :publishing-directory "docs"
+            :auto-sitemap t
+            :recursive t
+            :publishing-function org-html-publish-to-html))))
+    (org-publish-all t)
     (message "Site built at %s" (format-time-string "%Y-%m-%d %H:%M:%S")))
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 13:57:12
+: Site built at 2025-04-19 14:12:31

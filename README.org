@@ -77,6 +77,7 @@ Finally, the site is published using =ox-publish= with this article (the =README
             :with-author nil
             :with-creator t
             :with-toc t
+            :section-numbers nil
             :time-stamp-file nil
             :publishing-function org-html-publish-to-html))))
     (copy-file "README.org" "src/build-process.org" t)
@@ -87,7 +88,7 @@ Finally, the site is published using =ox-publish= with this article (the =README
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 16:25:42
+: Site built at 2025-04-19 16:47:16
 
 
 * Git Hooks

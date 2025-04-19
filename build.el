@@ -51,6 +51,7 @@
           :with-author nil
           :with-creator t
           :with-toc t
+          :section-numbers nil
           :time-stamp-file nil
           :publishing-function org-html-publish-to-html))))
   (copy-file "README.org" "src/build-process.org" t)

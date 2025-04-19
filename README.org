@@ -1,4 +1,17 @@
-#+title: Alex Drysdale's Personal Website
+#+title: My Personal Website
 #+author: Alex Drysdale
 
-Currently a W.I.P.
+Hosted on GitHub pages - built with org-mode.
+
+* Build
+
+#+begin_src elisp :results none
+  (let ((org-publish-project-alist
+         '(("blog"
+            :base-directory "src"
+            :publishing-directory "build"))))
+    (org-publish "blog")
+    (message "Site built!"))
+#+end_src
+
+#+RESULTS:

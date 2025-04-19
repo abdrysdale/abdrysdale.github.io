@@ -12,7 +12,7 @@ Hosted on GitHub pages - built with =org-mode=.
         (org-html-head-include-default-style nil)
         (org-html-head (concat
                         "<link rel=\"stylesheet\""
-                        "href=\"../resources/style.css\""
+                        "href=\"resources/style.css\""
                         "type=\"text/css\" />"))
         (org-publish-project-alist
          '(("blog"
@@ -30,4 +30,4 @@ Hosted on GitHub pages - built with =org-mode=.
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 14:17:22
+: Site built at 2025-04-19 14:28:49

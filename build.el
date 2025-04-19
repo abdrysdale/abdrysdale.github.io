@@ -38,7 +38,7 @@
       (org-html-head-include-default-style nil)
       (org-html-head (concat
                       "<link rel=\"stylesheet\""
-                      "href=\"resources/style.css\""
+                      "href=\"resources/org.css\""
                       "type=\"text/css\" />"
                       "<header>"
                       "<a href=\"index.html\">Home</a>&emsp;"

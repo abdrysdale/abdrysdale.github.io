@@ -64,7 +64,7 @@ Finally, the site is published using =ox-publish= with this article (the =README
         (org-html-head-include-default-style nil)
         (org-html-head (concat
                         "<link rel=\"stylesheet\""
-                        "href=\"resources/style.css\""
+                        "href=\"resources/org.css\""
                         "type=\"text/css\" />"
                         "<header>"
                         "<a href=\"index.html\">Home</a>&emsp;"
@@ -91,7 +91,7 @@ Finally, the site is published using =ox-publish= with this article (the =README
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-19 18:54:44
+: Site built at 2025-04-19 19:42:39
 
 
 * Git Hooks

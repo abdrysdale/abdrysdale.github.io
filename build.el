@@ -44,12 +44,13 @@
 
 (require 'ox-publish)
 (require 'whitespace)
+(require 'htmlize)
 (let ((current-theme (if custom-enabled-themes
                          (car custom-enabled-themes)
                        'modus-operandi))
       (publish-theme 'modus-operandi)
-      (my/whitespace-style whitespace-style)
-      (my/whitespace-mode whitespace-mode)
+      (whitespace-style nil)
+      (whitespace-mode 0)
       (org-html-validation-link nil)
       (org-html-head-include-scripts nil)
       (org-html-head-include-default-style nil)
@@ -78,16 +79,9 @@
   (copy-file "README.org" "src/build-process.org" t)
   (build-index "Alex Drysdale")
 
-  ;; Sets the publishing formatting
-  (setq whitespace-style nil) ;; No whitespace formatting
-  (whitespace-mode 0)         ;; No whitespace dots.
-  (load-theme publish-theme)  ;; Load the theme.
-
+  (load-theme publish-theme)
   (org-publish-all t)
+  (load-theme current-theme)
 
-  ;; Resets everything back to how it was
-  (load-theme current-theme)  ;; Load the original theme
-  (setq whitespace-style my/whitespace-style)
-  (whitespace-mode (if my/whitespace-mode 1 0))
   (message "Site built at %s"
            (format-time-string "%Y-%m-%d %H:%M:%S")))

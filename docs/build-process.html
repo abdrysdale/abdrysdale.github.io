@@ -16,9 +16,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgff624cb">Building the Home Page</a></li>
-<li><a href="#org6c13ccb">Publishing the Site</a></li>
-<li><a href="#org77b7850">Git Hooks</a></li>
+<li><a href="#orgeddf6c9">Building the Home Page</a></li>
+<li><a href="#orgb813e4c">Publishing the Site</a></li>
+<li><a href="#org43ad223">Git Hooks</a></li>
 </ul>
 </div>
 </div>
@@ -30,9 +30,9 @@ This website is built with <code>org-mode</code> and hosted through GitHub pages
 GitHub pages expects only a single <code>index.html</code> file and builds the site the from the <code>docs</code> directory - making the build process extremely simple.
 </p>
 
-<div id="outline-container-orgff624cb" class="outline-2">
-<h2 id="orgff624cb">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orgff624cb">
+<div id="outline-container-orgeddf6c9" class="outline-2">
+<h2 id="orgeddf6c9">Building the Home Page</h2>
+<div class="outline-text-2" id="text-orgeddf6c9">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 To do this, I create a cons list of <code>(title . path)</code> of each article in the <code>src/</code> directory that isn't <code>index.org</code>.
@@ -97,9 +97,9 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
 </div>
 </div>
 
-<div id="outline-container-org6c13ccb" class="outline-2">
-<h2 id="org6c13ccb">Publishing the Site</h2>
-<div class="outline-text-2" id="text-org6c13ccb">
+<div id="outline-container-orgb813e4c" class="outline-2">
+<h2 id="orgb813e4c">Publishing the Site</h2>
+<div class="outline-text-2" id="text-orgb813e4c">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -116,8 +116,8 @@ One thing of note is that we always publish the articles under the same theme fo
                          (car custom-enabled-themes)
                        'modus-operandi))
       (publish-theme 'modus-operandi)
-      (my/whitespace-style whitespace-style)
-      (my/whitespace-mode whitespace-mode)
+      (whitespace-style nil)
+      (whitespace-mode 0)
       (org-html-validation-link nil)
       (org-html-head-include-scripts nil)
       (org-html-head-include-default-style nil)
@@ -146,17 +146,10 @@ One thing of note is that we always publish the articles under the same theme fo
   (copy-file <span style="color: #2544bb;">"README.org"</span> <span style="color: #2544bb;">"src/build-process.org"</span> t)
   (build-index <span style="color: #2544bb;">"Alex Drysdale"</span>)
 
-  <span style="color: #505050;">;; </span><span style="color: #505050;">Sets the publishing formatting</span>
-  (<span style="color: #5317ac;">setq</span> whitespace-style nil) <span style="color: #505050;">;; </span><span style="color: #505050;">No whitespace formatting</span>
-  (whitespace-mode 0)         <span style="color: #505050;">;; </span><span style="color: #505050;">No whitespace dots.</span>
-  (load-theme publish-theme)  <span style="color: #505050;">;; </span><span style="color: #505050;">Load the theme.</span>
-
+  (load-theme publish-theme)
   (org-publish-all t)
+  (load-theme current-theme)
 
-  <span style="color: #505050;">;; </span><span style="color: #505050;">Resets everything back to how it was</span>
-  (load-theme current-theme)  <span style="color: #505050;">;; </span><span style="color: #505050;">Load the original theme</span>
-  (<span style="color: #5317ac;">setq</span> whitespace-style my/whitespace-style)
-  (whitespace-mode (<span style="color: #5317ac;">if</span> my/whitespace-mode 1 0))
   (message <span style="color: #2544bb;">"Site built at %s"</span>
            (format-time-string <span style="color: #2544bb;">"%Y-%m-%d %H:%M:%S"</span>)))
 </pre>
@@ -165,9 +158,9 @@ One thing of note is that we always publish the articles under the same theme fo
 </div>
 
 
-<div id="outline-container-org77b7850" class="outline-2">
-<h2 id="org77b7850">Git Hooks</h2>
-<div class="outline-text-2" id="text-org77b7850">
+<div id="outline-container-org43ad223" class="outline-2">
+<h2 id="org43ad223">Git Hooks</h2>
+<div class="outline-text-2" id="text-org43ad223">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>

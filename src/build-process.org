@@ -70,59 +70,60 @@ Finally, the site is published using =ox-publish= with this article (the =README
 One thing of note is that we always publish the articles under the same theme for continuity.
 
 #+begin_src elisp
-    (require 'ox-publish)
-    (require 'whitespace)
-    (let ((current-theme (if custom-enabled-themes
-                             (car custom-enabled-themes)
-                           'modus-operandi))
-          (publish-theme 'modus-operandi)
-          (my/whitespace-style whitespace-style)
-          (my/whitespace-mode whitespace-mode)
-          (org-html-validation-link nil)
-          (org-html-head-include-scripts nil)
-          (org-html-head-include-default-style nil)
-          (org-html-head (concat
-                          "<link rel=\"stylesheet\""
-                          "href=\"resources/org.css\""
-                          "type=\"text/css\" />"
-                          "<header>"
-                          "<a href=\"index.html\">Home</a>&emsp;"
-                          "<a href=\"aboutme.html\">About Me</a>&emsp;"
-                          "<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
-                          "</header>\n"))
-          (org-src-fontify-natively t)
-          (org-publish-project-alist
-           '(("blog"
-              :base-directory "src"
-              :publishing-directory "docs"
-              :auto-sitemap nil
-              :recursive t
-              :with-author nil
-              :with-creator t
-              :with-toc t
-              :section-numbers nil
-              :time-stamp-file nil
-              :publishing-function org-html-publish-to-html))))
-      (copy-file "README.org" "src/build-process.org" t)
-      (build-index "Alex Drysdale")
+  (require 'ox-publish)
+  (require 'whitespace)
+  (require 'htmlize)
+  (let ((current-theme (if custom-enabled-themes
+                           (car custom-enabled-themes)
+                         'modus-operandi))
+        (publish-theme 'modus-operandi)
+        (my/whitespace-style whitespace-style)
+        (my/whitespace-mode whitespace-mode)
+        (org-html-validation-link nil)
+        (org-html-head-include-scripts nil)
+        (org-html-head-include-default-style nil)
+        (org-html-head (concat
+                        "<link rel=\"stylesheet\""
+                        "href=\"resources/org.css\""
+                        "type=\"text/css\" />"
+                        "<header>"
+                        "<a href=\"index.html\">Home</a>&emsp;"
+                        "<a href=\"aboutme.html\">About Me</a>&emsp;"
+                        "<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
+                        "</header>\n"))
+        (org-src-fontify-natively t)
+        (org-publish-project-alist
+         '(("blog"
+            :base-directory "src"
+            :publishing-directory "docs"
+            :auto-sitemap nil
+            :recursive t
+            :with-author nil
+            :with-creator t
+            :with-toc t
+            :section-numbers nil
+            :time-stamp-file nil
+            :publishing-function org-html-publish-to-html))))
+    (copy-file "README.org" "src/build-process.org" t)
+    (build-index "Alex Drysdale")
 
-      ;; Sets the publishing formatting
-      (setq whitespace-style nil) ;; No whitespace formatting
-      (whitespace-mode 0)         ;; No whitespace dots.
-      (load-theme publish-theme)  ;; Load the theme.
+    ;; Sets the publishing formatting
+    (setq whitespace-style nil) ;; No whitespace formatting
+    (whitespace-mode 0)         ;; No whitespace dots.
+    (load-theme publish-theme)  ;; Load the theme.
 
-      (org-publish-all t)
+    (org-publish-all t)
 
-      ;; Resets everything back to how it was
-      (load-theme current-theme)  ;; Load the original theme
-      (setq whitespace-style my/whitespace-style)
-      (whitespace-mode (if my/whitespace-mode 1 0))
-      (message "Site built at %s"
-               (format-time-string "%Y-%m-%d %H:%M:%S")))
+    ;; Resets everything back to how it was
+    (load-theme current-theme)  ;; Load the original theme
+    (setq whitespace-style my/whitespace-style)
+    (whitespace-mode (if my/whitespace-mode 1 0))
+    (message "Site built at %s"
+             (format-time-string "%Y-%m-%d %H:%M:%S")))
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-20 16:35:23
+: Site built at 2025-04-20 16:37:28
 
 
 * Git Hooks
@@ -132,6 +133,7 @@ This script is tangled into =.git/hooks/build.el= which means that we just need 
 #+begin_src bash :results none :tangle ".git/hooks/pre-commit" :eval no
   #!/bin/sh
   emacs --batch -Q --script build.el
+  git add docs/*.html
 #+end_src
 
 and make that file executable:

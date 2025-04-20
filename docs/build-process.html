@@ -16,9 +16,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd46e5df">Building the Home Page</a></li>
-<li><a href="#org3194eb9">Publishing the Site</a></li>
-<li><a href="#org0e5892e">Git Hooks</a></li>
+<li><a href="#orgff624cb">Building the Home Page</a></li>
+<li><a href="#org6c13ccb">Publishing the Site</a></li>
+<li><a href="#org77b7850">Git Hooks</a></li>
 </ul>
 </div>
 </div>
@@ -30,9 +30,9 @@ This website is built with <code>org-mode</code> and hosted through GitHub pages
 GitHub pages expects only a single <code>index.html</code> file and builds the site the from the <code>docs</code> directory - making the build process extremely simple.
 </p>
 
-<div id="outline-container-orgd46e5df" class="outline-2">
-<h2 id="orgd46e5df">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orgd46e5df">
+<div id="outline-container-orgff624cb" class="outline-2">
+<h2 id="orgff624cb">Building the Home Page</h2>
+<div class="outline-text-2" id="text-orgff624cb">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 To do this, I create a cons list of <code>(title . path)</code> of each article in the <code>src/</code> directory that isn't <code>index.org</code>.
@@ -97,9 +97,9 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
 </div>
 </div>
 
-<div id="outline-container-org3194eb9" class="outline-2">
-<h2 id="org3194eb9">Publishing the Site</h2>
-<div class="outline-text-2" id="text-org3194eb9">
+<div id="outline-container-org6c13ccb" class="outline-2">
+<h2 id="org6c13ccb">Publishing the Site</h2>
+<div class="outline-text-2" id="text-org6c13ccb">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -111,6 +111,7 @@ One thing of note is that we always publish the articles under the same theme fo
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #5317ac;">require</span> '<span style="color: #0000c0;">ox-publish</span>)
 (<span style="color: #5317ac;">require</span> '<span style="color: #0000c0;">whitespace</span>)
+(<span style="color: #5317ac;">require</span> '<span style="color: #0000c0;">htmlize</span>)
 (<span style="color: #5317ac;">let</span> ((current-theme (<span style="color: #5317ac;">if</span> custom-enabled-themes
                          (car custom-enabled-themes)
                        'modus-operandi))
@@ -164,9 +165,9 @@ One thing of note is that we always publish the articles under the same theme fo
 </div>
 
 
-<div id="outline-container-org0e5892e" class="outline-2">
-<h2 id="org0e5892e">Git Hooks</h2>
-<div class="outline-text-2" id="text-org0e5892e">
+<div id="outline-container-org77b7850" class="outline-2">
+<h2 id="org77b7850">Git Hooks</h2>
+<div class="outline-text-2" id="text-org77b7850">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>
@@ -174,6 +175,7 @@ This script is tangled into <code>.git/hooks/build.el</code> which means that we
 <div class="org-src-container">
 <pre class="src src-bash"><span style="color: #505050;">#</span><span style="color: #505050;">!/bin/</span><span style="color: #5317ac;">sh</span>
 emacs --batch -Q --script build.el
+git add docs/*.html
 </pre>
 </div>
 

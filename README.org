@@ -33,7 +33,7 @@ Next the home page (=index.org=) is built. Currently this is really simple and j
 
 #+begin_src elisp :results none
   (defun build-index (author)
-    "Build the index in DIR."
+    "Build the index for the AUTHOR."
     ;; Copies the README.org to the index.
     (let ((dir "src")
           (index "src/index.org")

@@ -13,7 +13,7 @@
               files)))
 
 (defun build-index (author)
-  "Build the index in DIR."
+  "Build the index for the AUTHOR."
   ;; Copies the README.org to the index.
   (let ((dir "src")
         (index "src/index.org")

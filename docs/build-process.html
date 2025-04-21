@@ -16,9 +16,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgeddf6c9">Building the Home Page</a></li>
-<li><a href="#orgb813e4c">Publishing the Site</a></li>
-<li><a href="#org43ad223">Git Hooks</a></li>
+<li><a href="#orgc6fcd47">Build output</a></li>
+<li><a href="#orga21a2dd">Building the Home Page</a></li>
+<li><a href="#orgf515004">Publishing the Site</a></li>
+<li><a href="#orgc0810ca">Git Hooks</a></li>
 </ul>
 </div>
 </div>
@@ -30,36 +31,78 @@ This website is built with <code>org-mode</code> and hosted through GitHub pages
 GitHub pages expects only a single <code>index.html</code> file and builds the site the from the <code>docs</code> directory - making the build process extremely simple.
 </p>
 
-<div id="outline-container-orgeddf6c9" class="outline-2">
-<h2 id="orgeddf6c9">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orgeddf6c9">
+<div id="outline-container-orgc6fcd47" class="outline-2">
+<h2 id="orgc6fcd47">Build output</h2>
+<div class="outline-text-2" id="text-orgc6fcd47">
+<p>
+The build output will reside in <code>docs</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">rm -rf docs
+rm -rf src/tags-*
+mkdir docs
+cp -r src/resources docs/
+touch docs/.nojekyll  <span style="color: #505050;"># </span><span style="color: #505050;">For GitHub pages not to build a Jekyll site</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga21a2dd" class="outline-2">
+<h2 id="orga21a2dd">Building the Home Page</h2>
+<div class="outline-text-2" id="text-orga21a2dd">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 To do this, I create a cons list of <code>(title . path)</code> of each article in the <code>src/</code> directory that isn't <code>index.org</code>.
 </p>
 
-<p>
-Currently, just getting the title via a regular expression seems to work well.
-</p>
+
 <div class="org-src-container">
-<pre class="src src-elisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">get-titles-from-org-files</span> (directory)
-  <span style="color: #2a486a;">"Extract titles from org files in DIRECTORY."</span>
-  (<span style="color: #5317ac;">let</span> ((files (directory-files directory t <span style="color: #2544bb;">"\\.org$"</span>)))
-    (mapcar (<span style="color: #5317ac;">lambda</span> (file)
-              (<span style="color: #5317ac;">let</span> ((rel-file (file-relative-name
-                               file (expand-file-name directory))))
-                (<span style="color: #5317ac;">with-temp-buffer</span>
-                  (insert-file-contents file)
-                  (goto-char (point-min))
-                  (<span style="color: #5317ac;">if</span> (re-search-forward <span style="color: #2544bb;">"^#\\+title: </span><span style="color: #654d0f;">\\</span><span style="color: #8b1030;">(</span><span style="color: #2544bb;">.*</span><span style="color: #654d0f;">\\</span><span style="color: #8b1030;">)</span><span style="color: #2544bb;">$"</span> nil t)
-                      (cons rel-file (match-string 1))
-                    (cons rel-file nil)))))
-              files)))
+<pre class="src src-elisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">get-org-property</span> (prop file)
+  <span style="color: #2a486a;">"Extract PROP from the org FILE."</span>
+  (<span style="color: #5317ac;">with-temp-buffer</span>
+    (insert-file-contents file)
+    (car (cdr (car (org-collect-keywords `(,prop)))))))
+
+(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">get-titles-from-org-files</span> (directory)
+ <span style="color: #2a486a;">"Extract titles from org files in DIRECTORY."</span>
+ (<span style="color: #5317ac;">let</span> ((files (directory-files directory t <span style="color: #2544bb;">"^[[:alnum:]-_]+.org$"</span>)))
+   (mapcar (<span style="color: #5317ac;">lambda</span> (file)
+             (<span style="color: #5317ac;">let</span> ((rel-file (file-relative-name
+                              file (expand-file-name directory))))
+               `(,rel-file . ,(concat
+                               (get-org-property <span style="color: #2544bb;">"TITLE"</span> file)
+                               <span style="color: #2544bb;">"\t"</span>
+                               (get-org-property <span style="color: #2544bb;">"FILETAGS"</span> file)))))
+           files)))
 </pre>
 </div>
 
 <p>
 Next the home page (<code>index.org</code>) is built. Currently this is really simple and just includes the author's name and a list of the all the articles.
+</p>
+
+<p>
+We'll take this template:
+</p>
+<div class="org-src-container">
+<pre class="src src-org">Thank you for visiting my little patch of the internet.
+All views are my own and not that of my employer.
+
+You can expect content on programming, Emacs, philosophy, ethics, magnets and bread.
+
+<span style="font-style: italic;">This is site is intentially minimal and left as an exercise to the reader...</span>
+
+<span style="color: #000000; font-weight: bold;">* Copying</span>
+
+All material is in the website licensed under the the GNU/GPLv3 license - 
+which can be found <span style="color: #0000c0; text-decoration: underline;"><a href="https://github.com/abdrysdale/abdrysdale.github.io/blob/main/LICENSE">here</a></span>.
+</pre>
+</div>
+
+<p>
+insert a title and then add the articles and tags.
 </p>
 
 <div class="org-src-container">
@@ -68,21 +111,14 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
   <span style="color: #505050;">;; </span><span style="color: #505050;">Copies the README.org to the index.</span>
   (<span style="color: #5317ac;">let</span> ((dir <span style="color: #2544bb;">"src"</span>)
         (index <span style="color: #2544bb;">"src/index.org"</span>)
-        (ignore-files '(<span style="color: #2544bb;">"index.org"</span> <span style="color: #2544bb;">"aboutme.org"</span>)))
+        (ignore-files '(<span style="color: #2544bb;">"index.org"</span> <span style="color: #2544bb;">"aboutme.org"</span>))
+        (used-tags nil))
     (<span style="color: #5317ac;">with-current-buffer</span> (find-file-noselect index)
       (erase-buffer)
-      (insert (format <span style="color: #2544bb;">"#+title: %s's Personal Website\n"</span> author))
-      (insert <span style="color: #2544bb;">"\nThank you for visiting my little patch of the internet."</span>)
-      (insert <span style="color: #2544bb;">"  All views are my own and not that of my employer.\n"</span>)
-      (insert <span style="color: #2544bb;">"  You can expect content on programming, Emacs, philosophy,"</span>)
-      (insert <span style="color: #2544bb;">" ethics, magnets and bread."</span>)
-      (insert <span style="color: #2544bb;">"\n\n/This site is intentionally minimal"</span>)
-      (insert <span style="color: #2544bb;">" and is left as an exercise to the reader./\n"</span>)
-      (insert <span style="color: #2544bb;">"\n* Copying\n"</span>)
-      (insert <span style="color: #2544bb;">"All material is licensed under the GNU/GPLv3 license"</span>)
-      (insert <span style="color: #2544bb;">" - which can be found"</span>)
-      (insert <span style="color: #2544bb;">" [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/LICENSE][here]]"</span>)
-      (insert <span style="color: #2544bb;">"\n* Articles\n"</span>)
+      (insert (format <span style="color: #2544bb;">"#+title: %s's Personal Website\n\n"</span> author))
+      (insert-file-contents <span style="color: #2544bb;">"../index-template.org"</span>)
+      (end-of-buffer)
+      (insert <span style="color: #2544bb;">"\n\n* Articles\n"</span>)
       (save-buffer))
     (<span style="color: #5317ac;">dolist</span> (result (get-titles-from-org-files dir))
       (<span style="color: #5317ac;">let</span> ((path (car result))
@@ -90,16 +126,34 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
         (<span style="color: #5317ac;">with-current-buffer</span> (find-file-noselect index)
           (goto-char (point-max))
           (<span style="color: #5317ac;">unless</span> (member path ignore-files)
-            (insert (format <span style="color: #2544bb;">"- [[file:%s][%s]]\n"</span> path title))
-            (save-buffer)))))))
+            (<span style="color: #5317ac;">let</span> ((link (format <span style="color: #2544bb;">"- [[file:%s][%s]]\n"</span> path title))
+                  (tags (get-org-property <span style="color: #2544bb;">"FILETAGS"</span> path)))
+              (insert link)
+              (<span style="color: #5317ac;">dolist</span> (tag (split-string tags <span style="color: #2544bb;">":"</span>))
+                (<span style="color: #5317ac;">unless</span> (string-empty-p tag)
+                  (<span style="color: #5317ac;">let</span> ((tag-file (concat <span style="color: #2544bb;">"tags-"</span> tag <span style="color: #2544bb;">".org"</span>)))
+                    (<span style="color: #5317ac;">push</span> `(,tag . ,tag-file) used-tags)
+                    (<span style="color: #5317ac;">with-current-buffer</span> (find-file-noselect tag-file)
+                      (<span style="color: #5317ac;">unless</span> (file-exists-p tag-file)
+                        (erase-buffer)
+                        (insert (format <span style="color: #2544bb;">"#+title:%s\n\n"</span> tag)))
+                      (insert link)
+                      (save-buffer)))))
+              (save-buffer))))))
+    (<span style="color: #5317ac;">with-current-buffer</span> (find-file-noselect index)
+      (insert <span style="color: #2544bb;">"\n* Tags\n\n"</span>)
+      (<span style="color: #5317ac;">dolist</span> (tag-info used-tags)
+        (<span style="color: #5317ac;">let</span> ((tag (car tag-info))
+              (file (cdr tag-info)))
+          (insert (format <span style="color: #2544bb;">"- [[file:%s][%s]]\n"</span> file tag)))))))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb813e4c" class="outline-2">
-<h2 id="orgb813e4c">Publishing the Site</h2>
-<div class="outline-text-2" id="text-orgb813e4c">
+<div id="outline-container-orgf515004" class="outline-2">
+<h2 id="orgf515004">Publishing the Site</h2>
+<div class="outline-text-2" id="text-orgf515004">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -134,6 +188,7 @@ One thing of note is that we always publish the articles under the same theme fo
       (org-publish-project-alist
        '((<span style="color: #2544bb;">"blog"</span>
           <span style="color: #8f0075;">:base-directory</span> <span style="color: #2544bb;">"src"</span>
+          <span style="color: #8f0075;">:recursive</span> t
           <span style="color: #8f0075;">:publishing-directory</span> <span style="color: #2544bb;">"docs"</span>
           <span style="color: #8f0075;">:auto-sitemap</span> nil
           <span style="color: #8f0075;">:recursive</span> t
@@ -158,9 +213,9 @@ One thing of note is that we always publish the articles under the same theme fo
 </div>
 
 
-<div id="outline-container-org43ad223" class="outline-2">
-<h2 id="org43ad223">Git Hooks</h2>
-<div class="outline-text-2" id="text-org43ad223">
+<div id="outline-container-orgc0810ca" class="outline-2">
+<h2 id="orgc0810ca">Git Hooks</h2>
+<div class="outline-text-2" id="text-orgc0810ca">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>

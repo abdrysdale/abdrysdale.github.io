@@ -1,66 +1,115 @@
-#+title: Current Build Process For This Site
-#+author: Alex Drysdale
-#+date: <2025-04-19 Sat>
-#+property: header-args:elisp :tangle "build.el"
+#+TITLE: Current Build Process For This Site
+#+AUTHOR: Alex Drysdale
+#+DATE: <2025-04-19 Sat>
+#+PROPERTY: header-args:elisp :tangle "build.el"
+#+FILETAGS: :emacs:
 
 This website is built with =org-mode= and hosted through GitHub pages.
 
 GitHub pages expects only a single =index.html= file and builds the site the from the =docs= directory - making the build process extremely simple.
+
+* Build output
+
+The build output will reside in =docs=
+
+#+begin_src bash :tangle no
+  rm -rf docs
+  rm -rf src/tags-*
+  mkdir docs
+  cp -r src/resources docs/
+  touch docs/.nojekyll  # For GitHub pages not to build a Jekyll site
+#+end_src
+
+#+RESULTS:
 
 * Building the Home Page
 
 The first thing I want on the home page is a list of articles with the article title as the description.
 To do this, I create a cons list of =(title . path)= of each article in the =src/= directory that isn't =index.org=.
 
-Currently, just getting the title via a regular expression seems to work well.
+
 #+begin_src elisp :results none
+  (defun get-org-property (prop file)
+    "Extract PROP from the org FILE."
+    (with-temp-buffer
+      (insert-file-contents file)
+      (car (cdr (car (org-collect-keywords `(,prop)))))))
+
   (defun get-titles-from-org-files (directory)
-    "Extract titles from org files in DIRECTORY."
-    (let ((files (directory-files directory t "\\.org$")))
-      (mapcar (lambda (file)
-                (let ((rel-file (file-relative-name
-                                 file (expand-file-name directory))))
-                  (with-temp-buffer
-                    (insert-file-contents file)
-                    (goto-char (point-min))
-                    (if (re-search-forward "^#\\+title: \\(.*\\)$" nil t)
-                        (cons rel-file (match-string 1))
-                      (cons rel-file nil)))))
-                files)))
+   "Extract titles from org files in DIRECTORY."
+   (let ((files (directory-files directory t "^[[:alnum:]-_]+.org$")))
+     (mapcar (lambda (file)
+               (let ((rel-file (file-relative-name
+                                file (expand-file-name directory))))
+                 `(,rel-file . ,(concat
+                                 (get-org-property "TITLE" file)
+                                 "\t"
+                                 (get-org-property "FILETAGS" file)))))
+             files)))
 #+end_src
 
 Next the home page (=index.org=) is built. Currently this is really simple and just includes the author's name and a list of the all the articles.
 
+We'll take this template:
+#+begin_src org :tangle index-template.org
+  Thank you for visiting my little patch of the internet.
+  All views are my own and not that of my employer.
+
+  You can expect content on programming, Emacs, philosophy, ethics, magnets and bread.
+
+  /This is site is intentially minimal and left as an exercise to the reader.../
+
+  ,* Copying
+
+  All material is in the website licensed under the the GNU/GPLv3 license - 
+  which can be found [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/LICENSE][here]].
+#+end_src
+
+insert a title and then add the articles and tags.
+
+#+RESULTS:
+
 #+begin_src elisp :results none
-  (defun build-index (author)
-    "Build the index for the AUTHOR."
-    ;; Copies the README.org to the index.
-    (let ((dir "src")
-          (index "src/index.org")
-          (ignore-files '("index.org" "aboutme.org")))
-      (with-current-buffer (find-file-noselect index)
-        (erase-buffer)
-        (insert (format "#+title: %s's Personal Website\n" author))
-        (insert "\nThank you for visiting my little patch of the internet.")
-        (insert "  All views are my own and not that of my employer.\n")
-        (insert "  You can expect content on programming, Emacs, philosophy,")
-        (insert " ethics, magnets and bread.")
-        (insert "\n\n/This site is intentionally minimal")
-        (insert " and is left as an exercise to the reader./\n")
-        (insert "\n* Copying\n")
-        (insert "All material is licensed under the GNU/GPLv3 license")
-        (insert " - which can be found")
-        (insert " [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/LICENSE][here]]")
-        (insert "\n* Articles\n")
-        (save-buffer))
-      (dolist (result (get-titles-from-org-files dir))
-        (let ((path (car result))
-              (title (cdr result)))
-          (with-current-buffer (find-file-noselect index)
-            (goto-char (point-max))
-            (unless (member path ignore-files)
-              (insert (format "- [[file:%s][%s]]\n" path title))
-              (save-buffer)))))))
+    (defun build-index (author)
+      "Build the index for the AUTHOR."
+      ;; Copies the README.org to the index.
+      (let ((dir "src")
+            (index "src/index.org")
+            (ignore-files '("index.org" "aboutme.org"))
+            (used-tags nil))
+        (with-current-buffer (find-file-noselect index)
+          (erase-buffer)
+          (insert (format "#+title: %s's Personal Website\n\n" author))
+          (insert-file-contents "../index-template.org")
+          (end-of-buffer)
+          (insert "\n\n* Articles\n")
+          (save-buffer))
+        (dolist (result (get-titles-from-org-files dir))
+          (let ((path (car result))
+                (title (cdr result)))
+            (with-current-buffer (find-file-noselect index)
+              (goto-char (point-max))
+              (unless (member path ignore-files)
+                (let ((link (format "- [[file:%s][%s]]\n" path title))
+                      (tags (get-org-property "FILETAGS" path)))
+                  (insert link)
+                  (dolist (tag (split-string tags ":"))
+                    (unless (string-empty-p tag)
+                      (let ((tag-file (concat "tags-" tag ".org")))
+                        (push `(,tag . ,tag-file) used-tags)
+                        (with-current-buffer (find-file-noselect tag-file)
+                          (unless (file-exists-p tag-file)
+                            (erase-buffer)
+                            (insert (format "#+title:%s\n\n" tag)))
+                          (insert link)
+                          (save-buffer)))))
+                  (save-buffer))))))
+        (with-current-buffer (find-file-noselect index)
+          (insert "\n* Tags\n\n")
+          (dolist (tag-info used-tags)
+            (let ((tag (car tag-info))
+                  (file (cdr tag-info)))
+              (insert (format "- [[file:%s][%s]]\n" file tag)))))))
 #+end_src
 
 * Publishing the Site
@@ -95,6 +144,7 @@ One thing of note is that we always publish the articles under the same theme fo
         (org-publish-project-alist
          '(("blog"
             :base-directory "src"
+            :recursive t
             :publishing-directory "docs"
             :auto-sitemap nil
             :recursive t
@@ -116,7 +166,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-20 16:38:35
+: Site built at 2025-04-21 23:34:30
 
 
 * Git Hooks

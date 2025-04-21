@@ -1,37 +1,34 @@
+(defun get-org-property (prop file)
+  "Extract PROP from the org FILE."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (car (cdr (car (org-collect-keywords `(,prop)))))))
+
 (defun get-titles-from-org-files (directory)
-  "Extract titles from org files in DIRECTORY."
-  (let ((files (directory-files directory t "\\.org$")))
-    (mapcar (lambda (file)
-              (let ((rel-file (file-relative-name
-                               file (expand-file-name directory))))
-                (with-temp-buffer
-                  (insert-file-contents file)
-                  (goto-char (point-min))
-                  (if (re-search-forward "^#\\+title: \\(.*\\)$" nil t)
-                      (cons rel-file (match-string 1))
-                    (cons rel-file nil)))))
-              files)))
+ "Extract titles from org files in DIRECTORY."
+ (let ((files (directory-files directory t "^[[:alnum:]-_]+.org$")))
+   (mapcar (lambda (file)
+             (let ((rel-file (file-relative-name
+                              file (expand-file-name directory))))
+               `(,rel-file . ,(concat
+                               (get-org-property "TITLE" file)
+                               "\t"
+                               (get-org-property "FILETAGS" file)))))
+           files)))
 
 (defun build-index (author)
   "Build the index for the AUTHOR."
   ;; Copies the README.org to the index.
   (let ((dir "src")
         (index "src/index.org")
-        (ignore-files '("index.org" "aboutme.org")))
+        (ignore-files '("index.org" "aboutme.org"))
+        (used-tags nil))
     (with-current-buffer (find-file-noselect index)
       (erase-buffer)
-      (insert (format "#+title: %s's Personal Website\n" author))
-      (insert "\nThank you for visiting my little patch of the internet.")
-      (insert "  All views are my own and not that of my employer.\n")
-      (insert "  You can expect content on programming, Emacs, philosophy,")
-      (insert " ethics, magnets and bread.")
-      (insert "\n\n/This site is intentionally minimal")
-      (insert " and is left as an exercise to the reader./\n")
-      (insert "\n* Copying\n")
-      (insert "All material is licensed under the GNU/GPLv3 license")
-      (insert " - which can be found")
-      (insert " [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/LICENSE][here]]")
-      (insert "\n* Articles\n")
+      (insert (format "#+title: %s's Personal Website\n\n" author))
+      (insert-file-contents "../index-template.org")
+      (end-of-buffer)
+      (insert "\n\n* Articles\n")
       (save-buffer))
     (dolist (result (get-titles-from-org-files dir))
       (let ((path (car result))
@@ -39,8 +36,26 @@
         (with-current-buffer (find-file-noselect index)
           (goto-char (point-max))
           (unless (member path ignore-files)
-            (insert (format "- [[file:%s][%s]]\n" path title))
-            (save-buffer)))))))
+            (let ((link (format "- [[file:%s][%s]]\n" path title))
+                  (tags (get-org-property "FILETAGS" path)))
+              (insert link)
+              (dolist (tag (split-string tags ":"))
+                (unless (string-empty-p tag)
+                  (let ((tag-file (concat "tags-" tag ".org")))
+                    (push `(,tag . ,tag-file) used-tags)
+                    (with-current-buffer (find-file-noselect tag-file)
+                      (unless (file-exists-p tag-file)
+                        (erase-buffer)
+                        (insert (format "#+title:%s\n\n" tag)))
+                      (insert link)
+                      (save-buffer)))))
+              (save-buffer))))))
+    (with-current-buffer (find-file-noselect index)
+      (insert "\n* Tags\n\n")
+      (dolist (tag-info used-tags)
+        (let ((tag (car tag-info))
+              (file (cdr tag-info)))
+          (insert (format "- [[file:%s][%s]]\n" file tag)))))))
 
 (require 'ox-publish)
 (require 'whitespace)
@@ -67,6 +82,7 @@
       (org-publish-project-alist
        '(("blog"
           :base-directory "src"
+          :recursive t
           :publishing-directory "docs"
           :auto-sitemap nil
           :recursive t

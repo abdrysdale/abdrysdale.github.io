@@ -1,8 +1,10 @@
 (defun get-org-property (prop file)
   "Extract PROP from the org FILE."
-  (with-temp-buffer
-    (insert-file-contents file)
-    (car (cdr (car (org-collect-keywords `(,prop)))))))
+  (when (file-exists-p file)
+    (with-temp-buffer
+      (insert-file-contents file)
+      ;; No need for error handling here as (cdr nil) and (car nil) return nil
+      (car (cdr (car (org-collect-keywords `(,prop))))))))
 
 (defun get-titles-from-org-files (directory)
  "Extract titles from org files in DIRECTORY."
@@ -23,6 +25,8 @@
         (index "src/index.org")
         (ignore-files '("index.org" "aboutme.org"))
         (used-tags nil))
+
+    ;; Inserts title and template
     (with-current-buffer (find-file-noselect index)
       (erase-buffer)
       (insert (format "#+title: %s's Personal Website\n\n" author))
@@ -30,6 +34,8 @@
       (end-of-buffer)
       (insert "\n\n* Articles\n")
       (save-buffer))
+
+    ;; Gets all of the articles
     (dolist (result (get-titles-from-org-files dir))
       (let ((path (car result))
             (title (cdr result)))
@@ -38,7 +44,9 @@
           (unless (member path ignore-files)
             (let ((link (format "- [[file:%s][%s]]\n" path title))
                   (tags (get-org-property "FILETAGS" path)))
-              (insert link)
+              (insert link) ;; Insert a link to article in the index
+
+              ;; Insert a link to article in each of the tags file.
               (dolist (tag (split-string tags ":"))
                 (unless (string-empty-p tag)
                   (let ((tag-file (concat "tags-" tag ".org")))
@@ -50,6 +58,8 @@
                       (insert link)
                       (save-buffer)))))
               (save-buffer))))))
+
+    ;; Insert a link to the tag files in the index
     (with-current-buffer (find-file-noselect index)
       (insert "\n* Tags\n\n")
       (dolist (tag-info used-tags)
@@ -94,10 +104,8 @@
           :publishing-function org-html-publish-to-html))))
   (copy-file "README.org" "src/build-process.org" t)
   (build-index "Alex Drysdale")
-
   (load-theme publish-theme)
   (org-publish-all t)
   (load-theme current-theme)
-
   (message "Site built at %s"
            (format-time-string "%Y-%m-%d %H:%M:%S")))

@@ -16,10 +16,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc6fcd47">Build output</a></li>
-<li><a href="#orga21a2dd">Building the Home Page</a></li>
-<li><a href="#orgf515004">Publishing the Site</a></li>
-<li><a href="#orgc0810ca">Git Hooks</a></li>
+<li><a href="#orgf574e90">Build output</a></li>
+<li><a href="#orga7edab5">Building the Home Page</a></li>
+<li><a href="#org464d7d0">Publishing the Site</a></li>
+<li><a href="#org5c0c22f">Git Hooks</a></li>
 </ul>
 </div>
 </div>
@@ -31,16 +31,16 @@ This website is built with <code>org-mode</code> and hosted through GitHub pages
 GitHub pages expects only a single <code>index.html</code> file and builds the site the from the <code>docs</code> directory - making the build process extremely simple.
 </p>
 
-<div id="outline-container-orgc6fcd47" class="outline-2">
-<h2 id="orgc6fcd47">Build output</h2>
-<div class="outline-text-2" id="text-orgc6fcd47">
+<div id="outline-container-orgf574e90" class="outline-2">
+<h2 id="orgf574e90">Build output</h2>
+<div class="outline-text-2" id="text-orgf574e90">
 <p>
-The build output will reside in <code>docs</code>
+The build output will reside in <code>docs</code> to start we'll delete that directory and copy over the css files (that reside in <code>resources/</code> and tell GitHub that this isn't a Jekyll site.
 </p>
 
 <div class="org-src-container">
 <pre class="src src-bash">rm -rf docs
-rm -rf src/tags-*
+rm -rf src/tags-*.org <span style="color: #505050;"># </span><span style="color: #505050;">Tag files are stored in the format src/tags-TAG.org</span>
 mkdir docs
 cp -r src/resources docs/
 touch docs/.nojekyll  <span style="color: #505050;"># </span><span style="color: #505050;">For GitHub pages not to build a Jekyll site</span>
@@ -49,23 +49,35 @@ touch docs/.nojekyll  <span style="color: #505050;"># </span><span style="color:
 </div>
 </div>
 
-<div id="outline-container-orga21a2dd" class="outline-2">
-<h2 id="orga21a2dd">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orga21a2dd">
+<div id="outline-container-orga7edab5" class="outline-2">
+<h2 id="orga7edab5">Building the Home Page</h2>
+<div class="outline-text-2" id="text-orga7edab5">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
+I'd also like a list of tags that are used on the articles so the user can search by topic - topics are stored in the <code>FILETAGS</code> property.
 To do this, I create a cons list of <code>(title . path)</code> of each article in the <code>src/</code> directory that isn't <code>index.org</code>.
 </p>
 
-
+<p>
+First things first, let's define a generic function for extracting properties from an org-mode document.
+</p>
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">get-org-property</span> (prop file)
   <span style="color: #2a486a;">"Extract PROP from the org FILE."</span>
-  (<span style="color: #5317ac;">with-temp-buffer</span>
-    (insert-file-contents file)
-    (car (cdr (car (org-collect-keywords `(,prop)))))))
+  (<span style="color: #5317ac;">when</span> (file-exists-p file)
+    (<span style="color: #5317ac;">with-temp-buffer</span>
+      (insert-file-contents file)
+      <span style="color: #505050;">;; </span><span style="color: #505050;">No need for error handling here as (cdr nil) and (car nil) return nil</span>
+      (car (cdr (car (org-collect-keywords `(,prop))))))))
+</pre>
+</div>
 
-(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">get-titles-from-org-files</span> (directory)
+<p>
+Next we define a function that returns all of the articles in format <code>(file . link-title)</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">get-titles-from-org-files</span> (directory)
  <span style="color: #2a486a;">"Extract titles from org files in DIRECTORY."</span>
  (<span style="color: #5317ac;">let</span> ((files (directory-files directory t <span style="color: #2544bb;">"^[[:alnum:]-_]+.org$"</span>)))
    (mapcar (<span style="color: #5317ac;">lambda</span> (file)
@@ -80,7 +92,7 @@ To do this, I create a cons list of <code>(title . path)</code> of each article 
 </div>
 
 <p>
-Next the home page (<code>index.org</code>) is built. Currently this is really simple and just includes the author's name and a list of the all the articles.
+Next the home page (<code>index.org</code>) is built. Currently this is really simple and just includes a template followed by a list of all of the articles and then a list of all the tags.
 </p>
 
 <p>
@@ -113,6 +125,8 @@ insert a title and then add the articles and tags.
         (index <span style="color: #2544bb;">"src/index.org"</span>)
         (ignore-files '(<span style="color: #2544bb;">"index.org"</span> <span style="color: #2544bb;">"aboutme.org"</span>))
         (used-tags nil))
+
+    <span style="color: #505050;">;; </span><span style="color: #505050;">Inserts title and template</span>
     (<span style="color: #5317ac;">with-current-buffer</span> (find-file-noselect index)
       (erase-buffer)
       (insert (format <span style="color: #2544bb;">"#+title: %s's Personal Website\n\n"</span> author))
@@ -120,6 +134,8 @@ insert a title and then add the articles and tags.
       (end-of-buffer)
       (insert <span style="color: #2544bb;">"\n\n* Articles\n"</span>)
       (save-buffer))
+
+    <span style="color: #505050;">;; </span><span style="color: #505050;">Gets all of the articles</span>
     (<span style="color: #5317ac;">dolist</span> (result (get-titles-from-org-files dir))
       (<span style="color: #5317ac;">let</span> ((path (car result))
             (title (cdr result)))
@@ -128,7 +144,9 @@ insert a title and then add the articles and tags.
           (<span style="color: #5317ac;">unless</span> (member path ignore-files)
             (<span style="color: #5317ac;">let</span> ((link (format <span style="color: #2544bb;">"- [[file:%s][%s]]\n"</span> path title))
                   (tags (get-org-property <span style="color: #2544bb;">"FILETAGS"</span> path)))
-              (insert link)
+              (insert link) <span style="color: #505050;">;; </span><span style="color: #505050;">Insert a link to article in the index</span>
+
+              <span style="color: #505050;">;; </span><span style="color: #505050;">Insert a link to article in each of the tags file.</span>
               (<span style="color: #5317ac;">dolist</span> (tag (split-string tags <span style="color: #2544bb;">":"</span>))
                 (<span style="color: #5317ac;">unless</span> (string-empty-p tag)
                   (<span style="color: #5317ac;">let</span> ((tag-file (concat <span style="color: #2544bb;">"tags-"</span> tag <span style="color: #2544bb;">".org"</span>)))
@@ -140,6 +158,8 @@ insert a title and then add the articles and tags.
                       (insert link)
                       (save-buffer)))))
               (save-buffer))))))
+
+    <span style="color: #505050;">;; </span><span style="color: #505050;">Insert a link to the tag files in the index</span>
     (<span style="color: #5317ac;">with-current-buffer</span> (find-file-noselect index)
       (insert <span style="color: #2544bb;">"\n* Tags\n\n"</span>)
       (<span style="color: #5317ac;">dolist</span> (tag-info used-tags)
@@ -151,9 +171,9 @@ insert a title and then add the articles and tags.
 </div>
 </div>
 
-<div id="outline-container-orgf515004" class="outline-2">
-<h2 id="orgf515004">Publishing the Site</h2>
-<div class="outline-text-2" id="text-orgf515004">
+<div id="outline-container-org464d7d0" class="outline-2">
+<h2 id="org464d7d0">Publishing the Site</h2>
+<div class="outline-text-2" id="text-org464d7d0">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -200,11 +220,9 @@ One thing of note is that we always publish the articles under the same theme fo
           <span style="color: #8f0075;">:publishing-function</span> org-html-publish-to-html))))
   (copy-file <span style="color: #2544bb;">"README.org"</span> <span style="color: #2544bb;">"src/build-process.org"</span> t)
   (build-index <span style="color: #2544bb;">"Alex Drysdale"</span>)
-
   (load-theme publish-theme)
   (org-publish-all t)
   (load-theme current-theme)
-
   (message <span style="color: #2544bb;">"Site built at %s"</span>
            (format-time-string <span style="color: #2544bb;">"%Y-%m-%d %H:%M:%S"</span>)))
 </pre>
@@ -213,9 +231,9 @@ One thing of note is that we always publish the articles under the same theme fo
 </div>
 
 
-<div id="outline-container-orgc0810ca" class="outline-2">
-<h2 id="orgc0810ca">Git Hooks</h2>
-<div class="outline-text-2" id="text-orgc0810ca">
+<div id="outline-container-org5c0c22f" class="outline-2">
+<h2 id="org5c0c22f">Git Hooks</h2>
+<div class="outline-text-2" id="text-org5c0c22f">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>

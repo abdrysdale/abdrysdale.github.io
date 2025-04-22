@@ -8,6 +8,8 @@ This website is built with =org-mode= and hosted through GitHub pages.
 
 GitHub pages expects only a single =index.html= file and builds the site the from the =docs= directory - making the build process extremely simple.
 
+Naturally, as this site is purely static there's no user tracking or even a requirement for =https=!
+
 * Build output
 
 The build output will reside in =docs= to start we'll delete that directory and copy over the css files (that reside in =resources/= and tell GitHub that this isn't a Jekyll site.
@@ -82,7 +84,7 @@ insert a title and then add the articles and tags.
     ;; Copies the README.org to the index.
     (let ((dir "src")
           (index "src/index.org")
-          (ignore-files '("index.org" "aboutme.org"))
+          (ignore-files '("index.org" "about.org" "sitemap.org"))
           (used-tags nil))
 
       ;; Inserts title and template
@@ -151,9 +153,10 @@ One thing of note is that we always publish the articles under the same theme fo
                         "href=\"resources/org.css\""
                         "type=\"text/css\" />"
                         "<header>"
-                        "<a href=\"index.html\">Home</a>&emsp;"
-                        "<a href=\"aboutme.html\">About Me</a>&emsp;"
-                        "<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
+                        "<a href=\"index.html\">Home</a>"
+                        "&emsp;<a href=\"about.html\">About Me</a>"
+                        "&emsp;<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
+                        "&emsp;<a href=\"sitemap.html\">Sitemap</a>"
                         "</header>\n"))
         (org-src-fontify-natively t)
         (org-publish-project-alist
@@ -161,15 +164,16 @@ One thing of note is that we always publish the articles under the same theme fo
             :base-directory "src"
             :recursive t
             :publishing-directory "docs"
-            :auto-sitemap nil
+            :auto-sitemap t
             :recursive t
             :with-author nil
             :with-creator t
             :with-toc t
+            :headline-levels 1
             :section-numbers nil
             :time-stamp-file nil
             :publishing-function org-html-publish-to-html))))
-    (copy-file "README.org" "src/build-process.org" t)
+    (copy-file "README.org" "src/colophon.org" t)
     (build-index "Alex Drysdale")
     (load-theme publish-theme)
     (org-publish-all t)
@@ -179,7 +183,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-22 08:06:58
+: Site built at 2025-04-22 09:27:49
 
 
 * Git Hooks
@@ -196,3 +200,26 @@ and make that file executable:
 #+begin_src bash :tangle no :results none
   chmod +x .git/hooks/pre-commit
 #+end_src
+
+
+* Conclusion
+
+Not the most beautiful blog, or the most elegant build solution but this allows me to just write without think about much each.
+
+There's still a few things I'd like to implement in the build process namely:
+
+** TODO Include the date in the article link title and sort by date - /newest first/.
+At this stage of the site, with the number of posts in the single digits, it's not essential.
+** TODO Have each blog have a link to the tags file of the associated =FILETAGS= in that blog.
+Similar to above, this will need to be sorted when more posts come into existence.
+** TODO Include an RSS feed.
+RSS specification seems simple enough so it probably makes sense to an RSS generator according to the [[https://www.rssboard.org/rss-specification][specification]].
+** TODO Include the following [[https://slashpages.net/][slashpages]] in the index
+*** TODO [[https://blogroll.org/][blogroll]]
+A list of blogs that I follow.
+*** TODO [[https://bukmark.club/directory/][links]]
+Similar to blogroll but for specific posts.
+*** TODO [[https://uses.tech/][uses]]
+Tools that I use - likely to just be Emacs and whatever Linux I'm using a bootloader.
+*** TODO [[https://aboutideasnow.com/][ideas]]
+A graveyard for all the project ideas I have.

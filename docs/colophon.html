@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Current Build Process For This Site</title>
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet"href="resources/org.css"type="text/css" /><header><a href="index.html">Home</a>&emsp;<a href="aboutme.html">About Me</a>&emsp;<a href="https://github.com/abdrysdale/abdrysdale.github.io">Source</a></header>
+<link rel="stylesheet"href="resources/org.css"type="text/css" /><header><a href="index.html">Home</a>&emsp;<a href="about.html">About Me</a>&emsp;<a href="https://github.com/abdrysdale/abdrysdale.github.io">Source</a>&emsp;<a href="sitemap.html">Sitemap</a></header>
 </head>
 <body>
 <div id="content" class="content">
@@ -16,10 +16,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf574e90">Build output</a></li>
-<li><a href="#orga7edab5">Building the Home Page</a></li>
-<li><a href="#org464d7d0">Publishing the Site</a></li>
-<li><a href="#org5c0c22f">Git Hooks</a></li>
+<li><a href="#org53e56cf">Build output</a></li>
+<li><a href="#org4e5eb98">Building the Home Page</a></li>
+<li><a href="#orgaa2172a">Publishing the Site</a></li>
+<li><a href="#org7120d65">Git Hooks</a></li>
+<li><a href="#org260c330">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -31,9 +32,13 @@ This website is built with <code>org-mode</code> and hosted through GitHub pages
 GitHub pages expects only a single <code>index.html</code> file and builds the site the from the <code>docs</code> directory - making the build process extremely simple.
 </p>
 
-<div id="outline-container-orgf574e90" class="outline-2">
-<h2 id="orgf574e90">Build output</h2>
-<div class="outline-text-2" id="text-orgf574e90">
+<p>
+Naturally, as this site is purely static there's no user tracking or even a requirement for <code>https</code>!
+</p>
+
+<div id="outline-container-org53e56cf" class="outline-2">
+<h2 id="org53e56cf">Build output</h2>
+<div class="outline-text-2" id="text-org53e56cf">
 <p>
 The build output will reside in <code>docs</code> to start we'll delete that directory and copy over the css files (that reside in <code>resources/</code> and tell GitHub that this isn't a Jekyll site.
 </p>
@@ -49,9 +54,9 @@ touch docs/.nojekyll  <span style="color: #505050;"># </span><span style="color:
 </div>
 </div>
 
-<div id="outline-container-orga7edab5" class="outline-2">
-<h2 id="orga7edab5">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orga7edab5">
+<div id="outline-container-org4e5eb98" class="outline-2">
+<h2 id="org4e5eb98">Building the Home Page</h2>
+<div class="outline-text-2" id="text-org4e5eb98">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 I'd also like a list of tags that are used on the articles so the user can search by topic - topics are stored in the <code>FILETAGS</code> property.
@@ -123,7 +128,7 @@ insert a title and then add the articles and tags.
   <span style="color: #505050;">;; </span><span style="color: #505050;">Copies the README.org to the index.</span>
   (<span style="color: #5317ac;">let</span> ((dir <span style="color: #2544bb;">"src"</span>)
         (index <span style="color: #2544bb;">"src/index.org"</span>)
-        (ignore-files '(<span style="color: #2544bb;">"index.org"</span> <span style="color: #2544bb;">"aboutme.org"</span>))
+        (ignore-files '(<span style="color: #2544bb;">"index.org"</span> <span style="color: #2544bb;">"about.org"</span> <span style="color: #2544bb;">"sitemap.org"</span>))
         (used-tags nil))
 
     <span style="color: #505050;">;; </span><span style="color: #505050;">Inserts title and template</span>
@@ -171,9 +176,9 @@ insert a title and then add the articles and tags.
 </div>
 </div>
 
-<div id="outline-container-org464d7d0" class="outline-2">
-<h2 id="org464d7d0">Publishing the Site</h2>
-<div class="outline-text-2" id="text-org464d7d0">
+<div id="outline-container-orgaa2172a" class="outline-2">
+<h2 id="orgaa2172a">Publishing the Site</h2>
+<div class="outline-text-2" id="text-orgaa2172a">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -200,9 +205,10 @@ One thing of note is that we always publish the articles under the same theme fo
                       <span style="color: #2544bb;">"href=\"resources/org.css\""</span>
                       <span style="color: #2544bb;">"type=\"text/css\" /&gt;"</span>
                       <span style="color: #2544bb;">"&lt;header&gt;"</span>
-                      <span style="color: #2544bb;">"&lt;a href=\"index.html\"&gt;Home&lt;/a&gt;&amp;emsp;"</span>
-                      <span style="color: #2544bb;">"&lt;a href=\"aboutme.html\"&gt;About Me&lt;/a&gt;&amp;emsp;"</span>
-                      <span style="color: #2544bb;">"&lt;a href=\"https://github.com/abdrysdale/abdrysdale.github.io\"&gt;Source&lt;/a&gt;"</span>
+                      <span style="color: #2544bb;">"&lt;a href=\"index.html\"&gt;Home&lt;/a&gt;"</span>
+                      <span style="color: #2544bb;">"&amp;emsp;&lt;a href=\"about.html\"&gt;About Me&lt;/a&gt;"</span>
+                      <span style="color: #2544bb;">"&amp;emsp;&lt;a href=\"https://github.com/abdrysdale/abdrysdale.github.io\"&gt;Source&lt;/a&gt;"</span>
+                      <span style="color: #2544bb;">"&amp;emsp;&lt;a href=\"sitemap.html\"&gt;Sitemap&lt;/a&gt;"</span>
                       <span style="color: #2544bb;">"&lt;/header&gt;\n"</span>))
       (org-src-fontify-natively t)
       (org-publish-project-alist
@@ -210,15 +216,16 @@ One thing of note is that we always publish the articles under the same theme fo
           <span style="color: #8f0075;">:base-directory</span> <span style="color: #2544bb;">"src"</span>
           <span style="color: #8f0075;">:recursive</span> t
           <span style="color: #8f0075;">:publishing-directory</span> <span style="color: #2544bb;">"docs"</span>
-          <span style="color: #8f0075;">:auto-sitemap</span> nil
+          <span style="color: #8f0075;">:auto-sitemap</span> t
           <span style="color: #8f0075;">:recursive</span> t
           <span style="color: #8f0075;">:with-author</span> nil
           <span style="color: #8f0075;">:with-creator</span> t
           <span style="color: #8f0075;">:with-toc</span> t
+          <span style="color: #8f0075;">:headline-levels</span> 1
           <span style="color: #8f0075;">:section-numbers</span> nil
           <span style="color: #8f0075;">:time-stamp-file</span> nil
           <span style="color: #8f0075;">:publishing-function</span> org-html-publish-to-html))))
-  (copy-file <span style="color: #2544bb;">"README.org"</span> <span style="color: #2544bb;">"src/build-process.org"</span> t)
+  (copy-file <span style="color: #2544bb;">"README.org"</span> <span style="color: #2544bb;">"src/colophon.org"</span> t)
   (build-index <span style="color: #2544bb;">"Alex Drysdale"</span>)
   (load-theme publish-theme)
   (org-publish-all t)
@@ -231,9 +238,9 @@ One thing of note is that we always publish the articles under the same theme fo
 </div>
 
 
-<div id="outline-container-org5c0c22f" class="outline-2">
-<h2 id="org5c0c22f">Git Hooks</h2>
-<div class="outline-text-2" id="text-org5c0c22f">
+<div id="outline-container-org7120d65" class="outline-2">
+<h2 id="org7120d65">Git Hooks</h2>
+<div class="outline-text-2" id="text-org7120d65">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>
@@ -253,6 +260,76 @@ and make that file executable:
 </pre>
 </div>
 </div>
+</div>
+
+
+<div id="outline-container-org260c330" class="outline-2">
+<h2 id="org260c330">Conclusion</h2>
+<div class="outline-text-2" id="text-org260c330">
+<p>
+Not the most beautiful blog, or the most elegant build solution but this allows me to just write without think about much each.
+</p>
+
+<p>
+There's still a few things I'd like to implement in the build process namely:
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a id="org06f53d4"></a><span class="todo TODO">TODO</span> Include the date in the article link title and sort by date - <i>newest first</i>.<br />
+<div class="outline-text-3" id="text-org06f53d4">
+<p>
+At this stage of the site, with the number of posts in the single digits, it's not essential.
+</p>
+</div>
+</li>
+<li><a id="orgfa53ffc"></a><span class="todo TODO">TODO</span> Have each blog have a link to the tags file of the associated <code>FILETAGS</code> in that blog.<br />
+<div class="outline-text-3" id="text-orgfa53ffc">
+<p>
+Similar to above, this will need to be sorted when more posts come into existence.
+</p>
+</div>
+</li>
+<li><a id="orgde9d11f"></a><span class="todo TODO">TODO</span> Include an RSS feed.<br />
+<div class="outline-text-3" id="text-orgde9d11f">
+<p>
+RSS specification seems simple enough so it probably makes sense to an RSS generator according to the <a href="https://www.rssboard.org/rss-specification">specification</a>.
+</p>
+</div>
+</li>
+<li><a id="org48b9839"></a><span class="todo TODO">TODO</span> Include the following <a href="https://slashpages.net/">slashpages</a> in the index<br />
+<ul class="org-ul">
+<li><a id="org85da95f"></a><span class="todo TODO">TODO</span> <a href="https://blogroll.org/">blogroll</a><br />
+<div class="outline-text-4" id="text-org85da95f">
+<p>
+A list of blogs that I follow.
+</p>
+</div>
+</li>
+<li><a id="orgb66ecd6"></a><span class="todo TODO">TODO</span> <a href="https://bukmark.club/directory/">links</a><br />
+<div class="outline-text-4" id="text-orgb66ecd6">
+<p>
+Similar to blogroll but for specific posts.
+</p>
+</div>
+</li>
+<li><a id="org6544a11"></a><span class="todo TODO">TODO</span> <a href="https://uses.tech/">uses</a><br />
+<div class="outline-text-4" id="text-org6544a11">
+<p>
+Tools that I use - likely to just be Emacs and whatever Linux I'm using a bootloader.
+</p>
+</div>
+</li>
+<li><a id="org19ac746"></a><span class="todo TODO">TODO</span> <a href="https://aboutideasnow.com/">ideas</a><br />
+<div class="outline-text-4" id="text-org19ac746">
+<p>
+A graveyard for all the project ideas I have.
+</p>
+</div>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 <div id="postamble" class="status">

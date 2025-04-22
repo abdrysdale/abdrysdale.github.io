@@ -23,7 +23,7 @@
   ;; Copies the README.org to the index.
   (let ((dir "src")
         (index "src/index.org")
-        (ignore-files '("index.org" "aboutme.org"))
+        (ignore-files '("index.org" "about.org" "sitemap.org"))
         (used-tags nil))
 
     ;; Inserts title and template
@@ -84,9 +84,10 @@
                       "href=\"resources/org.css\""
                       "type=\"text/css\" />"
                       "<header>"
-                      "<a href=\"index.html\">Home</a>&emsp;"
-                      "<a href=\"aboutme.html\">About Me</a>&emsp;"
-                      "<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
+                      "<a href=\"index.html\">Home</a>"
+                      "&emsp;<a href=\"about.html\">About Me</a>"
+                      "&emsp;<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
+                      "&emsp;<a href=\"sitemap.html\">Sitemap</a>"
                       "</header>\n"))
       (org-src-fontify-natively t)
       (org-publish-project-alist
@@ -94,15 +95,16 @@
           :base-directory "src"
           :recursive t
           :publishing-directory "docs"
-          :auto-sitemap nil
+          :auto-sitemap t
           :recursive t
           :with-author nil
           :with-creator t
           :with-toc t
+          :headline-levels 1
           :section-numbers nil
           :time-stamp-file nil
           :publishing-function org-html-publish-to-html))))
-  (copy-file "README.org" "src/build-process.org" t)
+  (copy-file "README.org" "src/colophon.org" t)
   (build-index "Alex Drysdale")
   (load-theme publish-theme)
   (org-publish-all t)

@@ -29,7 +29,7 @@
     ;; Inserts title and template
     (with-current-buffer (find-file-noselect index)
       (erase-buffer)
-      (insert (format "#+title: %s's Personal Website\n\n" author))
+      (insert (format "#+title: %s\n\n" author))
       (insert-file-contents "../index-template.org")
       (end-of-buffer)
       (insert "\n\n* Articles\n")
@@ -117,7 +117,7 @@
                       "&emsp;<a href=\"about.html\">About Me</a>"
                       "&emsp;<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
                       "&emsp;<a href=\"sitemap.html\">Sitemap</a>"
-                      "&emsp;<a href=\"feed.xml\">RSS</a>"                        
+                      "&emsp;<a href=\"feed.xml\">RSS</a>"
                       "</header>\n"))
       (org-src-fontify-natively t)
       (org-publish-project-alist
@@ -137,7 +137,7 @@
   (copy-file "README.org" "src/colophon.org" t)
   (build-index "Alex Drysdale")
   (build-rss-feed
-   "Alex Drysdale's Personal Website"
+   "Alex Drysdale"
    "https://abdrysdale.github.io"
    "Blog posts by Alex Drysdale"
    "../src/" "docs/")

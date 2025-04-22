@@ -90,7 +90,7 @@ insert a title and then add the articles and tags.
       ;; Inserts title and template
       (with-current-buffer (find-file-noselect index)
         (erase-buffer)
-        (insert (format "#+title: %s's Personal Website\n\n" author))
+        (insert (format "#+title: %s\n\n" author))
         (insert-file-contents "../index-template.org")
         (end-of-buffer)
         (insert "\n\n* Articles\n")
@@ -218,7 +218,7 @@ One thing of note is that we always publish the articles under the same theme fo
     (copy-file "README.org" "src/colophon.org" t)
     (build-index "Alex Drysdale")
     (build-rss-feed
-     "Alex Drysdale's Personal Website"
+     "Alex Drysdale"
      "https://abdrysdale.github.io"
      "Blog posts by Alex Drysdale"
      "../src/" "docs/")
@@ -230,7 +230,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-22 15:00:26
+: Site built at 2025-04-22 15:22:03
 
 
 * Git Hooks

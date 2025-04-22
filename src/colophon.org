@@ -131,6 +131,45 @@ insert a title and then add the articles and tags.
             (insert (format "- [[file:%s][%s]]\n" file tag)))))))
 #+end_src
 
+* Add an RSS feed
+
+#+begin_src elisp
+  (defun get-rss-feed-item (title link)
+    "Return an rss feed item with TITLE and LINK."
+    (concat
+     "<item>\n"
+     "<title>" title "</title>\n"
+     "<link>" link "</link>\n"
+     "</item>\n"))
+#+end_src
+
+#+RESULTS:
+: get-rss-feed-item
+
+#+begin_src elisp
+  (defun build-rss-feed (title link desc src out)
+    "Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."
+    (with-current-buffer (find-file-noselect (concat out "feed.xml"))
+      (erase-buffer)
+      (insert (concat
+               "<rss version=\"2.0\">\n"
+               "<channel>\n"
+               "<title>" title "</title>\n"
+               "<description>" desc "</description>\n"
+               "<link>" link "</link>\n"))
+      (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
+        (insert (get-rss-feed-item (get-org-property "TITLE"
+                                                     (concat src "/" file))
+                                   (concat link "/"
+                                           (car (split-string file ".org"))
+                                           ".html"))))
+      (insert "</channel>\n</rss>")
+      (save-buffer)))
+#+end_src
+
+#+RESULTS:
+: build-rss-feed
+
 * Publishing the Site
 
 Finally, the site is published using =ox-publish= with this article (the =README.org=) being copied as an article.
@@ -177,6 +216,11 @@ One thing of note is that we always publish the articles under the same theme fo
             :publishing-function org-html-publish-to-html))))
     (copy-file "README.org" "src/colophon.org" t)
     (build-index "Alex Drysdale")
+    (build-rss-feed
+     "Alex Drysdale's Personal Website"
+     "https://abdrysdale.github.io"
+     "Blog posts by Alex Drysdale"
+     "../src/" "docs/")
     (load-theme publish-theme)
     (org-publish-all t)
     (load-theme current-theme)
@@ -185,7 +229,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-22 12:23:12
+: Site built at 2025-04-22 14:50:27
 
 
 * Git Hooks

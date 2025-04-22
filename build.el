@@ -69,6 +69,33 @@
               (file (cdr tag-info)))
           (insert (format "- [[file:%s][%s]]\n" file tag)))))))
 
+(defun get-rss-feed-item (title link)
+  "Return an rss feed item with TITLE and LINK."
+  (concat
+   "<item>\n"
+   "<title>" title "</title>\n"
+   "<link>" link "</link>\n"
+   "</item>\n"))
+
+(defun build-rss-feed (title link desc src out)
+  "Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."
+  (with-current-buffer (find-file-noselect (concat out "feed.xml"))
+    (erase-buffer)
+    (insert (concat
+             "<rss version=\"2.0\">\n"
+             "<channel>\n"
+             "<title>" title "</title>\n"
+             "<description>" desc "</description>\n"
+             "<link>" link "</link>\n"))
+    (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
+      (insert (get-rss-feed-item (get-org-property "TITLE"
+                                                   (concat src "/" file))
+                                 (concat link "/"
+                                         (car (split-string file ".org"))
+                                         ".html"))))
+    (insert "</channel>\n</rss>")
+    (save-buffer)))
+
 (require 'ox-publish)
 (require 'whitespace)
 (require 'htmlize)
@@ -108,6 +135,11 @@
           :publishing-function org-html-publish-to-html))))
   (copy-file "README.org" "src/colophon.org" t)
   (build-index "Alex Drysdale")
+  (build-rss-feed
+   "Alex Drysdale's Personal Website"
+   "https://abdrysdale.github.io"
+   "Blog posts by Alex Drysdale"
+   "../src/" "docs/")
   (load-theme publish-theme)
   (org-publish-all t)
   (load-theme current-theme)

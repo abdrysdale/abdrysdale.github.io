@@ -16,11 +16,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org389fd7f">Build output</a></li>
-<li><a href="#orgbb3e7ce">Building the Home Page</a></li>
-<li><a href="#org73fa65f">Publishing the Site</a></li>
-<li><a href="#org9a8f0a3">Git Hooks</a></li>
-<li><a href="#orgfec6802">Conclusion</a></li>
+<li><a href="#org207ee64">Build output</a></li>
+<li><a href="#org0f1de39">Building the Home Page</a></li>
+<li><a href="#org41d6d09">Add an RSS feed</a></li>
+<li><a href="#orgb652758">Publishing the Site</a></li>
+<li><a href="#org54a5769">Git Hooks</a></li>
+<li><a href="#orgbb5913e">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -36,9 +37,9 @@ GitHub pages expects only a single <code>index.html</code> file and builds the s
 Naturally, as this site is purely static there's no user tracking or even a requirement for <code>https</code>!
 </p>
 
-<div id="outline-container-org389fd7f" class="outline-2">
-<h2 id="org389fd7f">Build output</h2>
-<div class="outline-text-2" id="text-org389fd7f">
+<div id="outline-container-org207ee64" class="outline-2">
+<h2 id="org207ee64">Build output</h2>
+<div class="outline-text-2" id="text-org207ee64">
 <p>
 The build output will reside in <code>docs</code> to start we'll delete that directory and copy over the css files (that reside in <code>resources/</code> and tell GitHub that this isn't a Jekyll site.
 </p>
@@ -54,9 +55,9 @@ touch docs/.nojekyll  <span style="color: #505050;"># </span><span style="color:
 </div>
 </div>
 
-<div id="outline-container-orgbb3e7ce" class="outline-2">
-<h2 id="orgbb3e7ce">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orgbb3e7ce">
+<div id="outline-container-org0f1de39" class="outline-2">
+<h2 id="org0f1de39">Building the Home Page</h2>
+<div class="outline-text-2" id="text-org0f1de39">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 I'd also like a list of tags that are used on the articles so the user can search by topic - topics are stored in the <code>FILETAGS</code> property.
@@ -178,9 +179,47 @@ insert a title and then add the articles and tags.
 </div>
 </div>
 
-<div id="outline-container-org73fa65f" class="outline-2">
-<h2 id="org73fa65f">Publishing the Site</h2>
-<div class="outline-text-2" id="text-org73fa65f">
+<div id="outline-container-org41d6d09" class="outline-2">
+<h2 id="org41d6d09">Add an RSS feed</h2>
+<div class="outline-text-2" id="text-org41d6d09">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">get-rss-feed-item</span> (title link)
+  <span style="color: #2a486a;">"Return an rss feed item with TITLE and LINK."</span>
+  (concat
+   <span style="color: #2544bb;">"&lt;item&gt;\n"</span>
+   <span style="color: #2544bb;">"&lt;title&gt;"</span> title <span style="color: #2544bb;">"&lt;/title&gt;\n"</span>
+   <span style="color: #2544bb;">"&lt;link&gt;"</span> link <span style="color: #2544bb;">"&lt;/link&gt;\n"</span>
+   <span style="color: #2544bb;">"&lt;/item&gt;\n"</span>))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="color: #5317ac;">defun</span> <span style="color: #721045;">build-rss-feed</span> (title link desc src out)
+  <span style="color: #2a486a;">"Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."</span>
+  (<span style="color: #5317ac;">with-current-buffer</span> (find-file-noselect (concat out <span style="color: #2544bb;">"feed.xml"</span>))
+    (erase-buffer)
+    (insert (concat
+             <span style="color: #2544bb;">"&lt;rss version=\"2.0\"&gt;\n"</span>
+             <span style="color: #2544bb;">"&lt;channel&gt;\n"</span>
+             <span style="color: #2544bb;">"&lt;title&gt;"</span> title <span style="color: #2544bb;">"&lt;/title&gt;\n"</span>
+             <span style="color: #2544bb;">"&lt;description&gt;"</span> desc <span style="color: #2544bb;">"&lt;/description&gt;\n"</span>
+             <span style="color: #2544bb;">"&lt;link&gt;"</span> link <span style="color: #2544bb;">"&lt;/link&gt;\n"</span>))
+    (<span style="color: #5317ac;">dolist</span> (file (directory-files src nil <span style="color: #2544bb;">"^[[:alnum:]-_]+.org$"</span>))
+      (insert (get-rss-feed-item (get-org-property <span style="color: #2544bb;">"TITLE"</span>
+                                                   (concat src <span style="color: #2544bb;">"/"</span> file))
+                                 (concat link <span style="color: #2544bb;">"/"</span>
+                                         (car (split-string file <span style="color: #2544bb;">".org"</span>))
+                                         <span style="color: #2544bb;">".html"</span>))))
+    (insert <span style="color: #2544bb;">"&lt;/channel&gt;\n&lt;/rss&gt;"</span>)
+    (save-buffer)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb652758" class="outline-2">
+<h2 id="orgb652758">Publishing the Site</h2>
+<div class="outline-text-2" id="text-orgb652758">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -229,6 +268,11 @@ One thing of note is that we always publish the articles under the same theme fo
           <span style="color: #8f0075;">:publishing-function</span> org-html-publish-to-html))))
   (copy-file <span style="color: #2544bb;">"README.org"</span> <span style="color: #2544bb;">"src/colophon.org"</span> t)
   (build-index <span style="color: #2544bb;">"Alex Drysdale"</span>)
+  (build-rss-feed
+   <span style="color: #2544bb;">"Alex Drysdale's Personal Website"</span>
+   <span style="color: #2544bb;">"https://abdrysdale.github.io"</span>
+   <span style="color: #2544bb;">"Blog posts by Alex Drysdale"</span>
+   <span style="color: #2544bb;">"../src/"</span> <span style="color: #2544bb;">"docs/"</span>)
   (load-theme publish-theme)
   (org-publish-all t)
   (load-theme current-theme)
@@ -240,9 +284,9 @@ One thing of note is that we always publish the articles under the same theme fo
 </div>
 
 
-<div id="outline-container-org9a8f0a3" class="outline-2">
-<h2 id="org9a8f0a3">Git Hooks</h2>
-<div class="outline-text-2" id="text-org9a8f0a3">
+<div id="outline-container-org54a5769" class="outline-2">
+<h2 id="org54a5769">Git Hooks</h2>
+<div class="outline-text-2" id="text-org54a5769">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>
@@ -265,9 +309,9 @@ and make that file executable:
 </div>
 
 
-<div id="outline-container-orgfec6802" class="outline-2">
-<h2 id="orgfec6802">Conclusion</h2>
-<div class="outline-text-2" id="text-orgfec6802">
+<div id="outline-container-orgbb5913e" class="outline-2">
+<h2 id="orgbb5913e">Conclusion</h2>
+<div class="outline-text-2" id="text-orgbb5913e">
 <p>
 Not the most beautiful blog, or the most elegant build solution but this allows me to just write without think about much each.
 </p>
@@ -278,45 +322,45 @@ There's still a few things I'd like to implement in the build process namely:
 </div>
 
 <ul class="org-ul">
-<li><a id="org7d434c4"></a><span class="todo TODO">TODO</span> Include the date in the article link title and sort by date - <i>newest first</i>.<br />
-<div class="outline-text-3" id="text-org7d434c4">
+<li><a id="org9abcdc1"></a><span class="todo TODO">TODO</span> Include the date in the article link title and sort by date - <i>newest first</i>.<br />
+<div class="outline-text-3" id="text-org9abcdc1">
 <p>
 At this stage of the site, with the number of posts in the single digits, it's not essential.
 </p>
 </div>
 </li>
-<li><a id="org0a878df"></a><span class="todo TODO">TODO</span> Have each blog have a link to the tags file of the associated <code>FILETAGS</code> in that blog.<br />
-<div class="outline-text-3" id="text-org0a878df">
+<li><a id="org22fe8a4"></a><span class="todo TODO">TODO</span> Have each blog have a link to the tags file of the associated <code>FILETAGS</code> in that blog.<br />
+<div class="outline-text-3" id="text-org22fe8a4">
 <p>
 Similar to above, this will need to be sorted when more posts come into existence.
 </p>
 </div>
 </li>
-<li><a id="orgd4eeefc"></a><span class="todo TODO">TODO</span> Include an RSS feed.<br />
-<div class="outline-text-3" id="text-orgd4eeefc">
+<li><a id="org0d4b79b"></a><span class="todo TODO">TODO</span> Include an RSS feed.<br />
+<div class="outline-text-3" id="text-org0d4b79b">
 <p>
 RSS specification seems simple enough so it probably makes sense to an RSS generator according to the <a href="https://www.rssboard.org/rss-specification">specification</a>.
 </p>
 </div>
 </li>
-<li><a id="org3b87ff7"></a><span class="todo TODO">TODO</span> Include the following <a href="https://slashpages.net/">slashpages</a> in the index<br />
+<li><a id="org0c674c5"></a><span class="todo TODO">TODO</span> Include the following <a href="https://slashpages.net/">slashpages</a> in the index<br />
 <ul class="org-ul">
-<li><a id="org2dcc627"></a><span class="todo TODO">TODO</span> <a href="https://blogroll.org/">blogroll</a><br />
-<div class="outline-text-4" id="text-org2dcc627">
+<li><a id="orge33ee53"></a><span class="todo TODO">TODO</span> <a href="https://blogroll.org/">blogroll</a><br />
+<div class="outline-text-4" id="text-orge33ee53">
 <p>
 A list of blogs that I follow.
 </p>
 </div>
 </li>
-<li><a id="orgd366af3"></a><span class="todo TODO">TODO</span> <a href="https://bukmark.club/directory/">links</a><br />
-<div class="outline-text-4" id="text-orgd366af3">
+<li><a id="org0550b60"></a><span class="todo TODO">TODO</span> <a href="https://bukmark.club/directory/">links</a><br />
+<div class="outline-text-4" id="text-org0550b60">
 <p>
 Similar to blogroll but for specific posts.
 </p>
 </div>
 </li>
-<li><a id="org913f5a3"></a><span class="todo TODO">TODO</span> <a href="https://aboutideasnow.com/">ideas</a><br />
-<div class="outline-text-4" id="text-org913f5a3">
+<li><a id="org1821093"></a><span class="todo TODO">TODO</span> <a href="https://aboutideasnow.com/">ideas</a><br />
+<div class="outline-text-4" id="text-org1821093">
 <p>
 A graveyard for all the project ideas I have.
 </p>

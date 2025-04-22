@@ -60,7 +60,7 @@ Next we define a function that returns all of the articles in format =(file . li
 Next the home page (=index.org=) is built. Currently this is really simple and just includes a template followed by a list of all of the articles and then a list of all the tags.
 
 We'll take this template:
-#+begin_src org :tangle index-template.org
+#+begin_src org :tangle index-template.org :eval no
   Thank you for visiting my little patch of the internet.
   All views are my own and not that of my employer.
 
@@ -110,8 +110,10 @@ insert a title and then add the articles and tags.
                 ;; Insert a link to article in each of the tags file.
                 (dolist (tag (split-string tags ":"))
                   (unless (string-empty-p tag)
-                    (let ((tag-file (concat "tags-" tag ".org")))
-                      (push `(,tag . ,tag-file) used-tags)
+                    (let* ((tag-file (concat "tags-" tag ".org"))
+                           (tag-entry `(,tag . ,tag-file)))
+                      (unless (member tag-entry used-tags)
+                        (push tag-entry used-tags))
                       (with-current-buffer (find-file-noselect tag-file)
                         (unless (file-exists-p tag-file)
                           (erase-buffer)
@@ -183,7 +185,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-22 09:27:12
+: Site built at 2025-04-22 12:23:12
 
 
 * Git Hooks
@@ -219,7 +221,5 @@ RSS specification seems simple enough so it probably makes sense to an RSS gener
 A list of blogs that I follow.
 *** TODO [[https://bukmark.club/directory/][links]]
 Similar to blogroll but for specific posts.
-*** TODO [[https://uses.tech/][uses]]
-Tools that I use - likely to just be Emacs and whatever Linux I'm using a bootloader.
 *** TODO [[https://aboutideasnow.com/][ideas]]
 A graveyard for all the project ideas I have.

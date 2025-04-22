@@ -49,8 +49,10 @@
               ;; Insert a link to article in each of the tags file.
               (dolist (tag (split-string tags ":"))
                 (unless (string-empty-p tag)
-                  (let ((tag-file (concat "tags-" tag ".org")))
-                    (push `(,tag . ,tag-file) used-tags)
+                  (let* ((tag-file (concat "tags-" tag ".org"))
+                         (tag-entry `(,tag . ,tag-file)))
+                    (unless (member tag-entry used-tags)
+                      (push tag-entry used-tags))
                     (with-current-buffer (find-file-noselect tag-file)
                       (unless (file-exists-p tag-file)
                         (erase-buffer)

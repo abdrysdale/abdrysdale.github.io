@@ -1,0 +1,35 @@
+#+TITLE: Uses
+#+AUTHOR: Alex Drysdale
+#+DATE: <2025-04-22 Tue>
+#+FILETAGS: :slashpages:emacs:
+
+This is a [[https://uses.tech/][uses]] page.
+
+
+| What?                        | How?                                                     |
+|------------------------------+----------------------------------------------------------|
+| Boot-loader                  | GNU + Linux - Fedora [fn:1] [fn:2]                       |
+| OS                           | Emacs                                                    |
+| Text editor                  | Emacs [fn:3]                                             |
+| To-dos                       | Emacs (org-mode)                                         |
+| Browser                      | Emacs (eww), GNU IceCat                                  |
+| eMail                        | Emacs (notmuch) [fn:4]                                   |
+| IRC                          | Emacs (erc)                                              |
+| RSS Reader                   | Emacs (newsticker)                                       |
+| Writing                      | Emacs (org-mode + AUCTeX + RefTeX)                       |
+| Bibliography manager         | Emacs (ebib)                                             |
+| Music Player                 | Emacs (emm)                                              |
+| Media Player                 | MPV                                                      |
+| Programming languages [fn:5] | Python, R, Fortran, SQL, Perl, Elisp, Forth, Common Lisp |
+
+* Footnotes
+
+[fn:1] I previously used Gentoo but switched to Fedora due a bug I was having with external monitors not appearing after hibernation. The bug persisted in Fedora and I've experienced a lot more bugs and crashes. As soon as I've got some spare time I will be switching back to Gentoo - it is far the most stable distro I've tried out of Ubuntu, Fedora, Manjaro, Arch, NixOS and Gentoo.
+
+[fn:2] Unfortunately, I also have to use Windows for work.
+
+[fn:3] I previously used Vim for around 5 years. The scope of what I'm able to do now far exceeds what I was previously able to do with Vim. Prior to Emacs, the thought of spending days configuring my editor's configuration file would have seemed impossible! Emacs feels like a snug room that I've built my self with everything just so. A little retreat from the stresses of the modern world. Vim just always felt like a tool.
+
+[fn:4] Prior to Emacs, I used thunderbird for about a decade and had no complaints!
+
+[fn:5] Python, R and Fortran are the only ones that I can really get stuff done. SQL and Perl I use when needed but I'm phasing out Perl in favour of Python for all of scripting and automation tasks. I have the most fun with Elisp, Forth and Common Lisp.

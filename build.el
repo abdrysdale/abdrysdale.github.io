@@ -117,6 +117,7 @@
                       "&emsp;<a href=\"about.html\">About Me</a>"
                       "&emsp;<a href=\"https://github.com/abdrysdale/abdrysdale.github.io\">Source</a>"
                       "&emsp;<a href=\"sitemap.html\">Sitemap</a>"
+                      "&emsp;<a href=\"feed.xml\">RSS</a>"                        
                       "</header>\n"))
       (org-src-fontify-natively t)
       (org-publish-project-alist

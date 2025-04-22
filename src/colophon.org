@@ -230,7 +230,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-22 14:53:19
+: Site built at 2025-04-22 15:00:26
 
 
 * Git Hooks
@@ -259,8 +259,6 @@ There's still a few things I'd like to implement in the build process namely:
 At this stage of the site, with the number of posts in the single digits, it's not essential.
 ** TODO Have each blog have a link to the tags file of the associated =FILETAGS= in that blog.
 Similar to above, this will need to be sorted when more posts come into existence.
-** TODO Include an RSS feed.
-RSS specification seems simple enough so it probably makes sense to an RSS generator according to the [[https://www.rssboard.org/rss-specification][specification]].
 ** TODO Include the following [[https://slashpages.net/][slashpages]] in the index
 *** TODO [[https://blogroll.org/][blogroll]]
 A list of blogs that I follow.

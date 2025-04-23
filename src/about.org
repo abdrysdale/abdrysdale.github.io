@@ -11,7 +11,7 @@ In addition to turning coffee into bugs, I read a lot and bake bread.
 * Education
 
 - Physics BSc :: University of Glasgow -First Class Honours
-- PhD (in progress) :: Swansea University - Deep Residual Graph Convolutional Neural Networks for Real Time Uncertainty Quantification of 1D Haemodynamic Vessel System Metrics
+- PhD (candidate) :: Swansea University - Deep Residual Graph Convolutional Neural Networks for Real Time Uncertainty Quantification of 1D Haemodynamic Vessel System Metrics
 
 * Papers
 

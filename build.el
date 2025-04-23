@@ -138,7 +138,7 @@
   (build-index "Alex Drysdale")
   (build-rss-feed
    "Alex Drysdale"
-   "https://abdrysdale.github.io"
+   "https://abdrysdale.phd"
    "Blog posts by Alex Drysdale"
    "../src/" "docs/")
   (load-theme publish-theme)

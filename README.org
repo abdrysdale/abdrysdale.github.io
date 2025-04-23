@@ -20,6 +20,7 @@ The build output will reside in =docs= to start we'll delete that directory and 
   mkdir docs
   cp -r src/resources docs/
   touch docs/.nojekyll  # For GitHub pages not to build a Jekyll site
+  echo -n "abdrysdale.phd" > docs/CNAME
 #+end_src
 
 #+RESULTS:
@@ -61,10 +62,12 @@ Next the home page (=index.org=) is built. Currently this is really simple and j
 
 We'll take this template:
 #+begin_src org :tangle index-template.org :eval no
+  I'm Alex, a PhD candidate (haemodynamics + graph convolutional neural networks) and a trainee magnetic resonance physicist for NHS Wales.
   Thank you for visiting my little patch of the internet.
   All views are my own and not that of my employer.
 
   You can expect content on programming, Emacs, philosophy, ethics, magnets and bread.
+  In addition to this, I'll try to post explanations of papers that I publish. If I'm not the first author I'll do my best to explain the paper or, more likely, explain my contribution to paper.
 
   /This is site is intentially minimal and left as an exercise to the reader.../
 
@@ -219,7 +222,7 @@ One thing of note is that we always publish the articles under the same theme fo
     (build-index "Alex Drysdale")
     (build-rss-feed
      "Alex Drysdale"
-     "https://abdrysdale.github.io"
+     "https://abdrysdale.phd"
      "Blog posts by Alex Drysdale"
      "../src/" "docs/")
     (load-theme publish-theme)
@@ -230,7 +233,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-22 21:43:27
+: Site built at 2025-04-23 10:18:22
 
 
 * Git Hooks
@@ -264,5 +267,19 @@ Similar to above, this will need to be sorted when more posts come into existenc
 A list of blogs that I follow.
 *** TODO [[https://bukmark.club/directory/][links]]
 Similar to blogroll but for specific posts.
+*** TODO [[https://indieweb.org/release_notes][changelog]]
+*** TODO [[https://indieweb.org/contact][contact]]
+*** TODO [[https://thechels.uk/green][green]]
+Include some tangible targets and current status/metrics.
+*** TODO [[https://chrisburnell.com/note/slash-interests/][interests]]
+Nice way to express the things I'm interested in.
+*** TODO [[https://www.miriamsuzanne.com/why][why]]
 *** TODO [[https://aboutideasnow.com/][ideas]]
-A graveyard for all the project ideas I have.
+A list of the half-baked ideas I have.
+*** TODO [[https://rknight.me/next][next]] or [[https://fyr.io/yep][yep]]
+The better ideas should hopefully go here after I've given some thought and deemed them worth my time.
+*** TODO [[https://baty.net/nope][nope]]
+The not so good ideas will go here to remind myself not to keep thinking about them.
+*** TODO [[https://sive.rs/now][now]]
+Once I start working on ideas, they'll go here.
+** TODO Include a link a page on projects that I've developed

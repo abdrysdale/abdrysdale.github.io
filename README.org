@@ -233,7 +233,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-23 10:18:22
+: Site built at 2025-04-24 11:27:34
 
 
 * Git Hooks
@@ -280,6 +280,4 @@ A list of the half-baked ideas I have.
 The better ideas should hopefully go here after I've given some thought and deemed them worth my time.
 *** TODO [[https://baty.net/nope][nope]]
 The not so good ideas will go here to remind myself not to keep thinking about them.
-*** TODO [[https://sive.rs/now][now]]
-Once I start working on ideas, they'll go here.
 ** TODO Include a link a page on projects that I've developed

@@ -1,0 +1,8 @@
+#+title: What I'm doing now
+#+author: Alex Drysdale
+#+date: <2025-04-24 
+#+filetags: :slashpages:
+
+This is a [[https://sive.rs/now][now]] page.
+
+Currently my one and only goal is to finish my PhD thesis which currently stands at 250 pages with over 700 references...

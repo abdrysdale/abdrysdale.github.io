@@ -2,9 +2,11 @@ name: Build HTML
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
+  pull_request_review:
+    branches: [ "main" ]
 
 jobs:
   build:

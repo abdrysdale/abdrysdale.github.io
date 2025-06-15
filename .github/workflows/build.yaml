@@ -1,0 +1,21 @@
+name: Build HTML
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Emacs
+        run: sudo apt-get update && sudo apt-get install -y emacs
+
+      - name: Run build.el with Emacs
+        run: emacs --batch -l build.el

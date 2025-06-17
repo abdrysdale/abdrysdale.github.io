@@ -3,7 +3,7 @@
 #+author: Alex Drysdale
 #+filetags: :slashpages:
 
-This is an [[https://aboutideasnow.com/][ideas]] page.
+This is an [[https://aboutideasnow.com/][ideas]] page for all of my half-baked and overly ambitious ideas.
 
 - Write an epic fantasy series from the ground up (physical laws -> geology -> biology -> sociology -> politics -> story).
 - Build a robot arm that I can play over the board chess with that is capable of adapting to different play styles.

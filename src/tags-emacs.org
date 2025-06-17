@@ -1,4 +1,4 @@
 #+title:emacs
 
-- [[file:colophon.org][Current Build Process For This Site	:emacs:]]
-- [[file:uses.org][Uses	:slashpages:emacs:]]
+- [[file:uses.org][Uses]] <2025-04-22>	/slashpages/emacs/
+- [[file:colophon.org][Current Build Process For This Site]] <2025-04-19 Sat>	/emacs/

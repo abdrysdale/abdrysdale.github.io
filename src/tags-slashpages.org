@@ -1,4 +1,4 @@
 #+title:slashpages
 
-- [[file:now.org][What I'm doing now	:slashpages:]]
-- [[file:uses.org][Uses	:slashpages:emacs:]]
+- [[file:now.org][What I'm doing now]] <2025-04-24>	/slashpages/
+- [[file:uses.org][Uses]] <2025-04-22>	/slashpages/emacs/

@@ -34,16 +34,16 @@
       (car (cdr (car (org-collect-keywords `(,prop))))))))
 
 (defun get-titles-from-org-files (directory)
- "Extract titles from org files in DIRECTORY."
- (let ((files (directory-files directory t "^[[:alnum:]-_]+.org$")))
-   (mapcar (lambda (file)
-             (let ((rel-file (file-relative-name
-                              file (expand-file-name directory))))
-               `(,rel-file . ,(concat
-                               (get-org-property "TITLE" file)
-                               "\t"
-                               (get-org-property "FILETAGS" file)))))
-           files)))
+  "Extract titles and dates from org files in DIRECTORY."
+  (let ((files (directory-files directory t "^[[:alnum:]-_]+.org$")))
+    (mapcar (lambda (file)
+              (let ((rel-file (file-relative-name
+                               file (expand-file-name directory))))
+                `(,rel-file . ,(list
+                                (get-org-property "TITLE" file)
+                                (get-org-property "DATE" file)
+                                (get-org-property "FILETAGS" file)))))
+            files)))
 
 (defun build-index (author)
   "Build the index for the AUTHOR."
@@ -54,7 +54,8 @@
                         "about.org"
                         "sitemap.org"
                         "index-template.org"))
-        (used-tags nil))
+        (used-tags nil)
+        (articles nil))
 
     ;; Inserts title and template
     (with-current-buffer (find-file-noselect index)
@@ -68,43 +69,65 @@
     ;; Gets all of the articles
     (dolist (result (get-titles-from-org-files dir))
       (let ((path (car result))
-            (title (cdr result)))
+            (info (cdr result)))
+        (unless (member path ignore-files)
+          (push `(,path ,(car info) ,(cadr info) ,(caddr info)) articles))))
+
+    ;; Sort articles by date
+    (setq articles (sort articles (lambda (a b)
+                              (let ((date-a (caddr a))
+                                    (date-b (caddr b)))
+                                (string> (substring date-a 1 -1)
+                                         (substring date-b 1 -1))))))
+
+    ;; Insert links to articles in the index and tag files
+    (dolist (article articles)
+      (let ((path (car article))
+            (title (cadr article))
+            (date (caddr article))
+            (tags (cadddr article)))
         (with-current-buffer (find-file-noselect index)
           (goto-char (point-max))
-          (unless (member path ignore-files)
-            (let ((link (format "- [[file:%s][%s]]\n" path title))
-                  (tags (get-org-property "FILETAGS" path)))
-              (insert link) ;; Insert a link to article in the index
+          (let ((link (format
+                       "- [[file:%s][%s]] %s\t%s\n"
+                       path
+                       title
+                       date
+                       (replace-regexp-in-string ":" "/" tags))))
+            (insert link)
+            (save-buffer)
 
-              ;; Insert a link to article in each of the tags file.
-              (dolist (tag (split-string tags ":"))
-                (unless (string-empty-p tag)
-                  (let* ((tag-file (concat "tags-" tag ".org"))
-                         (tag-entry `(,tag . ,tag-file)))
-                    (unless (member tag-entry used-tags)
-                      (push tag-entry used-tags))
-                    (with-current-buffer (find-file-noselect tag-file)
-                      (unless (file-exists-p tag-file)
-                        (erase-buffer)
-                        (insert (format "#+title:%s\n\n" tag)))
-                      (insert link)
-                      (save-buffer)))))
-              (save-buffer))))))
+            ;; Insert a link to article in each of the tags file.
+            (dolist (tag (split-string tags ":"))
+              (unless (string-empty-p tag)
+                (let* ((tag-file (concat "tags-" tag ".org"))
+                       (tag-entry `(,tag . ,tag-file)))
+                  (unless (member tag-entry used-tags)
+                    (push tag-entry used-tags))
+                  (with-current-buffer (find-file-noselect tag-file)
+                    (unless (file-exists-p tag-file)
+                      (erase-buffer)
+                      (insert (format "#+title:%s\n\n" tag)))
+                    (goto-char (point-max))
+                    (insert link)
+                    (save-buffer)))))))))
 
-    ;; Insert a link to the tag files in the index
-    (with-current-buffer (find-file-noselect index)
-      (insert "\n* Tags\n\n")
-      (dolist (tag-info used-tags)
-        (let ((tag (car tag-info))
-              (file (cdr tag-info)))
-          (insert (format "- [[file:%s][%s]]\n" file tag)))))))
+          ;; Insert a link to the tag files in the index
+          (with-current-buffer (find-file-noselect index)
+            (insert "\n* Tags\n\n")
+            (dolist (tag-info used-tags)
+              (let ((tag (car tag-info))
+                    (file (cdr tag-info)))
+                (insert (format "- [[file:%s][%s]]\n" file tag))))
+            (save-buffer))))
 
-(defun get-rss-feed-item (title link)
-  "Return an rss feed item with TITLE and LINK."
+(defun get-rss-feed-item (title link date)
+  "Return an rss feed item with TITLE, LINK, and DATE."
   (concat
    "<item>\n"
    "<title>" title "</title>\n"
    "<link>" link "</link>\n"
+   "<pubDate>" date "</pubDate>\n"
    "</item>\n"))
 
 (defun build-rss-feed (title link desc src out)
@@ -118,13 +141,15 @@
              "<description>" desc "</description>\n"
              "<link>" link "</link>\n"))
     (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
-      (insert (get-rss-feed-item (get-org-property "TITLE"
-                                                   (concat src "/" file))
-                                 (concat link "/"
-                                         (car (split-string file ".org"))
-                                         ".html"))))
+      (let ((date (get-org-property "DATE" (concat src "/" file))))
+        (insert (get-rss-feed-item (get-org-property "TITLE"
+                                                     (concat src "/" file))
+                                   (concat link "/"
+                                           (car (split-string file ".org"))
+                                           ".html")
+                                   date)))
     (insert "</channel>\n</rss>")
-    (save-buffer)))
+    (save-buffer))))
 
 (require 'ox-publish)
 (require 'whitespace)

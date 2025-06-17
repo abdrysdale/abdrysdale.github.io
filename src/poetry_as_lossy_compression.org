@@ -1,6 +1,6 @@
 #+title: Poetry is Lossy Compression of Human Emotions
 #+author: Alex Drysdale
-#+date: <2025-06-17 Tue>
+#+date: <2025-06-17>
 #+filetags: :poetry:
 
 * The History of the Human Heart

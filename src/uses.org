@@ -1,6 +1,6 @@
 #+TITLE: Uses
 #+AUTHOR: Alex Drysdale
-#+DATE: <2025-04-22 Tue>
+#+DATE: <2025-04-22>
 #+FILETAGS: :slashpages:emacs:
 
 This is a [[https://uses.tech/][uses]] page.

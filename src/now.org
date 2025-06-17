@@ -1,6 +1,6 @@
 #+title: What I'm doing now
 #+author: Alex Drysdale
-#+date: <2025-04-24 
+#+date: <2025-04-24>
 #+filetags: :slashpages:
 
 This is a [[https://sive.rs/now][now]] page.

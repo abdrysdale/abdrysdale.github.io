@@ -1,6 +1,6 @@
 #+title: About Me
 #+author: Alex Drysdale
-#+date: <2025-04-19 Sat>
+#+date: <2025-04-19>
 
 I'm currently a trainee Magnetic Resonance Physicist for NHS Wales working with =Python=, =Elisp=, =SQL= and big magnets.
 

@@ -71,16 +71,16 @@ Next we define a function that returns all of the articles in format =(file . li
 
 #+begin_src elisp :results none
   (defun get-titles-from-org-files (directory)
-   "Extract titles from org files in DIRECTORY."
-   (let ((files (directory-files directory t "^[[:alnum:]-_]+.org$")))
-     (mapcar (lambda (file)
-               (let ((rel-file (file-relative-name
-                                file (expand-file-name directory))))
-                 `(,rel-file . ,(concat
-                                 (get-org-property "TITLE" file)
-                                 "\t"
-                                 (get-org-property "FILETAGS" file)))))
-             files)))
+    "Extract titles and dates from org files in DIRECTORY."
+    (let ((files (directory-files directory t "^[[:alnum:]-_]+.org$")))
+      (mapcar (lambda (file)
+                (let ((rel-file (file-relative-name
+                                 file (expand-file-name directory))))
+                  `(,rel-file . ,(list
+                                  (get-org-property "TITLE" file)
+                                  (get-org-property "DATE" file)
+                                  (get-org-property "FILETAGS" file)))))
+              files)))
 #+end_src
 
 Next the home page (=index.org=) is built. Currently this is really simple and just includes a template followed by a list of all of the articles and then a list of all the tags.
@@ -116,7 +116,8 @@ insert a title and then add the articles and tags.
                           "about.org"
                           "sitemap.org"
                           "index-template.org"))
-          (used-tags nil))
+          (used-tags nil)
+          (articles nil))
 
       ;; Inserts title and template
       (with-current-buffer (find-file-noselect index)
@@ -130,47 +131,69 @@ insert a title and then add the articles and tags.
       ;; Gets all of the articles
       (dolist (result (get-titles-from-org-files dir))
         (let ((path (car result))
-              (title (cdr result)))
+              (info (cdr result)))
+          (unless (member path ignore-files)
+            (push `(,path ,(car info) ,(cadr info) ,(caddr info)) articles))))
+
+      ;; Sort articles by date
+      (setq articles (sort articles (lambda (a b)
+                                (let ((date-a (caddr a))
+                                      (date-b (caddr b)))
+                                  (string> (substring date-a 1 -1)
+                                           (substring date-b 1 -1))))))
+
+      ;; Insert links to articles in the index and tag files
+      (dolist (article articles)
+        (let ((path (car article))
+              (title (cadr article))
+              (date (caddr article))
+              (tags (cadddr article)))
           (with-current-buffer (find-file-noselect index)
             (goto-char (point-max))
-            (unless (member path ignore-files)
-              (let ((link (format "- [[file:%s][%s]]\n" path title))
-                    (tags (get-org-property "FILETAGS" path)))
-                (insert link) ;; Insert a link to article in the index
+            (let ((link (format
+                         "- [[file:%s][%s]] %s\t%s\n"
+                         path
+                         title
+                         date
+                         (replace-regexp-in-string ":" "/" tags))))
+              (insert link)
+              (save-buffer)
 
-                ;; Insert a link to article in each of the tags file.
-                (dolist (tag (split-string tags ":"))
-                  (unless (string-empty-p tag)
-                    (let* ((tag-file (concat "tags-" tag ".org"))
-                           (tag-entry `(,tag . ,tag-file)))
-                      (unless (member tag-entry used-tags)
-                        (push tag-entry used-tags))
-                      (with-current-buffer (find-file-noselect tag-file)
-                        (unless (file-exists-p tag-file)
-                          (erase-buffer)
-                          (insert (format "#+title:%s\n\n" tag)))
-                        (insert link)
-                        (save-buffer)))))
-                (save-buffer))))))
+              ;; Insert a link to article in each of the tags file.
+              (dolist (tag (split-string tags ":"))
+                (unless (string-empty-p tag)
+                  (let* ((tag-file (concat "tags-" tag ".org"))
+                         (tag-entry `(,tag . ,tag-file)))
+                    (unless (member tag-entry used-tags)
+                      (push tag-entry used-tags))
+                    (with-current-buffer (find-file-noselect tag-file)
+                      (unless (file-exists-p tag-file)
+                        (erase-buffer)
+                        (insert (format "#+title:%s\n\n" tag)))
+                      (goto-char (point-max))
+                      (insert link)
+                      (save-buffer)))))))))
 
-      ;; Insert a link to the tag files in the index
-      (with-current-buffer (find-file-noselect index)
-        (insert "\n* Tags\n\n")
-        (dolist (tag-info used-tags)
-          (let ((tag (car tag-info))
-                (file (cdr tag-info)))
-            (insert (format "- [[file:%s][%s]]\n" file tag)))))))
+            ;; Insert a link to the tag files in the index
+            (with-current-buffer (find-file-noselect index)
+              (insert "\n* Tags\n\n")
+              (dolist (tag-info used-tags)
+                (let ((tag (car tag-info))
+                      (file (cdr tag-info)))
+                  (insert (format "- [[file:%s][%s]]\n" file tag))))
+              (save-buffer))))
 #+end_src
 
 * Add an RSS feed
 
 #+begin_src elisp
-  (defun get-rss-feed-item (title link)
-    "Return an rss feed item with TITLE and LINK."
+  (defun get-rss-feed-item (title link date)
+    "Return an rss feed item with TITLE, LINK, and DATE."
     (concat
      "<item>\n"
      "<title>" title "</title>\n"
      "<link>" link "</link>\n"
+     "<pubDate>" date "</pubDate>\n"
      "</item>\n"))
 #+end_src
 
@@ -189,13 +212,15 @@ insert a title and then add the articles and tags.
                "<description>" desc "</description>\n"
                "<link>" link "</link>\n"))
       (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
-        (insert (get-rss-feed-item (get-org-property "TITLE"
-                                                     (concat src "/" file))
-                                   (concat link "/"
-                                           (car (split-string file ".org"))
-                                           ".html"))))
+        (let ((date (get-org-property "DATE" (concat src "/" file))))
+          (insert (get-rss-feed-item (get-org-property "TITLE"
+                                                       (concat src "/" file))
+                                     (concat link "/"
+                                             (car (split-string file ".org"))
+                                             ".html")
+                                     date)))
       (insert "</channel>\n</rss>")
-      (save-buffer)))
+      (save-buffer))))
 #+end_src
 
 #+RESULTS:
@@ -261,7 +286,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-06-17 15:12:46
+: Site built at 2025-06-17 19:28:31
 
 
 * Git Hooks
@@ -286,7 +311,8 @@ Not the most beautiful blog, or the most elegant build solution but this allows 
 
 There's still a few things I'd like to implement in the build process namely:
 
-** TODO Include the date in the article link title and sort by date - /newest first/.
+** DONE Include the date in the article link title and sort by date - /newest first/.
+- State "DONE"       from "TODO"       [2025-06-17 Tue 19:28]
 At this stage of the site, with the number of posts in the single digits, it's not essential.
 ** TODO Have each blog have a link to the tags file of the associated =FILETAGS= in that blog.
 Similar to above, this will need to be sorted when more posts come into existence.

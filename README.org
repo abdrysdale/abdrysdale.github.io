@@ -14,16 +14,41 @@ Naturally, as this site is purely static there's no user tracking or even a requ
 
 The build output will reside in =docs= to start we'll delete that directory and copy over the css files (that reside in =resources/= and tell GitHub that this isn't a Jekyll site.
 
-#+begin_src bash :tangle no
-  rm -rf docs
-  rm -rf src/tags-*.org # Tag files are stored in the format src/tags-TAG.org
-  mkdir docs
-  cp -r src/resources docs/
-  touch docs/.nojekyll  # For GitHub pages not to build a Jekyll site
-  echo -n "abdrysdale.phd" > docs/CNAME
+#+begin_src elisp :results none
+  ;; Delete the docs directory
+  (when (file-exists-p "docs")
+    (delete-directory "docs" t))
+
+  ;; Delete tag files
+  (dolist (file (directory-files "src" nil "^tags-.*\\.org$"))
+    (when (file-regular-p (expand-file-name file "src"))
+      (delete-file (expand-file-name file "src"))))
+
+  ;; Copy resources to the docs directory
+  (make-directory "docs" t)
+  (copy-directory "src/resources" "docs/resources" t t)
+
+  ;; Tell github this isn't a Jekyll cite and insert the CNAME
+  (with-temp-file (expand-file-name "docs/.nojekyll"))
+  (with-temp-file (expand-file-name "docs/CNAME")
+    (insert "abdrysdale.phd"))
 #+end_src
 
-#+RESULTS:
+
+* Installing required packages
+
+We'll need to use an elisp package (=htmlize=) for the build process. The build process will work fine on my machine but I'll need this bit for continuous integration.
+
+#+begin_src elisp :results none
+  ;; Initialize package system
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (unless package--initialized (package-initialize))
+
+  (unless (package-installed-p 'htmlize)
+    (package-refresh-contents)
+    (package-install 'htmlize))
+#+end_src
 
 * Building the Home Page
 
@@ -87,7 +112,10 @@ insert a title and then add the articles and tags.
     ;; Copies the README.org to the index.
     (let ((dir "src")
           (index "src/index.org")
-          (ignore-files '("index.org" "about.org" "sitemap.org"))
+          (ignore-files '("index.org"
+                          "about.org"
+                          "sitemap.org"
+                          "index-template.org"))
           (used-tags nil))
 
       ;; Inserts title and template
@@ -233,7 +261,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-04-24 11:27:34
+: Site built at 2025-06-17 10:08:40
 
 
 * Git Hooks

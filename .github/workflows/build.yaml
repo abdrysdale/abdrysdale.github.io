@@ -38,8 +38,8 @@ jobs:
           git add docs/
           git commit -m "Built site" || echo "No changes to commit"
         
-
-      - name: Push changes
-        run: git push
+      - name: Push changes to current branch
+        run: |
+          git push origin HEAD:$GITHUB_REF_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -261,7 +261,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-06-17 10:08:40
+: Site built at 2025-06-17 15:12:46
 
 
 * Git Hooks

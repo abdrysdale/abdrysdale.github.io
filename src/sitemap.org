@@ -5,6 +5,8 @@
 - [[file:colophon.org][Current Build Process For This Site]]
 - [[file:tags-emacs.org][emacs]]
 - [[file:index-template.org][index-template]]
+- [[file:tags-poetry.org][poetry]]
+- [[file:poetry_as_lossy_compression.org][Poetry is Lossy Compression of Human Emotions]]
 - [[file:tags-slashpages.org][slashpages]]
 - [[file:uses.org][Uses]]
 - [[file:now.org][What I'm doing now]]

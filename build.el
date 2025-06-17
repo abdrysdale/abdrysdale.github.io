@@ -1,3 +1,30 @@
+;; Delete the docs directory
+(when (file-exists-p "docs")
+  (delete-directory "docs" t))
+
+;; Delete tag files
+(dolist (file (directory-files "src" nil "^tags-.*\\.org$"))
+  (when (file-regular-p (expand-file-name file "src"))
+    (delete-file (expand-file-name file "src"))))
+
+;; Copy resources to the docs directory
+(make-directory "docs" t)
+(copy-directory "src/resources" "docs/resources" t t)
+
+;; Tell github this isn't a Jekyll cite and insert the CNAME
+(with-temp-file (expand-file-name "docs/.nojekyll"))
+(with-temp-file (expand-file-name "docs/CNAME")
+  (insert "abdrysdale.phd"))
+
+;; Initialize package system
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(unless package--initialized (package-initialize))
+
+(unless (package-installed-p 'htmlize)
+  (package-refresh-contents)
+  (package-install 'htmlize))
+
 (defun get-org-property (prop file)
   "Extract PROP from the org FILE."
   (when (file-exists-p file)
@@ -23,7 +50,10 @@
   ;; Copies the README.org to the index.
   (let ((dir "src")
         (index "src/index.org")
-        (ignore-files '("index.org" "about.org" "sitemap.org"))
+        (ignore-files '("index.org"
+                        "about.org"
+                        "sitemap.org"
+                        "index-template.org"))
         (used-tags nil))
 
     ;; Inserts title and template

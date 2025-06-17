@@ -6,42 +6,61 @@
 <item>
 <title>About Me</title>
 <link>https://abdrysdale.phd/about.html</link>
+<pubDate><2025-04-19></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>Current Build Process For This Site</title>
 <link>https://abdrysdale.phd/colophon.html</link>
+<pubDate><2025-04-19 Sat></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>Alex Drysdale</title>
 <link>https://abdrysdale.phd/index.html</link>
+<pubDate></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>What I'm doing now</title>
 <link>https://abdrysdale.phd/now.html</link>
+<pubDate><2025-04-24></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>Poetry is Lossy Compression of Human Emotions</title>
 <link>https://abdrysdale.phd/poetry_as_lossy_compression.html</link>
+<pubDate><2025-06-17></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>Sitemap for project blog</title>
 <link>https://abdrysdale.phd/sitemap.html</link>
+<pubDate></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>emacs</title>
 <link>https://abdrysdale.phd/tags-emacs.html</link>
+<pubDate></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>poetry</title>
 <link>https://abdrysdale.phd/tags-poetry.html</link>
+<pubDate></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>slashpages</title>
 <link>https://abdrysdale.phd/tags-slashpages.html</link>
+<pubDate></pubDate>
 </item>
-<item>
+</channel>
+</rss><item>
 <title>Uses</title>
 <link>https://abdrysdale.phd/uses.html</link>
+<pubDate><2025-04-22></pubDate>
 </item>
 </channel>
 </rss>

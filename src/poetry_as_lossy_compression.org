@@ -39,7 +39,7 @@ Essentially, we can deduce from this the following:
 
 * Where the compression of emotions differs to the compression of files
 
-Building on this idea, the loss introduced by each of the stages is ~sometimes~ often a desired effect - unlike file compression.
+Building on this idea, the loss introduced by each of the stages is +sometimes+ often a desired effect - unlike file compression.
 
 If a file compression, transmission or decompression algorithm started randomly flipping bits of information, it would likely be completely unusable.
 The compressed files would be decompressed into complete garbage rending them completely nonsensical.

@@ -1,0 +1,11 @@
+#+title: Ideas
+#+date: <2025-06-17>
+#+author: Alex Drysdale
+#+filetags: :slashpages:
+
+This is an [[https://aboutideasnow.com/][ideas]] page.
+
+- Write an epic fantasy series from the ground up (physical laws -> geology -> biology -> sociology -> politics -> story).
+- Build a robot arm that I can play over the board chess with that is capable of adapting to different play styles.
+- Build a bass guitar compressor pedal.
+- Create a program that can calculate magnetic translational forces and torque experience by an object from a CT or X-ray image.

@@ -18,6 +18,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       - name: Install Emacs
         run: sudo apt-get update && sudo apt-get install -y emacs
 
@@ -39,7 +44,6 @@ jobs:
           git commit -m "Built site" || echo "No changes to commit"
         
       - name: Push changes to current branch
+        if: github.event_name == 'push'
         run: |
-          git push origin HEAD:$GITHUB_REF_NAME
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git push origin ${{ github.ref_name }}

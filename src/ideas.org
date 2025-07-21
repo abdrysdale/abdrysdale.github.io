@@ -9,7 +9,7 @@ This is an [[https://aboutideasnow.com/][ideas]] page for all of my half-baked a
 - Build a robot arm that I can play over the board chess with that is capable of adapting to different play styles.
 - Build a bass guitar compressor pedal.
 - Create a program that can calculate magnetic translational forces and torque experience by an object from a CT or X-ray image.
-- A Python testing library based of [Mathew Prast's blog post - To be a better programmer write little proofs in your head](https://the-nerve-blog.ghost.io/to-be-a-better-programmer-write-little-proofs-in-your-head/) that implements a mathematical proof style test suite written in pure Python with the idea that code can only pass if the following conditions are met:
+- A Python testing library based of [[https://the-nerve-blog.ghost.io/to-be-a-better-programmer-write-little-proofs-in-your-head/][Mathew Prast's blog post - To be a better programmer write little proofs in your head]] that implements a mathematical proof style test suite written in pure Python with the idea that code can only pass if the following conditions are met:
     - *Monotonicity*: Design systems where processes (e.g., checkpoints, logs) progress unidirectionally to simplify reasoning.  
     - *Invariants/Preconditions/Postconditions*: Explicitly define constraints to ensure correctness and guide testing.  
     - *Isolation*: Use "firewalls" (e.g., component boundaries) to contain changes and prevent unintended side effects.  

@@ -328,7 +328,8 @@ Include some tangible targets and current status/metrics.
 *** TODO [[https://chrisburnell.com/note/slash-interests/][interests]]
 Nice way to express the things I'm interested in.
 *** TODO [[https://www.miriamsuzanne.com/why][why]]
-*** TODO [[https://aboutideasnow.com/][ideas]]
+*** DONE [[https://aboutideasnow.com/][ideas]]
+- State "DONE"       from "TODO"       [2025-06-17 Tue 22:11]
 A list of the half-baked ideas I have.
 *** TODO [[https://rknight.me/next][next]] or [[https://fyr.io/yep][yep]]
 The better ideas should hopefully go here after I've given some thought and deemed them worth my time.

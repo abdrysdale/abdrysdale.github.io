@@ -16,13 +16,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org908fe86">Build output</a></li>
-<li><a href="#org4ff356d">Installing required packages</a></li>
-<li><a href="#orgf866d1c">Building the Home Page</a></li>
-<li><a href="#org4b37faf">Add an RSS feed</a></li>
-<li><a href="#org73276f8">Publishing the Site</a></li>
-<li><a href="#orgf1ccce9">Git Hooks</a></li>
-<li><a href="#orgef7e590">Conclusion</a></li>
+<li><a href="#orgb92c790">Build output</a></li>
+<li><a href="#org72d3286">Installing required packages</a></li>
+<li><a href="#org8742975">Building the Home Page</a></li>
+<li><a href="#org5b26e87">Add an RSS feed</a></li>
+<li><a href="#org155f643">Publishing the Site</a></li>
+<li><a href="#orgbe625bb">Git Hooks</a></li>
+<li><a href="#orga3ac1f3">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -38,9 +38,9 @@ GitHub pages expects only a single <code>index.html</code> file and builds the s
 Naturally, as this site is purely static there's no user tracking or even a requirement for <code>https</code>!
 </p>
 
-<div id="outline-container-org908fe86" class="outline-2">
-<h2 id="org908fe86">Build output</h2>
-<div class="outline-text-2" id="text-org908fe86">
+<div id="outline-container-orgb92c790" class="outline-2">
+<h2 id="orgb92c790">Build output</h2>
+<div class="outline-text-2" id="text-orgb92c790">
 <p>
 The build output will reside in <code>docs</code> to start we'll delete that directory and copy over the css files (that reside in <code>resources/</code> and tell GitHub that this isn't a Jekyll site.
 </p>
@@ -69,9 +69,9 @@ The build output will reside in <code>docs</code> to start we'll delete that dir
 </div>
 
 
-<div id="outline-container-org4ff356d" class="outline-2">
-<h2 id="org4ff356d">Installing required packages</h2>
-<div class="outline-text-2" id="text-org4ff356d">
+<div id="outline-container-org72d3286" class="outline-2">
+<h2 id="org72d3286">Installing required packages</h2>
+<div class="outline-text-2" id="text-org72d3286">
 <p>
 We'll need to use an elisp package (<code>htmlize</code>) for the build process. The build process will work fine on my machine but I'll need this bit for continuous integration.
 </p>
@@ -90,9 +90,9 @@ We'll need to use an elisp package (<code>htmlize</code>) for the build process.
 </div>
 </div>
 
-<div id="outline-container-orgf866d1c" class="outline-2">
-<h2 id="orgf866d1c">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orgf866d1c">
+<div id="outline-container-org8742975" class="outline-2">
+<h2 id="org8742975">Building the Home Page</h2>
+<div class="outline-text-2" id="text-org8742975">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 I'd also like a list of tags that are used on the articles so the user can search by topic - topics are stored in the <code>FILETAGS</code> property.
@@ -241,9 +241,9 @@ insert a title and then add the articles and tags.
 </div>
 </div>
 
-<div id="outline-container-org4b37faf" class="outline-2">
-<h2 id="org4b37faf">Add an RSS feed</h2>
-<div class="outline-text-2" id="text-org4b37faf">
+<div id="outline-container-org5b26e87" class="outline-2">
+<h2 id="org5b26e87">Add an RSS feed</h2>
+<div class="outline-text-2" id="text-org5b26e87">
 <div class="org-src-container">
 <pre class="src src-elisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-rss-feed-item</span> (title link date)
   <span style="font-style: italic;">"Return an rss feed item with TITLE, LINK, and DATE."</span>
@@ -282,9 +282,9 @@ insert a title and then add the articles and tags.
 </div>
 </div>
 
-<div id="outline-container-org73276f8" class="outline-2">
-<h2 id="org73276f8">Publishing the Site</h2>
-<div class="outline-text-2" id="text-org73276f8">
+<div id="outline-container-org155f643" class="outline-2">
+<h2 id="org155f643">Publishing the Site</h2>
+<div class="outline-text-2" id="text-org155f643">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -350,9 +350,9 @@ One thing of note is that we always publish the articles under the same theme fo
 </div>
 
 
-<div id="outline-container-orgf1ccce9" class="outline-2">
-<h2 id="orgf1ccce9">Git Hooks</h2>
-<div class="outline-text-2" id="text-orgf1ccce9">
+<div id="outline-container-orgbe625bb" class="outline-2">
+<h2 id="orgbe625bb">Git Hooks</h2>
+<div class="outline-text-2" id="text-orgbe625bb">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>
@@ -375,9 +375,9 @@ and make that file executable:
 </div>
 
 
-<div id="outline-container-orgef7e590" class="outline-2">
-<h2 id="orgef7e590">Conclusion</h2>
-<div class="outline-text-2" id="text-orgef7e590">
+<div id="outline-container-orga3ac1f3" class="outline-2">
+<h2 id="orga3ac1f3">Conclusion</h2>
+<div class="outline-text-2" id="text-orga3ac1f3">
 <p>
 Not the most beautiful blog, or the most elegant build solution but this allows me to just write without think about much each.
 </p>
@@ -388,8 +388,8 @@ There's still a few things I'd like to implement in the build process namely:
 </div>
 
 <ul class="org-ul">
-<li><a id="orgfce8baa"></a><span class="done DONE">DONE</span> Include the date in the article link title and sort by date - <i>newest first</i>.<br />
-<div class="outline-text-3" id="text-orgfce8baa">
+<li><a id="orgd5f78ab"></a><span class="done DONE">DONE</span> Include the date in the article link title and sort by date - <i>newest first</i>.<br />
+<div class="outline-text-3" id="text-orgd5f78ab">
 <ul class="org-ul">
 <li>State "DONE"       from "TODO"       <span class="timestamp-wrapper"><span class="timestamp">[2025-06-17 Tue 19:28]</span></span></li>
 </ul>
@@ -398,48 +398,48 @@ At this stage of the site, with the number of posts in the single digits, it's n
 </p>
 </div>
 </li>
-<li><a id="orgd55c0a8"></a><span class="todo TODO">TODO</span> Have each blog have a link to the tags file of the associated <code>FILETAGS</code> in that blog.<br />
-<div class="outline-text-3" id="text-orgd55c0a8">
+<li><a id="org662cf1b"></a><span class="todo TODO">TODO</span> Have each blog have a link to the tags file of the associated <code>FILETAGS</code> in that blog.<br />
+<div class="outline-text-3" id="text-org662cf1b">
 <p>
 Similar to above, this will need to be sorted when more posts come into existence.
 </p>
 </div>
 </li>
-<li><a id="orgb1f54c9"></a><span class="todo TODO">TODO</span> Include the following <a href="https://slashpages.net/">slashpages</a> in the index<br />
+<li><a id="org3b08032"></a><span class="todo TODO">TODO</span> Include the following <a href="https://slashpages.net/">slashpages</a> in the index<br />
 <ul class="org-ul">
-<li><a id="orge6c27b5"></a><span class="todo TODO">TODO</span> <a href="https://blogroll.org/">blogroll</a><br />
-<div class="outline-text-4" id="text-orge6c27b5">
+<li><a id="orgc182c20"></a><span class="todo TODO">TODO</span> <a href="https://blogroll.org/">blogroll</a><br />
+<div class="outline-text-4" id="text-orgc182c20">
 <p>
 A list of blogs that I follow.
 </p>
 </div>
 </li>
-<li><a id="orgc7c1e1d"></a><span class="todo TODO">TODO</span> <a href="https://bukmark.club/directory/">links</a><br />
-<div class="outline-text-4" id="text-orgc7c1e1d">
+<li><a id="org6f6c05e"></a><span class="todo TODO">TODO</span> <a href="https://bukmark.club/directory/">links</a><br />
+<div class="outline-text-4" id="text-org6f6c05e">
 <p>
 Similar to blogroll but for specific posts.
 </p>
 </div>
 </li>
-<li><a id="org60003f7"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/release_notes">changelog</a><br /></li>
-<li><a id="orgaf5fa10"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/contact">contact</a><br /></li>
-<li><a id="orgacbd4e4"></a><span class="todo TODO">TODO</span> <a href="https://thechels.uk/green">green</a><br />
-<div class="outline-text-4" id="text-orgacbd4e4">
+<li><a id="org8f3954b"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/release_notes">changelog</a><br /></li>
+<li><a id="org589d0bd"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/contact">contact</a><br /></li>
+<li><a id="orga1020cb"></a><span class="todo TODO">TODO</span> <a href="https://thechels.uk/green">green</a><br />
+<div class="outline-text-4" id="text-orga1020cb">
 <p>
 Include some tangible targets and current status/metrics.
 </p>
 </div>
 </li>
-<li><a id="org5f5f93a"></a><span class="todo TODO">TODO</span> <a href="https://chrisburnell.com/note/slash-interests/">interests</a><br />
-<div class="outline-text-4" id="text-org5f5f93a">
+<li><a id="org0e02007"></a><span class="todo TODO">TODO</span> <a href="https://chrisburnell.com/note/slash-interests/">interests</a><br />
+<div class="outline-text-4" id="text-org0e02007">
 <p>
 Nice way to express the things I'm interested in.
 </p>
 </div>
 </li>
-<li><a id="org4a3f8b6"></a><span class="todo TODO">TODO</span> <a href="https://www.miriamsuzanne.com/why">why</a><br /></li>
-<li><a id="org3ac977e"></a><span class="done DONE">DONE</span> <a href="https://aboutideasnow.com/">ideas</a><br />
-<div class="outline-text-4" id="text-org3ac977e">
+<li><a id="org37592fe"></a><span class="todo TODO">TODO</span> <a href="https://www.miriamsuzanne.com/why">why</a><br /></li>
+<li><a id="org3788fbb"></a><span class="done DONE">DONE</span> <a href="https://aboutideasnow.com/">ideas</a><br />
+<div class="outline-text-4" id="text-org3788fbb">
 <ul class="org-ul">
 <li>State "DONE"       from "TODO"       <span class="timestamp-wrapper"><span class="timestamp">[2025-06-17 Tue 22:11]</span></span></li>
 </ul>
@@ -448,15 +448,15 @@ A list of the half-baked ideas I have.
 </p>
 </div>
 </li>
-<li><a id="orga9b01eb"></a><span class="todo TODO">TODO</span> <a href="https://rknight.me/next">next</a> or <a href="https://fyr.io/yep">yep</a><br />
-<div class="outline-text-4" id="text-orga9b01eb">
+<li><a id="org82bc9f8"></a><span class="todo TODO">TODO</span> <a href="https://rknight.me/next">next</a> or <a href="https://fyr.io/yep">yep</a><br />
+<div class="outline-text-4" id="text-org82bc9f8">
 <p>
 The better ideas should hopefully go here after I've given some thought and deemed them worth my time.
 </p>
 </div>
 </li>
-<li><a id="org5fba5d2"></a><span class="todo TODO">TODO</span> <a href="https://baty.net/nope">nope</a><br />
-<div class="outline-text-4" id="text-org5fba5d2">
+<li><a id="org7a299eb"></a><span class="todo TODO">TODO</span> <a href="https://baty.net/nope">nope</a><br />
+<div class="outline-text-4" id="text-org7a299eb">
 <p>
 The not so good ideas will go here to remind myself not to keep thinking about them.
 </p>
@@ -464,7 +464,7 @@ The not so good ideas will go here to remind myself not to keep thinking about t
 </li>
 </ul>
 </li>
-<li><a id="orgeabde17"></a><span class="todo TODO">TODO</span> Include a link a page on projects that I've developed<br /></li>
+<li><a id="orgaf72cf7"></a><span class="todo TODO">TODO</span> Include a link a page on projects that I've developed<br /></li>
 </ul>
 </div>
 </div>

@@ -1,4 +1,5 @@
 #+title:slashpages
 
+- [[file:ideas.org][Ideas]] <2025-06-17>	/slashpages/
 - [[file:now.org][What I'm doing now]] <2025-04-24>	/slashpages/
 - [[file:uses.org][Uses]] <2025-04-22>	/slashpages/emacs/

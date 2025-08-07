@@ -5,4 +5,9 @@
 
 This is a [[https://sive.rs/now][now]] page.
 
-Currently my one and only goal is to finish my PhD thesis which currently stands at 250 pages with over 700 references...
+Here's what I'm working on now:
+
+- Twiddling my fingers whilst I wait for my PhD viva.
+- I've been reading a lot - /I'm on track to read over 100 books this year with a few this year being over 1000 pages./
+- Reading through the entirety of Python's standard library.
+- But most importantly, spending time with my family.

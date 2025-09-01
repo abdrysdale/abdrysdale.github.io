@@ -187,13 +187,23 @@ insert a title and then add the articles and tags.
 * Add an RSS feed
 
 #+begin_src elisp
-  (defun get-rss-feed-item (title link date)
-    "Return an rss feed item with TITLE, LINK, and DATE."
+(defun get-string-from-file (filePath)
+  "Return file content as string."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+;; 2010-09-02 thanks to Pascal J Bourguignon and TheFlyingDutchman
+#+end_src
+
+#+begin_src elisp
+  (defun get-rss-feed-item (title link date &optional desc)
+    "Return an rss feed item with TITLE, LINK, DATE and DESCRIPTION."
     (concat
      "<item>\n"
      "<title>" title "</title>\n"
      "<link>" link "</link>\n"
      "<pubDate>" date "</pubDate>\n"
+     "<description>" (if desc desc "") "</description>"
      "</item>\n"))
 #+end_src
 
@@ -201,26 +211,28 @@ insert a title and then add the articles and tags.
 : get-rss-feed-item
 
 #+begin_src elisp
-  (defun build-rss-feed (title link desc src out)
-    "Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."
-    (with-current-buffer (find-file-noselect (concat out "feed.xml"))
-      (erase-buffer)
-      (insert (concat
-               "<rss version=\"2.0\">\n"
-               "<channel>\n"
-               "<title>" title "</title>\n"
-               "<description>" desc "</description>\n"
-               "<link>" link "</link>\n"))
-      (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
-        (let ((date (get-org-property "DATE" (concat src "/" file))))
-          (insert (get-rss-feed-item (get-org-property "TITLE"
-                                                       (concat src "/" file))
-                                     (concat link "/"
-                                             (car (split-string file ".org"))
-                                             ".html")
-                                     date)))
-      (insert "</channel>\n</rss>")
-      (save-buffer))))
+    (defun build-rss-feed (title link desc src out)
+      "Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."
+      (with-current-buffer (find-file-noselect (concat out "feed.xml"))
+        (erase-buffer)
+        (insert (concat
+                 "<rss version=\"2.0\">\n"
+                 "<channel>\n"
+                 "<title>" title "</title>\n"
+                 "<description>" desc "</description>\n"
+                 "<link>" link "</link>\n"))
+        (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
+          (let ((date (get-org-property "DATE" (concat src "/" file))))
+            (insert (get-rss-feed-item (get-org-property "TITLE"
+                                                         (concat src "/" file))
+                                       (concat link "/"
+                                               (car (split-string file ".org"))
+                                               ".html")
+                                       date
+                                       (get-string-from-file
+                                        (concat src "/" file))))))
+        (insert "</channel>\n</rss>")
+        (save-buffer)))
 #+end_src
 
 #+RESULTS:
@@ -260,10 +272,9 @@ One thing of note is that we always publish the articles under the same theme fo
         (org-publish-project-alist
          '(("blog"
             :base-directory "src"
-            :recursive t
+            :recursive nil
             :publishing-directory "docs"
             :auto-sitemap t
-            :recursive t
             :with-author nil
             :with-creator t
             :with-toc t

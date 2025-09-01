@@ -121,13 +121,21 @@
                 (insert (format "- [[file:%s][%s]]\n" file tag))))
             (save-buffer))))
 
-(defun get-rss-feed-item (title link date)
-  "Return an rss feed item with TITLE, LINK, and DATE."
+(defun get-string-from-file (filePath)
+  "Return file content as string."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+;; 2010-09-02 thanks to Pascal J Bourguignon and TheFlyingDutchman
+
+(defun get-rss-feed-item (title link date &optional desc)
+  "Return an rss feed item with TITLE, LINK, DATE and DESCRIPTION."
   (concat
    "<item>\n"
    "<title>" title "</title>\n"
    "<link>" link "</link>\n"
    "<pubDate>" date "</pubDate>\n"
+   "<description>" (if desc desc "") "</description>\n"
    "</item>\n"))
 
 (defun build-rss-feed (title link desc src out)
@@ -147,9 +155,11 @@
                                    (concat link "/"
                                            (car (split-string file ".org"))
                                            ".html")
-                                   date)))
+                                   date
+                                   (get-string-from-file
+                                    (concat src "/" file))))))
     (insert "</channel>\n</rss>")
-    (save-buffer))))
+    (save-buffer)))
 
 (require 'ox-publish)
 (require 'whitespace)
@@ -178,10 +188,9 @@
       (org-publish-project-alist
        '(("blog"
           :base-directory "src"
-          :recursive t
+          :recursive nil
           :publishing-directory "docs"
           :auto-sitemap t
-          :recursive t
           :with-author nil
           :with-creator t
           :with-toc t

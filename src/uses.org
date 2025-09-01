@@ -24,6 +24,10 @@ This is a [[https://uses.tech/][uses]] page.
 | Programming languages [fn:5] | Python, R, Fortran, SQL, Perl, Elisp, Forth, Common Lisp |
 
 * Footnotes
+:PROPERTIES:
+:ID:       50ab32a6-39a2-49b1-872d-20a16261b04c
+:PUBDATE:  2025-09-01 Mon 13:56
+:END:
 
 [fn:1] I previously used Gentoo but switched to Fedora due a bug I was having with external monitors not appearing after hibernation. This occurred late one night whilst writing my PhD thesis and I didn't have the time or mental energy to fix this so I decided to install Fedora. The bug persisted in Fedora and I've experienced a lot more bugs and crashes. As soon as I've got some spare time I will be switching back to Gentoo - it is far the most stable distro I've tried out of Ubuntu, Fedora, Manjaro, Arch, NixOS and Gentoo.
 

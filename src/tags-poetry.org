@@ -1,3 +1,4 @@
 #+title:poetry
 
+- [[file:poems.org][Poems - A Collection of Poems that have resonated with me.]] <2025-09-01 Mon>	/poetry/
 - [[file:poetry_as_lossy_compression.org][Poetry is Lossy Compression of Human Emotions]] <2025-06-17>	/poetry/

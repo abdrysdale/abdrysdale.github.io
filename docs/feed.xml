@@ -10,6 +10,12 @@
 </item>
 </channel>
 </rss><item>
+<title>Coffee Recipes</title>
+<link>https://abdrysdale.phd/coffee.html</link>
+<pubDate><2025-08-14 Thu></pubDate>
+</item>
+</channel>
+</rss><item>
 <title>Current Build Process For This Site</title>
 <link>https://abdrysdale.phd/colophon.html</link>
 <pubDate><2025-04-19 Sat></pubDate>
@@ -34,6 +40,12 @@
 </item>
 </channel>
 </rss><item>
+<title>Poems - A Collection of Poems that have resonated with me.</title>
+<link>https://abdrysdale.phd/poems.html</link>
+<pubDate><2025-09-01 Mon></pubDate>
+</item>
+</channel>
+</rss><item>
 <title>Poetry is Lossy Compression of Human Emotions</title>
 <link>https://abdrysdale.phd/poetry_as_lossy_compression.html</link>
 <pubDate><2025-06-17></pubDate>
@@ -42,6 +54,12 @@
 </rss><item>
 <title>Sitemap for project blog</title>
 <link>https://abdrysdale.phd/sitemap.html</link>
+<pubDate></pubDate>
+</item>
+</channel>
+</rss><item>
+<title>coffee</title>
+<link>https://abdrysdale.phd/tags-coffee.html</link>
 <pubDate></pubDate>
 </item>
 </channel>

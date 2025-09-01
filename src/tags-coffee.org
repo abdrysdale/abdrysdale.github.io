@@ -1,0 +1,3 @@
+#+title:coffee
+
+- [[file:coffee.org][Coffee Recipes]] <2025-08-14 Thu>	/coffee/

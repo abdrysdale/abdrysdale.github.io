@@ -10,12 +10,6 @@
 </item>
 </channel>
 </rss><item>
-<title>Coffee Recipes</title>
-<link>https://abdrysdale.phd/coffee.html</link>
-<pubDate><2025-08-14 Thu></pubDate>
-</item>
-</channel>
-</rss><item>
 <title>Current Build Process For This Site</title>
 <link>https://abdrysdale.phd/colophon.html</link>
 <pubDate><2025-04-19 Sat></pubDate>
@@ -54,12 +48,6 @@
 </rss><item>
 <title>Sitemap for project blog</title>
 <link>https://abdrysdale.phd/sitemap.html</link>
-<pubDate></pubDate>
-</item>
-</channel>
-</rss><item>
-<title>coffee</title>
-<link>https://abdrysdale.phd/tags-coffee.html</link>
 <pubDate></pubDate>
 </item>
 </channel>

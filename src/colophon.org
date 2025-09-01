@@ -307,7 +307,7 @@ and make that file executable:
 
 * Conclusion
 
-Not the most beautiful blog, or the most elegant build solution but this allows me to just write without think about much each.
+Not the most beautiful blog, or the most elegant build solution but this allows me to just write without thinking about much each.
 
 There's still a few things I'd like to implement in the build process namely:
 

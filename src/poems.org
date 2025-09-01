@@ -5,17 +5,7 @@
 
 A collection of poems that have resonated with me on some level. Sorted by poet.
 
-* Henry David Thoreau (1817-1862)
-** I Was Born Upon Thy Bank, River
-
-#+begin_example
-I was born upon thy bank, river,
-    My blood flows in thy stream,
-And thou meanderest forever
-    At the bottom of my dream
-#+end_example
-
-* John Fletcher (1579-162)
+* Fletcher, John (1579-162)
 ** The River-God's Song
 
 #+begin_example
@@ -27,4 +17,14 @@ Nor let the water rising high
 As thou wad'st in make thee cry
 And sob, but ever live with me,
 And not a wave shall trouble thee.
+#+end_example
+
+* Thoreau, Henry David (1817-1862)
+** I Was Born Upon Thy Bank, River
+
+#+begin_example
+I was born upon thy bank, river,
+    My blood flows in thy stream,
+And thou meanderest forever
+    At the bottom of my dream
 #+end_example

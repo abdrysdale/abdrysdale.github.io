@@ -1,0 +1,28 @@
+#+title: Poems - A Collection of Poems that have resonated with me.
+#+author: Alex Drysdale
+#+date: <2025-09-01 Mon>
+
+A collection of poems that have resonated with me on some level. Sorted by poet.
+
+* Henry David Thoreau (1817-1862)
+** I Was Born Upon Thy Bank, River
+#+begin_quote
+I was born upon thy bank, river,
+    My blood flows in thy stream,
+And thou meanderest forever
+    At the bottom of my dream
+#+end_quote
+
+* John Fletcher (1579-162)
+** The River-God's Song
+
+#+begin_quote
+Do not feat to they feet
+Naked in the river sweet;
+Think not leech or newt or toad
+Will bite thy foot when thou hast trod;
+Nor let the water rising high
+As thou wad'st in make thee cry
+And sob, but ever live with me,
+And not a wave shall trouble thee.
+#+end_quote

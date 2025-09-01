@@ -203,7 +203,7 @@ insert a title and then add the articles and tags.
      "<title>" title "</title>\n"
      "<link>" link "</link>\n"
      "<pubDate>" date "</pubDate>\n"
-     "<description>" (if desc desc "") "</description>\n"
+     "<description><![CDATA[" (if desc desc "") "]]></description>\n"
      "</item>\n"))
 #+end_src
 

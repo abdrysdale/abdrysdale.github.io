@@ -135,7 +135,7 @@
    "<title>" title "</title>\n"
    "<link>" link "</link>\n"
    "<pubDate>" date "</pubDate>\n"
-   "<description>" (if desc desc "") "</description>\n"
+   "<description><![CDATA[" (if desc desc "") "]]></description>\n"
    "</item>\n"))
 
 (defun build-rss-feed (title link desc src out)

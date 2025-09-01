@@ -7,7 +7,7 @@
 <title>About Me</title>
 <link>https://abdrysdale.phd/about.html</link>
 <pubDate><2025-04-19></pubDate>
-<description>#+title: About Me
+<description><![CDATA[#+title: About Me
 #+author: Alex Drysdale
 #+date: <2025-04-19>
 
@@ -46,13 +46,13 @@ In addition to turning coffee into bugs, I read a lot and bake bread.
 - European Society of Mechanical Engineering, 2023 :: Deep Residual Ambivalent Graph-convolutional Neural Networks (DRAGNN) for Biomarker Prediction in Large Vessel Networks
 - BioMedEng, 2023 :: Machine Learning for Large Vessel Networks
 
-</description>
+]]></description>
 </item>
 <item>
 <title>Current Build Process For This Site</title>
 <link>https://abdrysdale.phd/colophon.html</link>
 <pubDate><2025-04-19 Sat></pubDate>
-<description>#+TITLE: Current Build Process For This Site
+<description><![CDATA[#+TITLE: Current Build Process For This Site
 #+AUTHOR: Alex Drysdale
 #+DATE: <2025-04-19 Sat>
 #+PROPERTY: header-args:elisp :tangle "build.el"
@@ -257,7 +257,7 @@ insert a title and then add the articles and tags.
      "<title>" title "</title>\n"
      "<link>" link "</link>\n"
      "<pubDate>" date "</pubDate>\n"
-     "<description>" (if desc desc "") "</description>\n"
+     "<description><![CDATA[" (if desc desc "") "]]></description>\n"
      "</item>\n"))
 #+end_src
 
@@ -401,13 +401,13 @@ The better ideas should hopefully go here after I've given some thought and deem
 *** TODO [[https://baty.net/nope][nope]]
 The not so good ideas will go here to remind myself not to keep thinking about them.
 ** TODO Include a link a page on projects that I've developed
-</description>
+]]></description>
 </item>
 <item>
 <title>Ideas</title>
 <link>https://abdrysdale.phd/ideas.html</link>
 <pubDate><2025-06-17></pubDate>
-<description>#+title: Ideas
+<description><![CDATA[#+title: Ideas
 #+date: <2025-06-17>
 #+author: Alex Drysdale
 #+filetags: :slashpages:
@@ -424,13 +424,13 @@ This is an [[https://aboutideasnow.com/][ideas]] page for all of my half-baked a
     - *Isolation*: Use "firewalls" (e.g., component boundaries) to contain changes and prevent unintended side effects.  
     - *Induction*: Prove recursive code correct by verifying base cases and inductive steps.  
     - *Proof-Affinity*: Write code that is inherently easy to reason about, prioritizing clarity and structure over trial-and-error debugging.  
-</description>
+]]></description>
 </item>
 <item>
 <title>Alex Drysdale</title>
 <link>https://abdrysdale.phd/index.html</link>
 <pubDate></pubDate>
-<description>#+title: Alex Drysdale
+<description><![CDATA[#+title: Alex Drysdale
 
 I'm Alex, a PhD candidate (haemodynamics + graph convolutional neural networks) and a trainee magnetic resonance physicist for NHS Wales.
 Thank you for visiting my little patch of the internet.
@@ -460,13 +460,13 @@ which can be found [[https://github.com/abdrysdale/abdrysdale.github.io/blob/mai
 - [[file:tags-emacs.org][emacs]]
 - [[file:tags-slashpages.org][slashpages]]
 - [[file:tags-poetry.org][poetry]]
-</description>
+]]></description>
 </item>
 <item>
 <title>What I'm doing now</title>
 <link>https://abdrysdale.phd/now.html</link>
 <pubDate><2025-04-24></pubDate>
-<description>#+title: What I'm doing now
+<description><![CDATA[#+title: What I'm doing now
 #+author: Alex Drysdale
 #+date: <2025-04-24>
 #+filetags: :slashpages:
@@ -479,13 +479,13 @@ Here's what I'm working on now:
 - I've been reading a lot - /I'm on track to read over 100 books this year with a few this year being over 1000 pages./
 - Reading through the entirety of Python's standard library.
 - But most importantly, spending time with my family.
-</description>
+]]></description>
 </item>
 <item>
 <title>Poems - A Collection of Poems that have resonated with me.</title>
 <link>https://abdrysdale.phd/poems.html</link>
 <pubDate><2025-09-01 Mon></pubDate>
-<description>#+title: Poems - A Collection of Poems that have resonated with me.
+<description><![CDATA[#+title: Poems - A Collection of Poems that have resonated with me.
 #+author: Alex Drysdale
 #+date: <2025-09-01 Mon>
 #+FILETAGS: :poetry:
@@ -529,13 +529,13 @@ I was born upon thy bank, river,
 And thou meanderest forever
     At the bottom of my dream
 #+end_example
-</description>
+]]></description>
 </item>
 <item>
 <title>Poetry is Lossy Compression of Human Emotions</title>
 <link>https://abdrysdale.phd/poetry_as_lossy_compression.html</link>
 <pubDate><2025-06-17></pubDate>
-<description>#+title: Poetry is Lossy Compression of Human Emotions
+<description><![CDATA[#+title: Poetry is Lossy Compression of Human Emotions
 #+author: Alex Drysdale
 #+date: <2025-06-17>
 #+filetags: :poetry:
@@ -641,68 +641,62 @@ The cracks in its reflection only help us see ourselves more clearly.
 
 [fn:1] Similar to how a JPEG takes an a high resolution image and compresses it into something lower resolution but a lot smaller in file size - with minimal reduction in the perceived quality of the image. The true, original image, can never be reconstructed which is what makes JPEG compression "lossy".
  
-</description>
+]]></description>
 </item>
 <item>
 <title>Sitemap for project blog</title>
 <link>https://abdrysdale.phd/sitemap.html</link>
 <pubDate></pubDate>
-<description>#+TITLE: Sitemap for project blog
+<description><![CDATA[#+TITLE: Sitemap for project blog
 
 - [[file:about.org][About Me]]
 - [[file:index.org][Alex Drysdale]]
 - [[file:colophon.org][Current Build Process For This Site]]
 - [[file:ideas.org][Ideas]]
-- [[file:ai-credulous-friends.org][My AI Credulous Friends Are All Nuts]]
 - [[file:poems.org][Poems - A Collection of Poems that have resonated with me.]]
 - [[file:poetry_as_lossy_compression.org][Poetry is Lossy Compression of Human Emotions]]
 - [[file:uses.org][Uses]]
 - [[file:now.org][What I'm doing now]]
-- [[file:tags-ai.org][ai]]
-- [[file:tags-data-science.org][data-science]]
-- [[file:tags-draft.org][draft]]
 - [[file:tags-emacs.org][emacs]]
-- [[file:tags-llm.org][llm]]
 - [[file:tags-poetry.org][poetry]]
-- [[file:tags-programming.org][programming]]
-- [[file:tags-slashpages.org][slashpages]]</description>
+- [[file:tags-slashpages.org][slashpages]]]]></description>
 </item>
 <item>
 <title>emacs</title>
 <link>https://abdrysdale.phd/tags-emacs.html</link>
 <pubDate></pubDate>
-<description>#+title:emacs
+<description><![CDATA[#+title:emacs
 
 - [[file:uses.org][Uses]] <2025-04-22>	/slashpages/emacs/
 - [[file:colophon.org][Current Build Process For This Site]] <2025-04-19 Sat>	/emacs/
-</description>
+]]></description>
 </item>
 <item>
 <title>poetry</title>
 <link>https://abdrysdale.phd/tags-poetry.html</link>
 <pubDate></pubDate>
-<description>#+title:poetry
+<description><![CDATA[#+title:poetry
 
 - [[file:poems.org][Poems - A Collection of Poems that have resonated with me.]] <2025-09-01 Mon>	/poetry/
 - [[file:poetry_as_lossy_compression.org][Poetry is Lossy Compression of Human Emotions]] <2025-06-17>	/poetry/
-</description>
+]]></description>
 </item>
 <item>
 <title>slashpages</title>
 <link>https://abdrysdale.phd/tags-slashpages.html</link>
 <pubDate></pubDate>
-<description>#+title:slashpages
+<description><![CDATA[#+title:slashpages
 
 - [[file:ideas.org][Ideas]] <2025-06-17>	/slashpages/
 - [[file:now.org][What I'm doing now]] <2025-04-24>	/slashpages/
 - [[file:uses.org][Uses]] <2025-04-22>	/slashpages/emacs/
-</description>
+]]></description>
 </item>
 <item>
 <title>Uses</title>
 <link>https://abdrysdale.phd/uses.html</link>
 <pubDate><2025-04-22></pubDate>
-<description>#+TITLE: Uses
+<description><![CDATA[#+TITLE: Uses
 #+AUTHOR: Alex Drysdale
 #+DATE: <2025-04-22>
 #+FILETAGS: :slashpages:emacs:
@@ -742,7 +736,7 @@ This is a [[https://uses.tech/][uses]] page.
 [fn:4] Prior to Emacs, I used thunderbird for about a decade and had no complaints!
 
 [fn:5] Python, R and Fortran are the only ones that I can really get stuff done. SQL and Perl I use when needed but I'm phasing out Perl in favour of Python for all of scripting and automation tasks. I have the most fun with Elisp, Forth and Common Lisp.
-</description>
+]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,20 @@
+#+TITLE: Coffee Recipes
+#+AUTHOR: Alex Drysdale
+#+DATE: <2025-08-14 Thu>
+#+FILETAGS: :coffee:
+
+I've struggled to find recipes for some of the beans I buy and decided to keep this article as an online reminder for myself and potentially a helpful resource for others.
+
+Currently this is just for espresso so I'll have a header for each roaster and then a subheading for the beans.
+I like a sharp (acidic) taste which may not be to everyones liking
+
+
+* Hardlines
+:PROPERTIES:
+:ID:       28d3d095-1518-4fa9-afff-13dd36bf7d09
+:PUBDATE:  2025-09-01 Mon 13:56
+:END:
+** Kilimbi
+:PROPERTIES:
+:ID:       23be31aa-78f3-4532-beda-3b015748f7c8
+:END:

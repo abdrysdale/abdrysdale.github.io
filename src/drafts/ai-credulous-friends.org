@@ -1,0 +1,76 @@
+#+title: My AI Credulous Friends Are All Nuts
+#+author: Alex Drysdale
+#+date: <2025-09-01 Mon>
+#+filetags: :ai:llm:programming:data-science:
+
+/Note, this is a rebuttal to the article [[https://fly.io/blog/youre-all-nuts/][Thomas Ptacek's piece - My AI Skeptic Friends Are All Nuts]]./
+
+*Important Caveat:* As with the original article, I'm only discussing the implications of LLMs for software development.
+
+Bona Fides: Most of my day-to-day work could be classed as data science - as applied to a national healthcare service. For my PhD, I developed novel neural network architectures from the ground up in uncharted domains. Most of my work involves using Python and SQL along with statistics in R, numerical simulations in Fortran and a lot of cobbled together stuff in elisp.
+
+* Level Setting
+:PROPERTIES:
+:ID:       b9df5475-c71f-4be3-8c7c-5347660a1df5
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* The Positive Case
+:PROPERTIES:
+:ID:       d82b2dce-2f73-4af3-9b63-ab41195b3dfb
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But you have no idea what the code is
+:PROPERTIES:
+:ID:       2dce87aa-d9cc-4bee-b83c-e9620a7a30f1
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But Hallucination
+:PROPERTIES:
+:ID:       2ab90db8-d3a5-4cce-ae7c-22f55bb92b0b
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But the code is shitty, like that of a junior developer
+:PROPERTIES:
+:ID:       d313262b-e6b4-42e7-b9f2-aa70550975f9
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But it's bad at rust
+:PROPERTIES:
+:ID:       b7390e7d-5866-4bcb-932c-ec5cbdcebf51
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But the craft
+:PROPERTIES:
+:ID:       74f57b6f-88f2-4440-8a76-07ae85fbe1e7
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But the mediocrity
+:PROPERTIES:
+:ID:       b9c23769-bd7c-4999-a083-1b9c0de5779a
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But it'll never be AGI
+:PROPERTIES:
+:ID:       a896ccce-51a1-4ce2-916d-2ce714604f36
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But they take-rr jerbs
+:PROPERTIES:
+:ID:       4d256dac-3608-46da-9ac8-9e0439adc819
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But the plagiarism
+:PROPERTIES:
+:ID:       d269fdb1-73ee-4aec-83d4-9e7624ddb493
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* Positive Case Redux
+:PROPERTIES:
+:ID:       8f29fd55-20d1-4061-851b-88caa46b6632
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:
+* But I'm tired of hearing about it
+:PROPERTIES:
+:ID:       3c0c334c-64c6-49be-9d68-5e04a00b999a
+:PUBDATE:  2025-09-01 Mon 13:55
+:END:

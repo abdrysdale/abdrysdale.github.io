@@ -121,13 +121,6 @@
                 (insert (format "- [[file:%s][%s]]\n" file tag))))
             (save-buffer))))
 
-(defun get-string-from-file (filePath)
-  "Return file content as string."
-  (with-temp-buffer
-    (insert-file-contents filePath)
-    (buffer-string)))
-;; 2010-09-02 thanks to Pascal J Bourguignon and TheFlyingDutchman
-
 (defun get-rss-feed-item (title link date &optional desc)
   "Return an rss feed item with TITLE, LINK, DATE and DESCRIPTION."
   (concat
@@ -135,7 +128,6 @@
    "<title>" title "</title>\n"
    "<link>" link "</link>\n"
    "<pubDate>" date "</pubDate>\n"
-   "<description><![CDATA[" (if desc desc "") "]]></description>\n"
    "</item>\n"))
 
 (defun build-rss-feed (title link desc src out)
@@ -155,9 +147,7 @@
                                    (concat link "/"
                                            (car (split-string file ".org"))
                                            ".html")
-                                   date
-                                   (get-string-from-file
-                                    (concat src "/" file))))))
+                                   date))))
     (insert "</channel>\n</rss>")
     (save-buffer)))
 

@@ -1,13 +1,10 @@
 #+title: Poetry is Lossy Compression of Human Emotions
 #+author: Alex Drysdale
 #+date: <2025-06-17>
+#+export_date: Tue, 17 Jun 2025 00:00:01 GMT
 #+filetags: :poetry:
 
 * The History of the Human Heart
-:PROPERTIES:
-:ID:       a65e021d-f2e5-4408-bb4a-efb42964172d
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 
 I read a quote from the contemporary American poet Billy Collins:
 
@@ -42,10 +39,6 @@ Essentially, we can deduce from this the following:
 
 
 * Where the compression of emotions differs to the compression of files
-:PROPERTIES:
-:ID:       150be7c1-05b4-4ab1-a9d6-b255a99279bf
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 
 Building on this idea, the loss introduced by each of the stages is +sometimes+ often a desired effect - unlike file compression.
 
@@ -61,10 +54,6 @@ With poetry, however, this imperfection is what makes poetry so powerful.
 Which raises the question, how can we reduce the emotion loss? As a reader/listener, all you have control of is the decompression algorithm.
 
 * How to reduce decoding loss?
-:PROPERTIES:
-:ID:       286b657a-5d87-4d80-bb38-cd9a88aed57d
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 
 From this we can say that understanding more about the poet's life, the historical/social/political context of poem and understanding the reasoning behind the poetic techniques used allows us more accurately decode the poet's original emotions when writing the poem.
 
@@ -83,10 +72,6 @@ All that is improved upon when becoming a "better" reader of poetry is a more fa
 Even if a poem or poet doesn't "speak to you" (encode their emotions into a poem that is meaningfully decoded by yourself) then there are plenty of others that will be meaningful.
 
 * Is poetry a history of human emotions?
-:PROPERTIES:
-:ID:       50f8e632-6cff-4940-ad8c-fab277653e3a
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 
 Collins’ claim begins to make sense when we see poems as time capsules of compressed feeling.
 A medieval lament, a war-time sonnet, a protest haiku—all are all encoded with emotions that might today be decoded in ways their writers never imagined.
@@ -97,10 +82,6 @@ In this light, poetry isn’t just a history of emotion - it’s a mirror showin
 The cracks in its reflection only help us see ourselves more clearly.
 
 * Footnotes
-:PROPERTIES:
-:ID:       a24d55ee-d510-41e9-aeb1-bfa57e5b3462
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 
 [fn:1] Similar to how a JPEG takes an a high resolution image and compresses it into something lower resolution but a lot smaller in file size - with minimal reduction in the perceived quality of the image. The true, original image, can never be reconstructed which is what makes JPEG compression "lossy".
  

@@ -1,6 +1,7 @@
 #+title: Ideas
-#+date: <2025-06-17>
 #+author: Alex Drysdale
+#+date: <2025-06-17>
+#+export_date: Tue, 17 Jun 2025 00:00:01 GMT
 #+filetags: :slashpages:
 
 This is an [[https://aboutideasnow.com/][ideas]] page for all of my half-baked and overly ambitious ideas.

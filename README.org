@@ -1,6 +1,8 @@
 #+TITLE: Current Build Process For This Site
 #+AUTHOR: Alex Drysdale
 #+DATE: <2025-04-19 Sat>
+#+EXPORT_DATE: Sat, 19 Apr 2025 00:00:01 GMT
+
 #+PROPERTY: header-args:elisp :tangle "build.el"
 #+FILETAGS: :emacs:
 
@@ -211,28 +213,28 @@ insert a title and then add the articles and tags.
 : get-rss-feed-item
 
 #+begin_src elisp
-    (defun build-rss-feed (title link desc src out)
-      "Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."
-      (with-current-buffer (find-file-noselect (concat out "feed.xml"))
-        (erase-buffer)
-        (insert (concat
-                 "<rss version=\"2.0\">\n"
-                 "<channel>\n"
-                 "<title>" title "</title>\n"
-                 "<description>" desc "</description>\n"
-                 "<link>" link "</link>\n"))
-        (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
-          (let ((date (get-org-property "DATE" (concat src "/" file))))
-            (insert (get-rss-feed-item (get-org-property "TITLE"
-                                                         (concat src "/" file))
-                                       (concat link "/"
-                                               (car (split-string file ".org"))
-                                               ".html")
-                                       date
-                                       (get-string-from-file
-                                        (concat src "/" file))))))
-        (insert "</channel>\n</rss>")
-        (save-buffer)))
+  (defun build-rss-feed (title link desc src out)
+    "Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."
+    (with-current-buffer (find-file-noselect (concat out "feed.xml"))
+      (erase-buffer)
+      (insert (concat
+               "<rss version=\"2.0\">\n"
+               "<channel>\n"
+               "<title>" title "</title>\n"
+               "<description>" desc "</description>\n"
+               "<link>" link "</link>\n"))
+      (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
+        (let ((date (get-org-property "EXPORT_DATE" (concat src "/" file))))
+          (insert (get-rss-feed-item (get-org-property "TITLE"
+                                                       (concat src "/" file))
+                                     (concat link "/"
+                                             (car (split-string file ".org"))
+                                             ".html")
+                                     date
+                                     (get-string-from-file
+                                      (concat src "/" file))))))
+      (insert "</channel>\n</rss>")
+      (save-buffer)))
 #+end_src
 
 #+RESULTS:

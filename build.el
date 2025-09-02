@@ -149,7 +149,7 @@
              "<description>" desc "</description>\n"
              "<link>" link "</link>\n"))
     (dolist (file (directory-files src nil "^[[:alnum:]-_]+.org$"))
-      (let ((date (get-org-property "DATE" (concat src "/" file))))
+      (let ((date (get-org-property "EXPORT_DATE" (concat src "/" file))))
         (insert (get-rss-feed-item (get-org-property "TITLE"
                                                      (concat src "/" file))
                                    (concat link "/"

@@ -1,19 +1,13 @@
 #+title: Poems - A Collection of Poems that have resonated with me.
 #+author: Alex Drysdale
 #+date: <2025-09-01 Mon>
+#+export_date: Mon, 01 Sep 2025 00:00:01 GMT
 #+FILETAGS: :poetry:
 
 A collection of poems that have resonated with me on some level. Sorted by poet.
 
 * Fletcher, John (1579-162)
-:PROPERTIES:
-:ID:       e353d484-99f5-40f9-81e3-b302344b271f
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 ** The River-God's Song
-:PROPERTIES:
-:ID:       902efcec-bd19-4fb2-baa6-90b9aff6f7e3
-:END:
 
 #+begin_example
 Do not feat to they feet
@@ -27,14 +21,7 @@ And not a wave shall trouble thee.
 #+end_example
 
 * Thoreau, Henry David (1817-1862)
-:PROPERTIES:
-:ID:       41f1abf0-c0f1-4b23-85d9-0747c626e576
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 ** I Was Born Upon Thy Bank, River
-:PROPERTIES:
-:ID:       8fb1cff6-bc3d-4cc1-b084-70bc533aa459
-:END:
 
 #+begin_example
 I was born upon thy bank, river,

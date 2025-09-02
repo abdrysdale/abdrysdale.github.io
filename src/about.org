@@ -1,6 +1,7 @@
 #+title: About Me
 #+author: Alex Drysdale
 #+date: <2025-04-19>
+#+export_date: Sat, 19 Apr 2025 00:00:01 GMT
 
 I'm currently a trainee Magnetic Resonance Physicist for NHS Wales working with =Python=, =Elisp=, =SQL= and big magnets.
 
@@ -9,28 +10,16 @@ Outwith employment, I dabble in many programming languages - mainly =Forth=, =Co
 In addition to turning coffee into bugs, I read a lot and bake bread.
 
 * Education
-:PROPERTIES:
-:ID:       97b32d6a-a3b5-451c-8bbe-a1f4869a1720
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
 
 - Physics BSc :: University of Glasgow -First Class Honours
 - PhD (candidate) :: Swansea University - Deep Residual Graph Convolutional Neural Networks for Real Time Uncertainty Quantification of 1D Haemodynamic Vessel System Metrics
 
 * Papers
-:PROPERTIES:
-:ID:       8068f338-4d8d-40fc-a924-235a2acb2796
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
 
 - [[https://doi.org/10.48550/arXiv.2411.09046][A new computational model for quantifying blood flow dynamics across myogenically-active cerebral arterial networks - A Coccarelli, I Polydoros, A Drysdale, OF Harraz, C Kadapa]]
 - [[https://doi.org/10.1038/s41598-024-72832-y][Development of non-invasive biomarkers for pre-eclampsia through data-driven cardiovascular network models - Claudia Popp, Jason M Carson, Alex B Drysdale, Hari Arora, Edward D Johnstone, Jenny E Myers, Raoul van Loon]]
 
 * Conferences
-:PROPERTIES:
-:ID:       1a8713c6-a9df-4898-8ff0-526b44251e85
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
 
 - UK Association for Computational Mechanics, 2022 :: Neural Network Solvers from Synthetically Generated Data
 - BioMedEng, 2022 :: Physics Informed 1D Haemodynamic Neural Network Solvers

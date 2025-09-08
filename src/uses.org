@@ -7,28 +7,26 @@
 This is a [[https://uses.tech/][uses]] page.
 
 
-| What?                        | How?                                                     |
-|------------------------------+----------------------------------------------------------|
-| Boot-loader                  | GNU + Linux + Fedora [fn:1] [fn:2]                       |
-| OS                           | Emacs                                                    |
-| Text editor                  | Emacs [fn:3]                                             |
-| To-dos                       | Emacs (org-mode)                                         |
-| Browser                      | Emacs (eww), GNU IceCat                                  |
-| eMail                        | Emacs (notmuch) [fn:4]                                   |
-| IRC                          | Emacs (erc)                                              |
-| RSS Reader                   | Emacs (newsticker)                                       |
-| Writing                      | Emacs (org-mode + AUCTeX + RefTeX)                       |
-| Bibliography manager         | Emacs (ebib)                                             |
-| Music Player                 | Emacs (emm)                                              |
-| Media Player                 | MPV                                                      |
-| EBook Library                | Calibre                                                  |
-| Programming languages [fn:5] | Python, R, Fortran, SQL, Perl, Elisp, Forth, Common Lisp |
+| What?                        | How?                                                |
+|------------------------------+-----------------------------------------------------|
+| Boot-loader                  | GNU + Linux + Fedora [fn:1] [fn:2]                  |
+| OS                           | Emacs                                               |
+| Text editor                  | Emacs [fn:3]                                        |
+| To-dos                       | Emacs (org-mode)                                    |
+| Browser                      | Emacs (eww), GNU IceCat                             |
+| eMail                        | Emacs (notmuch) [fn:4]                              |
+| IRC                          | Emacs (erc)                                         |
+| RSS Reader                   | Emacs (newsticker)                                  |
+| Writing                      | Emacs (org-mode + AUCTeX + RefTeX)                  |
+| Bibliography manager         | Emacs (ebib)                                        |
+| Music Player                 | Emacs (emm)                                         |
+| Media Player                 | MPV                                                 |
+| EBook Library                | Calibre                                             |
+| Professional languages[fn:5] | Python, R, Fortran, SQL                             |
+| Hobby languages[fn:6]        | Perl[fn:7], Elisp, Forth, Common Lisp               |
+| Flirtation languages[fn:8]   | Haskell, OCaml, Clojure, Lean4, Guile, Elixir, Rust |
 
 * Footnotes
-:PROPERTIES:
-:ID:       50ab32a6-39a2-49b1-872d-20a16261b04c
-:PUBDATE:  2025-09-01 Mon 13:56
-:END:
 
 [fn:1] I previously used Gentoo but switched to Fedora due a bug I was having with external monitors not appearing after hibernation. This occurred late one night whilst writing my PhD thesis and I didn't have the time or mental energy to fix this so I decided to install Fedora. The bug persisted in Fedora and I've experienced a lot more bugs and crashes. As soon as I've got some spare time I will be switching back to Gentoo - it is far the most stable distro I've tried out of Ubuntu, Fedora, Manjaro, Arch, NixOS and Gentoo.
 
@@ -38,4 +36,10 @@ This is a [[https://uses.tech/][uses]] page.
 
 [fn:4] Prior to Emacs, I used thunderbird for about a decade and had no complaints!
 
-[fn:5] Python, R and Fortran are the only ones that I can really get stuff done. SQL and Perl I use when needed but I'm phasing out Perl in favour of Python for all of scripting and automation tasks. I have the most fun with Elisp, Forth and Common Lisp.
+[fn:5] These are the languages that I consider myself fluent in and use for my day job.
+
+[fn:6] These languages I use for hobby projects. I've written some decent projects in these but I'd need to build up some more experience and knowledge of best practices before I'd feel comfortable subjecting some future employee to a maintenance burden.
+
+[fn:7] I suffer from a common Perl related vision problem whereby I can write Perl but I can't read it - not even my own.
+
+[fn:8] These languages I've read a book or two about along with spending a lot of my day thinking about them. If I was given the green-light to do some work using one of these languages I'd ditch my tried and trusted languages in a heart-beat; and then most likely come crawling back, cap in hand, having realized I fallen into the trap of /"the grass is always greener"/.

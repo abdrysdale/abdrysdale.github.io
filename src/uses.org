@@ -1,8 +1,9 @@
-#+TITLE: Uses
-#+AUTHOR: Alex Drysdale
-#+DATE: <2025-04-22>
-#+EXPORT_DATE: Tue, 22 Apr 2025 00:00:01 GMT
-#+FILETAGS: :slashpages:emacs:
+#+title: Uses
+#+author: Alex Drysdale
+#+date: <2025-04-22>
+#+export_date: Tue, 22 Apr 2025 00:00:01 GMT
+#+html_head_extra: <link rel="icon" type="image/x-icon" href="/resources/favicon.jpeg">
+#+filetags: :slashpages:emacs:
 
 This is a [[https://uses.tech/][uses]] page.
 

@@ -2,7 +2,8 @@
 #+author: Alex Drysdale
 #+date: <2025-09-01 Mon>
 #+export_date: Mon, 01 Sep 2025 00:00:01 GMT
-#+FILETAGS: :poetry:
+#+html_head_extra: <link rel="icon" type="image/x-icon" href="/resources/favicon.jpeg">
+#+filetags: :poetry:
 
 A collection of poems that have resonated with me on some level or that I've simply enjoyed. Sorted by poet.
 

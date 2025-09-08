@@ -2,6 +2,7 @@
 #+author: Alex Drysdale
 #+date: <2025-04-24>
 #+export_date: Thu, 24 Apr 2025 00:00:01 GMT
+#+html_head_extra: <link rel="icon" type="image/x-icon" href="/resources/favicon.jpeg">
 #+filetags: :slashpages:
 
 This is a [[https://sive.rs/now][now]] page.

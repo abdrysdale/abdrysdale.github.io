@@ -1,0 +1,39 @@
+#+title: Blogroll
+#+author: Alex Drysdale
+#+date: <2025-09-08 Mon>
+#+export_data: Mon, 08 Sep 2025 00:00:00 GMT
+#+html_head_extra: <link rel="icon" type="image/x-icon" href="/resources/favicon.jpeg">
+#+filetags: :slashpages:
+
+This is a [[https://blogroll.org/][blogroll]] page - a list of blogs I follow in no particular order. I've included the blog and with some information lifted from the blog's about page.
+
+* [[https://blog.meadowhawk.xyz/][Meadowhawk]]
+
+#+begin_quote
+[Y]ou're going to find all my notes on Making, hacking, P2P and
+decentralization here. I embrace independence, self reliance and cultivating small
+communities. Decentralization is the only option left to us who are fighting this corporate
+dystopia, join me in independence!
+#+end_quote
+
+
+* [[https://codelearn.me][Ruslan]]
+
+#+begin_quote
+I'm a long time Software Engineer primarily aiming web technologies.
+
+I've created this site to keep every kind of notes I consider useful and I really hope these
+notes may be helpful for other people as well.
+#+end_quote
+
+* [[https://ogbe.net/blog/][Dennis Ogbe's Blog]]
+
+#+begin_quote
+Dennis O. Ogbe (S'13, M'20) is a member of the Reprogrammable Signal Processing group at NASA's Jet Propulsion Laboratory in Pasadena, CA. Prior to joining JPL, he was a postdoctoral associate in the Bradley Department of Electrical and Computer Engineering at Virginia Tech in Arlington, VA, followed by a stint as a software-defined radio engineer at Lynk in Falls Church, VA. He holds a B.S. in electrical engineering from Tennessee Technological University and a Ph.D. in electrical engineering from Purdue University. His research interests are in the fields of communication theory, signal processing, computer engineering, and their application to aerospace engineering problems.
+#+end_quote
+
+* [[http://sachachua.com/][Sacha Chau's Blog]]
+
+#+begin_quote
+I can't remember everything. In fact, anything past the last week gets pretty fuzzy. That's why I try to share as much as I can through this personal blog. You'll find notes about Emacs, parenting, sketchnoting, visual book reviews, self-tracking, blogging, life... whatever I'm learning about or whatever I can help other people learn.
+#+end_quote

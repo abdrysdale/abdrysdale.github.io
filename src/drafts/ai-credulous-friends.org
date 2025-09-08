@@ -3,17 +3,24 @@
 #+date: <2025-09-01 Mon>
 #+filetags: :ai:llm:programming:data-science:
 
-/Note, this is a rebuttal to the article [[https://fly.io/blog/youre-all-nuts/][Thomas Ptacek's piece - My AI Skeptic Friends Are All Nuts]]./
+/Note, this is a rebuttal to the article [[https://fly.io/blog/youre-all-nuts/][Thomas Ptacek's piece - My AI Skeptic Friends Are All Nuts]]./ Any friends that I have are already nuts by choosing to maintain a friendship with me.
 
-*Important Caveat:* As with the original article, I'm only discussing the implications of LLMs for software development.
+*Important Caveat:* As with the original article, I'm only discussing the implications of LLMs for software development. The ethics of AI usage in creative domains is something I feel passionate about but is out of the scope of this article.
 
-Bona Fides: Most of my day-to-day work could be classed as data science - as applied to a national healthcare service. For my PhD, I developed novel neural network architectures from the ground up in uncharted domains. Most of my work involves using Python and SQL along with statistics in R, numerical simulations in Fortran and a lot of cobbled together stuff in elisp.
+Bona Fides: Most of my day-to-day work could be classed as data science - as applied to a national healthcare service. For my PhD, I developed novel neural network architectures from the ground up in uncharted domains. Most of my work involves using Python and SQL along with statistics in R, numerical simulations in Fortran and a lot of cobbled together stuff in Emacs Lisp.
 
 * Level Setting
-:PROPERTIES:
-:ID:       b9df5475-c71f-4be3-8c7c-5347660a1df5
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+Just so we're all on the same page, both myself and the original author are referring to "agentic-LLMs" which can:
+
+- compile code, run tests, and iterate on the results
+- pull in arbitrary code from the tree, or from other trees online, into their context
+ windows, 
+- run standard Unix tools to navigate the tree and extract information, 
+- interact with Git, 
+- run existing tooling, like linters, formatters, and model checkers, and 
+- make essentially arbitrary tool calls (that you set up) through MCP. 
+
 * The Positive Case
 :PROPERTIES:
 :ID:       d82b2dce-2f73-4af3-9b63-ab41195b3dfb

@@ -4,7 +4,7 @@
 #+export_date: Mon, 01 Sep 2025 00:00:01 GMT
 #+FILETAGS: :poetry:
 
-A collection of poems that have resonated with me on some level. Sorted by poet.
+A collection of poems that have resonated with me on some level or that I've simply enjoyed. Sorted by poet.
 
 * Fletcher, John (1579-162)
 ** The River-God's Song
@@ -20,6 +20,43 @@ And sob, but ever live with me,
 And not a wave shall trouble thee.
 #+end_example
 
+* Plath, Sylvia (1932-1963)
+** The Moon and the Yew Tree
+
+#+begin_example
+This is the light of the mind, cold and planetary,
+The trees of the mind are black. The light is blue.
+The grasses unload their griefs on my feet as if I were God
+Prickling my ankles and murmuring of their humility
+Fumy, spiritous mists inhabit this place.
+Separated from my house by a row of headstones.
+I simply cannot see where there is to get to.
+
+The moon is no door. It is a face in its own right,
+White as a knuckle and terribly upset.
+It drags the sea after it like a dark crime; it is quiet
+With the O-gape of complete despair. I live here.
+Twice on Sunday, the bells startle the sky --
+Eight great tongues affirming the Resurrection
+At the end, they soberly bong out their names.
+
+The yew tree points up, it has a Gothic shape.
+The eyes lift after it and find the moon.
+The moon is my mother. She is not sweet like Mary.
+Her blue garments unloose small bats and owls.
+How I would like to believe in tenderness -
+The face of the effigy, gentled by candles,
+Bending, on me in particular, its mild eyes.
+
+I have fallen a long way. Clouds are flowering
+Blue and mystical over the face of the stars
+Inside the church, the saints will all be blue,
+Floating on their delicate feet over the cold pews,
+Their hands and faces stiff with holiness.
+The moon sees nothing of this. She is bald and wild.
+And the message of the yew tree is blackness - blackness and silence.
+#+end_example
+
 * Thoreau, Henry David (1817-1862)
 ** I Was Born Upon Thy Bank, River
 
@@ -29,3 +66,5 @@ I was born upon thy bank, river,
 And thou meanderest forever
     At the bottom of my dream
 #+end_example
+
+

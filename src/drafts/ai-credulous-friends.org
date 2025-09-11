@@ -22,62 +22,113 @@ Just so we're all on the same page, both myself and the original author are refe
 - make essentially arbitrary tool calls (that you set up) through MCP. 
 
 * The Positive Case
-:PROPERTIES:
-:ID:       d82b2dce-2f73-4af3-9b63-ab41195b3dfb
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+#+begin_quote
+LLMs can write a large fraction of all the tedious code you'll ever need to write. And most code on most projects is tedious.
+#+end_quote
+
+Here in lies my crucial issue with this article. That most of the code I write is tedious. Outwith testing, it's not.
+
+If that assumption is taken as a given then I can wholeheartedly understand the author's point of view.
+
+But, at least for me, that assumption is false. Most of the stuff I'm actually paid to do is come up with solutions rather than write boilerplate code. For trivial boilerplate code, I have an extensive set of Emacs macros.
+
 * But you have no idea what the code is
-:PROPERTIES:
-:ID:       2dce87aa-d9cc-4bee-b83c-e9620a7a30f1
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+#+begin_quote
+People complain about LLM-generated code being "probabilistic".
+No it isn't.
+It's code.
+It's not Yacc output.
+It's knowable.
+The LLM might be stochastic.
+But the LLM doesn't matter.
+What matters is whether you can make sense of the result, and whether your guardrails hold.
+#+end_quote
+
 * But Hallucination
-:PROPERTIES:
-:ID:       2ab90db8-d3a5-4cce-ae7c-22f55bb92b0b
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+#+begin_quote
+Agents lint.
+They compile and run tests.
+If their LLM invents a new function signature, the agent sees the error. 
+They feed it back to the LLM, which says "oh, right, I totally made that up" and then tries again.
+#+end_quote
+
+#+begin_quote
+I'm sure there are still environments where hallucination matters.
+But "hallucination" is the first thing developers bring up when someone suggests using LLMs, despite it being (more or less) a solved problem.
+#+end_quote
+
 * But the code is shitty, like that of a junior developer
-:PROPERTIES:
-:ID:       d313262b-e6b4-42e7-b9f2-aa70550975f9
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+#+begin_quote
+Does an intern cost $20/month? Because that's what Cursor.ai costs.
+#+end_quote
 * But it's bad at rust
-:PROPERTIES:
-:ID:       b7390e7d-5866-4bcb-932c-ec5cbdcebf51
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+#+begin_quote
+Fair enough!
+But people select languages in part based on how well LLMs work with them, so Rust people should get on that
+#+end_quote
+
 * But the craft
-:PROPERTIES:
-:ID:       74f57b6f-88f2-4440-8a76-07ae85fbe1e7
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+#+begin_quote
+I have a basic wood shop in my basement.
+I could get a lot of satisfaction from building a table.
+And, if that table is a workbench or a grill table, sure, I'll build it.
+But if I need, like, a table?
+For people to sit at?
+In my office?
+I buy a [...] table.
+#+end_quote
+
 * But the mediocrity
-:PROPERTIES:
-:ID:       b9c23769-bd7c-4999-a083-1b9c0de5779a
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+#+begin_quote
+If truly mediocre code is all we ever get
+from LLMs, that's still huge.
+It's that much less mediocre code humans have to write.
+#+end_quote
 * But it'll never be AGI
-:PROPERTIES:
-:ID:       a896ccce-51a1-4ce2-916d-2ce714604f36
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+#+begin_quote
+Things either work or they don't, no matter what Jensen Huang has to say
+about it.
+#+end_quote
 * But they take-rr jerbs
-:PROPERTIES:
-:ID:       4d256dac-3608-46da-9ac8-9e0439adc819
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+#+begin_quote
+So does open source. We used to pay good money for databases.
+
+We're a field premised on automating other people's jobs away.
+"Productivity gains" say the economists.
+You get what that means, right?
+Fewer people doing the same stuff.
+#+end_quote
+
 * But the plagiarism
-:PROPERTIES:
-:ID:       d269fdb1-73ee-4aec-83d4-9e7624ddb493
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+#+begin_quote
+Meanwhile, software developers spot code fragments seemingly lifted from public
+repositories on Github and lose their shit.
+What about the licensing?
+If you're a lawyer, I defer.
+But if you're a software developer playing this card?
+Cut me a little slack as I ask you to shove this concern up your ass.
+No profession has demonstrated more contempt for intellectual property.
+#+end_quote
+
 * Positive Case Redux
-:PROPERTIES:
-:ID:       8f29fd55-20d1-4061-851b-88caa46b6632
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+
+#+begin_quote
+To the consternation of many of my friends, I'm not a radical or a futurist.
+I'm a statist.
+I believe in the haphazard perseverance of complex systems, of institutions, of reversions to the mean.
+I write Go and Python code.
+#+end_quote
+
 * But I'm tired of hearing about it
-:PROPERTIES:
-:ID:       3c0c334c-64c6-49be-9d68-5e04a00b999a
-:PUBDATE:  2025-09-01 Mon 13:55
-:END:
+#+begin_quote
+I think this is going to get clearer over the next year.
+The cool kid haughtiness about "stochastic parrots" and "vibe coding" can't survive much more contact with reality.
+I'm snarking about these people, but I meant what I said: they're smarter than me.
+And when they get over this affectation, they're going to make coding agents profoundly more effective than they are today.
+#+end_quote

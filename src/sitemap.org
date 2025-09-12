@@ -2,9 +2,10 @@
 
 - [[file:about.org][About Me]]
 - [[file:index.org][Alex Drysdale]]
+- [[file:blogroll.org][Blogroll]]
 - [[file:colophon.org][Current Build Process For This Site]]
 - [[file:ideas.org][Ideas]]
-- [[file:poems.org][Poems - A Collection of Poems that have resonated with me.]]
+- [[file:poems.org][Poems - A Collection of Poems That Have Resonated With Me]]
 - [[file:poetry_as_lossy_compression.org][Poetry is Lossy Compression of Human Emotions]]
 - [[file:uses.org][Uses]]
 - [[file:now.org][What I'm doing now]]

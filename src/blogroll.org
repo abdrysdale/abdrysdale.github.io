@@ -37,3 +37,41 @@ Dennis O. Ogbe (S'13, M'20) is a member of the Reprogrammable Signal Processing 
 #+begin_quote
 I can't remember everything. In fact, anything past the last week gets pretty fuzzy. That's why I try to share as much as I can through this personal blog. You'll find notes about Emacs, parenting, sketchnoting, visual book reviews, self-tracking, blogging, life... whatever I'm learning about or whatever I can help other people learn.
 #+end_quote
+
+* [[https://freyavie.blog/about/][Freya Vie]]
+
+#+begin_quote
+I am a mother of two preschoolers and work office hours in the government sector.
+
+I've been writing since 2006 to process and reflect on my daily life - what I did, observed,
+overheard, or learned. Writing is crucial to me - it keeps me grounded, makes me happy,
+and allows me to connect with others personally.
+#+end_quote
+
+
+* [[https://jan.systems/][Jan's Garden]]
+
+#+begin_quote
+On this personal website you may find things related to computers and software, games
+of all kinds but mostly tabletop and role-playing, electronics, music, language learning and
+linguistics. I'm not big on writing long-form stuff or essays, but I sometimes like to jot down
+some short ideas or experiences. I created this site to lower the barrier to entry and make
+it easier for myself to just write.
+#+end_quote
+
+* [[https://bcmullins.github.io/][Brett Mullins]]
+
+#+begin_quote
+I am a researcher and graduate student at UMass Amherst working with Dan Sheldon and
+Gerome Miklau. Before this, I was a Data Scientist at Allstate, an affiliate researcher at the
+Fiscal Research Center at Georgia State University, and studied mathematics and logic at
+Miami University in Oxford, Ohio.
+#+end_quote
+
+
+* [[https://marius.ink/][Marius Masalar]]
+
+#+begin_quote
+By day, I work at 1Password. This is where I write about
+seeking healthier, more thoughtful relationships with technology.
+#+end_quote

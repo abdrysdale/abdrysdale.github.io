@@ -82,6 +82,13 @@ The moon sees nothing of this. She is bald and wild.
 And the message of the yew tree is blackness - blackness and silence.
 #+end_example
 
+* Shakespeare, William (1564-1616)
+** Romeo and Juliet, Act 2 Scene 2 Lines 133-5
+#+begin_example
+My bounty is as boundless as the sea,
+My love a deep; the more I give to thee,
+The more I have: for both are infinite
+#+end_example
 * Teasdale, Sara (1884-1933)
 ** The River
 

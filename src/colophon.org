@@ -2,7 +2,6 @@
 #+AUTHOR: Alex Drysdale
 #+DATE: <2025-04-19 Sat>
 #+EXPORT_DATE: Sat, 19 Apr 2025 00:00:01 GMT
-#+HTML_HEAD_EXTRA: <link rel="icon" type="image/x-icon" href="/resources/favicon.jpeg">
 
 #+PROPERTY: header-args:elisp :tangle "build.el"
 #+FILETAGS: :emacs:
@@ -288,7 +287,7 @@ One thing of note is that we always publish the articles under the same theme fo
 #+end_src
 
 #+RESULTS:
-: Site built at 2025-06-17 19:28:31
+: Site built at 2025-09-08 11:15:28
 
 
 * Git Hooks

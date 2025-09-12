@@ -7,6 +7,21 @@
 
 A collection of poems that have resonated with me on some level or that I've simply enjoyed. Sorted by poet.
 
+* Dickinson, Emily (1830-1886)
+** My River Runs to Thee
+
+#+begin_example
+My River runs to thee.
+Blue sea, wilt thou welcome me?
+My river awaits reply.
+Oh! Sea, look graciously.
+
+I'll fetch thee brooks
+From spotted nooks.
+Say, sea,
+Take me!
+#+end_example
+
 * Fletcher, John (1579-162)
 ** The River-God's Song
 

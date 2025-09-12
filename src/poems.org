@@ -36,6 +36,17 @@ And sob, but ever live with me,
 And not a wave shall trouble thee.
 #+end_example
 
+* Hulme, T. E. (1883-1917)
+
+** Above the Dock
+
+#+begin_example
+Above the quiet dock at mid night,
+Tangled in the tall mast's corded height,
+Hangs the moon. What seemed so far away
+Is but a child's balloon, forgotten after play.
+#+end_example
+
 * Lawrence, D. H. (1885-1930)
 ** Seaweed
 #+begin_example

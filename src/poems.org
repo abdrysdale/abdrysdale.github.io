@@ -21,6 +21,15 @@ And sob, but ever live with me,
 And not a wave shall trouble thee.
 #+end_example
 
+* Lawrence, D. H. (1885-1930)
+** Seaweed
+#+begin_example
+Seaweed ways and sways and swirls
+as if swaying were its form of stillness
+and if it flushes against fierce rock
+it slips over it as shadows do, without hurting itself.
+#+end_example
+
 * Plath, Sylvia (1932-1963)
 ** The Moon and the Yew Tree
 

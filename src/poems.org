@@ -22,6 +22,25 @@ Say, sea,
 Take me!
 #+end_example
 
+** Wild nights - Wild nights!
+
+#+begin_example
+Wild nights - Wild nights!
+Were I with thee
+Wild nights should be
+Our luxury!
+
+Futile - the winds -
+To a Heart in port -
+Done with the Compass -
+Done with the Chart!
+
+Rowing in Eden -
+Ah - the Sea!
+Might I but moor - tonight -
+In thee!
+#+end_example
+
 * Fletcher, John (1579-162)
 ** The River-God's Song
 

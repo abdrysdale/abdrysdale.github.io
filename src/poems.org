@@ -1,3 +1,4 @@
+
 #+title: Poems - A Collection of Poems That Have Resonated With Me
 #+author: Alex Drysdale
 #+date: <2025-09-01 Mon>
@@ -150,3 +151,22 @@ And thou meanderest forever
 #+end_example
 
 
+* Wilde, Oscar (1854-1900)
+** Les Silhouettes
+
+#+begin_example
+    The sea is flecked with bars of gray,
+    The dull dead wind is out of tune,
+    And like a withered leaf the moon
+Is blown across the stormy bay.
+
+    Etched clear upon the pallid sand
+    The black boat lies; a sailor boy
+    Clambers abroad in careless joy
+With laughing face and gleaming hand.
+
+    And overhead the curlews cry,
+    Where through the dusky uplands grass
+    The young brown-throated reapers pass,
+Like silhouettes against the sky.
+#+end_example

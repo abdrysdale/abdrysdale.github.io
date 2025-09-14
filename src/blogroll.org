@@ -75,3 +75,31 @@ Miami University in Oxford, Ohio.
 By day, I work at 1Password. This is where I write about
 seeking healthier, more thoughtful relationships with technology.
 #+end_quote
+
+
+* [[https://www.neilgrogan.com/][Neil Grogan]]
+
+#+begin_quote
+Software Engineering Manager at Ericsson in Athlone, Ireland, managing teams in Software Development Kits (SDKs) for Encsson Intelligent Automation Platform (EIAP). Before that, I was managing JEE Platform, User Interface SDK and 5G Topology teams in Ericsson Network Manager.
+#+end_quote
+
+
+* [[https://ryan.himmelwright.net/about/][Ryan Himmelwright]]
+
+#+begin_quote
+I'm a 30-something dad, husband, and all-around nerd living in Durham, NC (USA). My hobbies span just about anything I come in contact with, but some of the most prominent ones over the years have been technology, writing, music, reading TTRPGs, hiking, and swimming (I competitively swam from the age of 8, through college). I also enjoy learning about permaculture gardening, sustainability, urban planning, and similar topics.
+#+end_quote
+
+
+* [[https://galen.me/][Galen Cuthbertson]]
+
+#+begin_quote
+About Me
+I build tools & toys to help understand human culture.
+I'm doing a PhD at the Australian National University, where I'm studying
+complex machine learning models (esp. large language models), and
+whether those models are (or can be) meaningfully 'knowledge-producing' in the social sciences.
+I generally want humans to
+flourish far into the future, and
+not destroy ourselves in the process of developing powerful new technologies (hence the PhD).
+#+end_quote

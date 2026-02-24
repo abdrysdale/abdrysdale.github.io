@@ -6,6 +6,7 @@
 
 In general it looks like the following (the source can be found [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/src/org_mode_weekly_planner.org][here]]):
 
+#+begin_src org
 * Journal
 ** 2026-02-23
 *** Clock table
@@ -100,3 +101,6 @@ In general it looks like the following (the source can be found [[https://github
 
 - [ ] Item 4.
 - [ ] Item 5.
+
+
+#+end_src

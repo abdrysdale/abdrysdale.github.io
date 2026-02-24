@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Org-mode Weekly Planner</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet"href="resources/org.css"type="text/css" /><header><a href="index.html">Home</a>&emsp;<a href="about.html">About Me</a>&emsp;<a href="https://github.com/abdrysdale/abdrysdale.github.io">Source</a>&emsp;<a href="sitemap.html">Sitemap</a>&emsp;<a href="feed.xml">RSS</a></header>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">My Org-mode Weekly Planner</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9161cfc">Journal</a></li>
+</ul>
+</div>
+</div>
+<p>
+In general it looks like the following (the source can be found <a href="https://github.com/abdrysdale/abdrysdale.github.io/blob/main/src/org_mode_weekly_planner.org">here</a>):
+</p>
+
+<div id="outline-container-org9161cfc" class="outline-2">
+<h2 id="org9161cfc">Journal</h2>
+<div class="outline-text-2" id="text-org9161cfc">
+</div>
+<ul class="org-ul">
+<li><a id="orgffcdc65"></a>2026-02-23<br />
+<ul class="org-ul">
+<li><a id="org3dba69f"></a>Clock table<br />
+<div class="outline-text-4" id="text-org3dba69f">
+<p>
+
+</p>
+</div>
+</li>
+
+<li><a id="org1ca7e75"></a>Time sheet<br />
+<div class="outline-text-4" id="text-org1ca7e75">
+<table id="orgc739571" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Day</th>
+<th scope="col" class="org-right">Clock In</th>
+<th scope="col" class="org-right">Clock Out</th>
+<th scope="col" class="org-right">Break Taken</th>
+<th scope="col" class="org-right">Duration</th>
+<th scope="col" class="org-right">Cumulative (Minus Breaks)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2026-02-23</td>
+<td class="org-right">09:00</td>
+<td class="org-right">17:00</td>
+<td class="org-right">00:30</td>
+<td class="org-right">08:00</td>
+<td class="org-right">07:30</td>
+</tr>
+
+<tr>
+<td class="org-right">2026-02-24</td>
+<td class="org-right">09:00</td>
+<td class="org-right">17:00</td>
+<td class="org-right">00:30</td>
+<td class="org-right">08:00</td>
+<td class="org-right">15:00</td>
+</tr>
+
+<tr>
+<td class="org-right">2026-02-25</td>
+<td class="org-right">09:00</td>
+<td class="org-right">17:00</td>
+<td class="org-right">00:30</td>
+<td class="org-right">08:00</td>
+<td class="org-right">22:30</td>
+</tr>
+
+<tr>
+<td class="org-right">2026-02-26</td>
+<td class="org-right">09:00</td>
+<td class="org-right">17:00</td>
+<td class="org-right">00:30</td>
+<td class="org-right">08:00</td>
+<td class="org-right">30:00</td>
+</tr>
+
+<tr>
+<td class="org-right">2026-02-27</td>
+<td class="org-right">09:00</td>
+<td class="org-right">17:00</td>
+<td class="org-right">00:30</td>
+<td class="org-right">08:00</td>
+<td class="org-right">37:30</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-style: italic;">"""Export work times to shared excel sheet."""</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Python imports
+</span><span style="font-weight: bold;">from</span> pathlib <span style="font-weight: bold;">import</span> Path
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Module imports
+</span><span style="font-weight: bold;">import</span> pandas <span style="font-weight: bold;">as</span> pd
+<span style="font-weight: bold;">import</span> openpyxl
+
+<span style="font-weight: bold; font-style: italic;">filename</span> = (
+    Path(<span style="font-style: italic;">"C:</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">"</span>)
+    / <span style="font-style: italic;">"Users"</span>
+    / <span style="font-style: italic;">"me"</span>
+    / <span style="font-style: italic;">"documents"</span>
+    / <span style="font-style: italic;">"hours.xlsx"</span>
+)
+
+<span style="font-weight: bold; font-style: italic;">cols</span>, <span style="font-weight: bold; font-style: italic;">data</span> = clock_data[0], clock_data[1:]
+<span style="font-weight: bold; font-style: italic;">df</span> = pd.DataFrame(data, columns=cols)
+<span style="font-weight: bold; font-style: italic;">sheet_title</span> = df.iloc[0, 0]
+
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Saving data to </span>{filename}<span style="font-style: italic;"> in </span>{sheet_title}<span style="font-style: italic;">"</span>)
+
+<span style="font-weight: bold; font-style: italic;">wb</span> = openpyxl.load_workbook(filename)
+<span style="font-weight: bold;">if</span> sheet_title <span style="font-weight: bold;">not</span> <span style="font-weight: bold;">in</span> wb.sheetnames:
+    wb.create_sheet(title=sheet_title, index=0)
+    wb.<span style="font-weight: bold; font-style: italic;">active</span> = wb[sheet_title]
+    wb.save(filename)
+    <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Created a new sheet."</span>)
+wb.close()
+
+<span style="font-weight: bold;">with</span> pd.ExcelWriter(
+        filename, engine=<span style="font-style: italic;">"openpyxl"</span>, mode=<span style="font-style: italic;">"a"</span>, if_sheet_exists=<span style="font-style: italic;">"replace"</span>,
+) <span style="font-weight: bold;">as</span> writer:
+    df.to_excel(writer, sheet_name=sheet_title, index=<span style="font-weight: bold; text-decoration: underline;">False</span>)
+
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Data:</span><span style="font-weight: bold; text-decoration: underline;">\n</span>{df}<span style="font-style: italic;">"</span>)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org5c734de"></a>Open Issues<br />
+<div class="outline-text-4" id="text-org5c734de">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"| Repo | Title | Last Updated |"</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"|-|-|-|"</span>
+gh search issues --involves abdrysdale --state open <span style="font-style: italic;">\</span>
+   --sort updated <span style="font-style: italic;">\</span>
+   --json title,repository,url,updatedAt --template <span style="font-style: italic;">\</span>
+   <span style="font-style: italic;">'{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org7b44828"></a>Open PRs<br />
+<div class="outline-text-4" id="text-org7b44828">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"| Repo | Title | Last Updated |"</span>
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"|-|-|-|"</span>
+gh search prs --involves abdrysdale --state open <span style="font-style: italic;">\</span>
+   --sort updated <span style="font-style: italic;">\</span>
+   --json title,repository,url,updatedAt --template <span style="font-style: italic;">\</span>
+   <span style="font-style: italic;">'{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org8fa7cc1"></a>Plan <code>[0/0]</code><br />
+<div class="outline-text-4" id="text-org8fa7cc1">
+<p>
+<b>Core</b>
+</p>
+
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Item 1.</li>
+<li class="off"><code>[&#xa0;]</code> Item 2.</li>
+<li class="off"><code>[&#xa0;]</code> Item 3.</li>
+</ul>
+
+
+<p>
+<b>Ambitious</b>
+</p>
+
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Item 4.</li>
+<li class="off"><code>[&#xa0;]</code> Item 5.</li>
+</ul>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2026-02-24 Tue 00:00</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</p>
+</div>
+</body>
+</html>

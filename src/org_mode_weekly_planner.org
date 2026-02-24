@@ -1,9 +1,9 @@
+# -*- org-export-babel-evaluate: nil -*-
 #+title: My Org-mode Weekly Planner
 #+author: Alex Drysdale
 #+date: <2026-02-24>
 #+export_date: Tue, 24 Feb 2026 00:00:01 GMT
 #+filetags: :emacs:
-# -*- org-export-babel-evaluate: nil -*-
 
 In general it has a clock table to keep track of tasks I've worked on, a time sheet to keep track of of working hours, a list of currently open issues & pull requests along with a general plan for the week.
 
@@ -37,7 +37,7 @@ A time sheet to keep track of the hours I've worked:
 
  along with a Python script to update a main Excel document:
 
-#+begin_src python :var clock_data=clock-data :colnames no :results output
+#+begin_src python
   """Export work times to shared excel sheet."""
   # Python imports
   from pathlib import Path

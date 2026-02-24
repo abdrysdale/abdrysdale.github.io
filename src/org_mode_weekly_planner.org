@@ -4,19 +4,25 @@
 #+export_date: Tue, 24 Feb 2026 00:00:01 GMT
 #+filetags: :emacs:
 
-In general it looks like the following (the source can be found [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/src/org_mode_weekly_planner.org][here]]):
+In general it has a clock table to keep track of tasks I've worked on, a time sheet to keep track of of working hours, a list of currently open issues & pull requests along with a general plan for the week.
 
-#+begin_src org
-* Journal
-** 2026-02-23
-*** Clock table
+All of this lives in my =agenda.org= document under the heading =Journal= and then under a sub-heading for each week. That way, I can easily pull what I've worked on for particular week along with the hours I've worked and the workload of that week (e.g. Open Issues/PRs).
 
+** A clock table
+
+A clock table to keep track of what tasks that I've worked on during the week:
+
+#+begin_src 
 #+BEGIN: clocktable :scope agenda-with-archives :maxlevel 10 :block thisweek :link t :step day :formula % :fileskip0 t :stepskip0 t :emphasize t :indent t :filetitle t
 
 #+END:
+#+end_src
 
-*** Time sheet
+** A Time Sheet
 
+A time sheet to keep track of the hours I've worked:
+
+#+begin_src
 #+NAME:clock-data
 |        Day | Clock In | Clock Out | Break Taken | Duration | Cumulative (Minus Breaks) |
 |------------+----------+-----------+-------------+----------+---------------------------|
@@ -26,6 +32,9 @@ In general it looks like the following (the source can be found [[https://github
 | 2026-02-26 |    09:00 |     17:00 |       00:30 |    08:00 |                     30:00 |
 | 2026-02-27 |    09:00 |     17:00 |       00:30 |    08:00 |                     37:30 |
 #+TBLFM: $5='(apply #'(lambda (a b) (if (and (> a 0) (> b 0)) (- a b) 0)) '($3 $2));U::$6=$5+@-1-$4;U
+#+end_src
+
+ along with a Python script to update a main Excel document:
 
 #+begin_src python :var clock_data=clock-data :colnames no :results output
   """Export work times to shared excel sheet."""
@@ -66,8 +75,17 @@ In general it looks like the following (the source can be found [[https://github
   print(f"Data:\n{df}")
 #+end_src
 
-*** Open Issues
+Crucially the Python script has the header:
 
+#+begin_src 
+#+begin_src python :var clock_data=clock-data :colnames no :results output
+#+end_src
+
+** Current Open Issue
+
+A little shell command that displays the currently open issues:
+
+#+begin_src 
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -76,9 +94,13 @@ In general it looks like the following (the source can be found [[https://github
      --json title,repository,url,updatedAt --template \
      '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
 #+end_src
+#+end_src
 
-*** Open PRs
+** Current Open PRs
 
+A similar shell command that displays the currently open PRs.
+
+#+begin_src 
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -87,9 +109,13 @@ In general it looks like the following (the source can be found [[https://github
      --json title,repository,url,updatedAt --template \
      '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
 #+end_src
+#+end_src
 
-*** Plan [0/0]
+** Plan
 
+And finally a plan like this:
+
+#+begin_src 
 *Core*
 
 - [ ] Item 1.
@@ -101,6 +127,34 @@ In general it looks like the following (the source can be found [[https://github
 
 - [ ] Item 4.
 - [ ] Item 5.
-
-
 #+end_src
+
+And a nifty keybinding to link to plan tasks to the root tasks agenda:
+
+#+begin_src emacs-lisp
+;; Source: https://gist.github.com/mmarshall540/61601368dbb6143c04aff59060096682
+(defun my/org-id-insert-link-with-completion ()
+  "Insert a link to another heading using completion.
+Use the heading text as default description, but provide an
+opportunity to edit same.
+The `org-outline-path-complete-in-steps' option affects the behavior of
+this command.  It works best when set to nil.
+To change which headings are presented as candidates, modify the command
+by adding a `targets' argument in the call to
+`org-id-get-with-outline-path-completion'.  By default all headings in
+the current buffer are presented as completion-candidates, but you can
+use any value that would work as a value of `org-refile-targets' to set
+the completion candidates to use.  Or you could do something fancy with
+prefix arguments to select different sets of targets.  I am too lazy to
+do that at the moment."
+  (interactive)
+  (let* ((id (org-id-get-with-outline-path-completion))
+         (desc (save-excursion
+                 (org-id-goto id)
+                 (org-get-heading :notags :notodo :noprty :nocmnt))))
+    (funcall-interactively 'org-insert-link nil (concat "id:" id) desc)))
+
+(keymap-set org-mode-map "C-c C-M-l"
+            'my/org-id-insert-link-with-completion)
+#+end_src
+

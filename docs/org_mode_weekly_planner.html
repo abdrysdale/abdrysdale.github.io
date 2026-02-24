@@ -16,209 +16,206 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org11c5b6a">Journal</a></li>
+<li><a href="#org443eaf7">A clock table</a></li>
+<li><a href="#org41d38fb">A Time Sheet</a></li>
+<li><a href="#orgef2711f">Current Open Issue</a></li>
+<li><a href="#org52d6220">Current Open PRs</a></li>
+<li><a href="#org9d43a76">Plan</a></li>
 </ul>
 </div>
 </div>
 <p>
-In general it looks like the following (the source can be found <a href="https://github.com/abdrysdale/abdrysdale.github.io/blob/main/src/org_mode_weekly_planner.org">here</a>):
+In general it has a clock table to keep track of tasks I've worked on, a time sheet to keep track of of working hours, a list of currently open issues &amp; pull requests along with a general plan for the week.
 </p>
 
 <p>
-#+begin<sub>src</sub> org
+All of this lives in my <code>agenda.org</code> document under the heading <code>Journal</code> and then under a sub-heading for each week. That way, I can easily pull what I've worked on for particular week along with the hours I've worked and the workload of that week (e.g. Open Issues/PRs).
 </p>
-<div id="outline-container-org11c5b6a" class="outline-2">
-<h2 id="org11c5b6a">Journal</h2>
-<div class="outline-text-2" id="text-org11c5b6a">
-</div>
-<ul class="org-ul">
-<li><a id="org31118ec"></a>2026-02-23<br />
-<ul class="org-ul">
-<li><a id="org2ed31fb"></a>Clock table<br />
-<div class="outline-text-4" id="text-org2ed31fb">
+
+<div id="outline-container-org443eaf7" class="outline-2">
+<h2 id="org443eaf7">A clock table</h2>
+<div class="outline-text-2" id="text-org443eaf7">
 <p>
-
+A clock table to keep track of what tasks that I've worked on during the week:
 </p>
+
+<pre class="example">
+#+BEGIN: clocktable :scope agenda-with-archives :maxlevel 10 :block thisweek :link t :step day :formula % :fileskip0 t :stepskip0 t :emphasize t :indent t :filetitle t
+
+#+END:
+</pre>
 </div>
-</li>
+</div>
 
-<li><a id="orgb9e5f13"></a>Time sheet<br />
-<div class="outline-text-4" id="text-orgb9e5f13">
-<table id="org943c5af" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org41d38fb" class="outline-2">
+<h2 id="org41d38fb">A Time Sheet</h2>
+<div class="outline-text-2" id="text-org41d38fb">
+<p>
+A time sheet to keep track of the hours I've worked:
+</p>
 
+<pre class="example">
+#+NAME:clock-data
+|        Day | Clock In | Clock Out | Break Taken | Duration | Cumulative (Minus Breaks) |
+|------------+----------+-----------+-------------+----------+---------------------------|
+| 2026-02-23 |    09:00 |     17:00 |       00:30 |    08:00 |                     07:30 |
+| 2026-02-24 |    09:00 |     17:00 |       00:30 |    08:00 |                     15:00 |
+| 2026-02-25 |    09:00 |     17:00 |       00:30 |    08:00 |                     22:30 |
+| 2026-02-26 |    09:00 |     17:00 |       00:30 |    08:00 |                     30:00 |
+| 2026-02-27 |    09:00 |     17:00 |       00:30 |    08:00 |                     37:30 |
+#+TBLFM: $5='(apply #'(lambda (a b) (if (and (&gt; a 0) (&gt; b 0)) (- a b) 0)) '($3 $2));U::$6=$5+@-1-$4;U
+</pre>
 
-<colgroup>
-<col  class="org-right" />
+<p>
+along with a Python script to update a main Excel document:
+</p>
 
-<col  class="org-right" />
+<pre class="example" id="orgf057e19">
+"""Export work times to shared excel sheet."""
+# Python imports
+from pathlib import Path
 
-<col  class="org-right" />
+# Module imports
+import pandas as pd
+import openpyxl
 
-<col  class="org-right" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-right">Day</th>
-<th scope="col" class="org-right">Clock In</th>
-<th scope="col" class="org-right">Clock Out</th>
-<th scope="col" class="org-right">Break Taken</th>
-<th scope="col" class="org-right">Duration</th>
-<th scope="col" class="org-right">Cumulative (Minus Breaks)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-right">2026-02-23</td>
-<td class="org-right">09:00</td>
-<td class="org-right">17:00</td>
-<td class="org-right">00:30</td>
-<td class="org-right">08:00</td>
-<td class="org-right">07:30</td>
-</tr>
-
-<tr>
-<td class="org-right">2026-02-24</td>
-<td class="org-right">09:00</td>
-<td class="org-right">17:00</td>
-<td class="org-right">00:30</td>
-<td class="org-right">08:00</td>
-<td class="org-right">15:00</td>
-</tr>
-
-<tr>
-<td class="org-right">2026-02-25</td>
-<td class="org-right">09:00</td>
-<td class="org-right">17:00</td>
-<td class="org-right">00:30</td>
-<td class="org-right">08:00</td>
-<td class="org-right">22:30</td>
-</tr>
-
-<tr>
-<td class="org-right">2026-02-26</td>
-<td class="org-right">09:00</td>
-<td class="org-right">17:00</td>
-<td class="org-right">00:30</td>
-<td class="org-right">08:00</td>
-<td class="org-right">30:00</td>
-</tr>
-
-<tr>
-<td class="org-right">2026-02-27</td>
-<td class="org-right">09:00</td>
-<td class="org-right">17:00</td>
-<td class="org-right">00:30</td>
-<td class="org-right">08:00</td>
-<td class="org-right">37:30</td>
-</tr>
-</tbody>
-</table>
-
-<div class="org-src-container">
-<pre class="src src-python"><span style="font-style: italic;">"""Export work times to shared excel sheet."""</span>
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Python imports
-</span><span style="font-weight: bold;">from</span> pathlib <span style="font-weight: bold;">import</span> Path
-
-<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Module imports
-</span><span style="font-weight: bold;">import</span> pandas <span style="font-weight: bold;">as</span> pd
-<span style="font-weight: bold;">import</span> openpyxl
-
-<span style="font-weight: bold; font-style: italic;">filename</span> = (
-    Path(<span style="font-style: italic;">"C:</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">"</span>)
-    / <span style="font-style: italic;">"Users"</span>
-    / <span style="font-style: italic;">"me"</span>
-    / <span style="font-style: italic;">"documents"</span>
-    / <span style="font-style: italic;">"hours.xlsx"</span>
+filename = (
+    Path("C:\\")
+    / "Users"
+    / "me"
+    / "documents"
+    / "hours.xlsx"
 )
 
-<span style="font-weight: bold; font-style: italic;">cols</span>, <span style="font-weight: bold; font-style: italic;">data</span> = clock_data[0], clock_data[1:]
-<span style="font-weight: bold; font-style: italic;">df</span> = pd.DataFrame(data, columns=cols)
-<span style="font-weight: bold; font-style: italic;">sheet_title</span> = df.iloc[0, 0]
+cols, data = clock_data[0], clock_data[1:]
+df = pd.DataFrame(data, columns=cols)
+sheet_title = df.iloc[0, 0]
 
-<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Saving data to </span>{filename}<span style="font-style: italic;"> in </span>{sheet_title}<span style="font-style: italic;">"</span>)
+print(f"Saving data to {filename} in {sheet_title}")
 
-<span style="font-weight: bold; font-style: italic;">wb</span> = openpyxl.load_workbook(filename)
-<span style="font-weight: bold;">if</span> sheet_title <span style="font-weight: bold;">not</span> <span style="font-weight: bold;">in</span> wb.sheetnames:
+wb = openpyxl.load_workbook(filename)
+if sheet_title not in wb.sheetnames:
     wb.create_sheet(title=sheet_title, index=0)
-    wb.<span style="font-weight: bold; font-style: italic;">active</span> = wb[sheet_title]
+    wb.active = wb[sheet_title]
     wb.save(filename)
-    <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Created a new sheet."</span>)
+    print("Created a new sheet.")
 wb.close()
 
-<span style="font-weight: bold;">with</span> pd.ExcelWriter(
-        filename, engine=<span style="font-style: italic;">"openpyxl"</span>, mode=<span style="font-style: italic;">"a"</span>, if_sheet_exists=<span style="font-style: italic;">"replace"</span>,
-) <span style="font-weight: bold;">as</span> writer:
-    df.to_excel(writer, sheet_name=sheet_title, index=<span style="font-weight: bold; text-decoration: underline;">False</span>)
+with pd.ExcelWriter(
+        filename, engine="openpyxl", mode="a", if_sheet_exists="replace",
+) as writer:
+    df.to_excel(writer, sheet_name=sheet_title, index=False)
 
-<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Data:</span><span style="font-weight: bold; text-decoration: underline;">\n</span>{df}<span style="font-style: italic;">"</span>)
+print(f"Data:\n{df}")
 </pre>
-</div>
-</div>
-</li>
-
-<li><a id="org17528a2"></a>Open Issues<br />
-<div class="outline-text-4" id="text-org17528a2">
-<div class="org-src-container">
-<pre class="src src-sh"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"| Repo | Title | Last Updated |"</span>
-<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"|-|-|-|"</span>
-gh search issues --involves abdrysdale --state open <span style="font-style: italic;">\</span>
-   --sort updated <span style="font-style: italic;">\</span>
-   --json title,repository,url,updatedAt --template <span style="font-style: italic;">\</span>
-   <span style="font-style: italic;">'{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'</span>
-</pre>
-</div>
-</div>
-</li>
-
-<li><a id="orgdbf7e9a"></a>Open PRs<br />
-<div class="outline-text-4" id="text-orgdbf7e9a">
-<div class="org-src-container">
-<pre class="src src-sh"><span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"| Repo | Title | Last Updated |"</span>
-<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"|-|-|-|"</span>
-gh search prs --involves abdrysdale --state open <span style="font-style: italic;">\</span>
-   --sort updated <span style="font-style: italic;">\</span>
-   --json title,repository,url,updatedAt --template <span style="font-style: italic;">\</span>
-   <span style="font-style: italic;">'{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'</span>
-</pre>
-</div>
-</div>
-</li>
-
-<li><a id="org12ac3d4"></a>Plan <code>[0/0]</code><br />
-<div class="outline-text-4" id="text-org12ac3d4">
-<p>
-<b>Core</b>
-</p>
-
-<ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Item 1.</li>
-<li class="off"><code>[&#xa0;]</code> Item 2.</li>
-<li class="off"><code>[&#xa0;]</code> Item 3.</li>
-</ul>
-
 
 <p>
-<b>Ambitious</b>
+Crucially the Python script has the header:
 </p>
 
-<ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Item 4.</li>
-<li class="off"><code>[&#xa0;]</code> Item 5.</li>
-</ul>
+<pre class="example">
+#+begin_src python :var clock_data=clock-data :colnames no :results output
+</pre>
+</div>
+</div>
 
+<div id="outline-container-orgef2711f" class="outline-2">
+<h2 id="orgef2711f">Current Open Issue</h2>
+<div class="outline-text-2" id="text-orgef2711f">
+<p>
+A little shell command that displays the currently open issues:
+</p>
 
+<pre class="example">
+#+begin_src sh :results output drawer
+  echo "| Repo | Title | Last Updated |"
+  echo "|-|-|-|"
+  gh search issues --involves abdrysdale --state open \
+     --sort updated \
+     --json title,repository,url,updatedAt --template \
+     '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
+</pre>
 <p>
 #+end<sub>src</sub>
 </p>
 </div>
-</li>
-</ul>
-</li>
-</ul>
+</div>
+
+<div id="outline-container-org52d6220" class="outline-2">
+<h2 id="org52d6220">Current Open PRs</h2>
+<div class="outline-text-2" id="text-org52d6220">
+<p>
+A similar shell command that displays the currently open PRs.
+</p>
+
+<pre class="example">
+#+begin_src sh :results output drawer
+  echo "| Repo | Title | Last Updated |"
+  echo "|-|-|-|"
+  gh search prs --involves abdrysdale --state open \
+     --sort updated \
+     --json title,repository,url,updatedAt --template \
+     '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
+</pre>
+<p>
+#+end<sub>src</sub>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9d43a76" class="outline-2">
+<h2 id="org9d43a76">Plan</h2>
+<div class="outline-text-2" id="text-org9d43a76">
+<p>
+And finally a plan like this:
+</p>
+
+<pre class="example">
+*Core*
+
+- [ ] Item 1.
+- [ ] Item 2.
+- [ ] Item 3.
+
+
+*Ambitious*
+
+- [ ] Item 4.
+- [ ] Item 5.
+</pre>
+
+<p>
+And a nifty keybinding to link to plan tasks to the root tasks agenda:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Source: https://gist.github.com/mmarshall540/61601368dbb6143c04aff59060096682
+</span>(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my/org-id-insert-link-with-completion</span> ()
+  <span style="font-style: italic;">"Insert a link to another heading using completion.
+Use the heading text as default description, but provide an
+opportunity to edit same.
+The `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">org-outline-path-complete-in-steps</span><span style="font-style: italic;">' option affects the behavior of
+this command.  It works best when set to nil.
+To change which headings are presented as candidates, modify the command
+by adding a `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">targets</span><span style="font-style: italic;">' argument in the call to
+`</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">org-id-get-with-outline-path-completion</span><span style="font-style: italic;">'.  By default all headings in
+the current buffer are presented as completion-candidates, but you can
+use any value that would work as a value of `</span><span style="font-weight: bold; font-style: italic; text-decoration: underline;">org-refile-targets</span><span style="font-style: italic;">' to set
+the completion candidates to use.  Or you could do something fancy with
+prefix arguments to select different sets of targets.  I am too lazy to
+do that at the moment."</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let*</span> ((id (org-id-get-with-outline-path-completion))
+         (desc (<span style="font-weight: bold;">save-excursion</span>
+                 (org-id-goto id)
+                 (org-get-heading <span style="font-weight: bold;">:notags</span> <span style="font-weight: bold;">:notodo</span> <span style="font-weight: bold;">:noprty</span> <span style="font-weight: bold;">:nocmnt</span>))))
+    (funcall-interactively 'org-insert-link nil (concat <span style="font-style: italic;">"id:"</span> id) desc)))
+
+(keymap-set org-mode-map <span style="font-style: italic;">"C-c C-M-l"</span>
+            'my/org-id-insert-link-with-completion)
+</pre>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">

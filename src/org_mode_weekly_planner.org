@@ -1,0 +1,98 @@
+#+title: My Org-mode Weekly Planner
+
+In general it looks like the following (the source can be found [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/src/org_mode_weekly_planner.org][here]]):
+
+* Journal
+** 2026-02-23
+*** Clock table
+
+#+BEGIN: clocktable :scope agenda-with-archives :maxlevel 10 :block thisweek :link t :step day :formula % :fileskip0 t :stepskip0 t :emphasize t :indent t :filetitle t
+
+#+END:
+
+*** Time sheet
+
+#+NAME:clock-data
+|        Day | Clock In | Clock Out | Break Taken | Duration | Cumulative (Minus Breaks) |
+|------------+----------+-----------+-------------+----------+---------------------------|
+| 2026-02-23 |    09:00 |     17:00 |       00:30 |    08:00 |                     07:30 |
+| 2026-02-24 |    09:00 |     17:00 |       00:30 |    08:00 |                     15:00 |
+| 2026-02-25 |    09:00 |     17:00 |       00:30 |    08:00 |                     22:30 |
+| 2026-02-26 |    09:00 |     17:00 |       00:30 |    08:00 |                     30:00 |
+| 2026-02-27 |    09:00 |     17:00 |       00:30 |    08:00 |                     37:30 |
+#+TBLFM: $5='(apply #'(lambda (a b) (if (and (> a 0) (> b 0)) (- a b) 0)) '($3 $2));U::$6=$5+@-1-$4;U
+
+#+begin_src python :var clock_data=clock-data :colnames no :results output
+  """Export work times to shared excel sheet."""
+  # Python imports
+  from pathlib import Path
+
+  # Module imports
+  import pandas as pd
+  import openpyxl
+
+  filename = (
+      Path("C:\\")
+      / "Users"
+      / "me"
+      / "documents"
+      / "hours.xlsx"
+  )
+
+  cols, data = clock_data[0], clock_data[1:]
+  df = pd.DataFrame(data, columns=cols)
+  sheet_title = df.iloc[0, 0]
+
+  print(f"Saving data to {filename} in {sheet_title}")
+
+  wb = openpyxl.load_workbook(filename)
+  if sheet_title not in wb.sheetnames:
+      wb.create_sheet(title=sheet_title, index=0)
+      wb.active = wb[sheet_title]
+      wb.save(filename)
+      print("Created a new sheet.")
+  wb.close()
+
+  with pd.ExcelWriter(
+          filename, engine="openpyxl", mode="a", if_sheet_exists="replace",
+  ) as writer:
+      df.to_excel(writer, sheet_name=sheet_title, index=False)
+
+  print(f"Data:\n{df}")
+#+end_src
+
+*** Open Issues
+
+#+begin_src sh :results output drawer
+  echo "| Repo | Title | Last Updated |"
+  echo "|-|-|-|"
+  gh search issues --involves abdrysdale --state open \
+     --sort updated \
+     --json title,repository,url,updatedAt --template \
+     '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
+#+end_src
+
+*** Open PRs
+
+#+begin_src sh :results output drawer
+  echo "| Repo | Title | Last Updated |"
+  echo "|-|-|-|"
+  gh search prs --involves abdrysdale --state open \
+     --sort updated \
+     --json title,repository,url,updatedAt --template \
+     '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
+#+end_src
+
+*** Plan [0/0]
+
+*Core*
+
+- [ ] Item 1.
+- [ ] Item 2.
+- [ ] Item 3.
+
+
+*Ambitious*
+
+- [ ] Item 4.
+- [ ] Item 5.

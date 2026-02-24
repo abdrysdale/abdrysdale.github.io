@@ -3,6 +3,7 @@
 #+date: <2026-02-24>
 #+export_date: Tue, 24 Feb 2026 00:00:01 GMT
 #+filetags: :emacs:
+# -*- org-export-babel-evaluate: nil -*-
 
 In general it has a clock table to keep track of tasks I've worked on, a time sheet to keep track of of working hours, a list of currently open issues & pull requests along with a general plan for the week.
 
@@ -85,7 +86,7 @@ Crucially the Python script has the header:
 
 A little shell command that displays the currently open issues:
 
-#+begin_src 
+#+begin_example 
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -94,13 +95,13 @@ A little shell command that displays the currently open issues:
      --json title,repository,url,updatedAt --template \
      '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
 #+end_src
-#+end_src
+#+end_example
 
 ** Current Open PRs
 
 A similar shell command that displays the currently open PRs.
 
-#+begin_src 
+#+begin_example 
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -109,7 +110,7 @@ A similar shell command that displays the currently open PRs.
      --json title,repository,url,updatedAt --template \
      '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
 #+end_src
-#+end_src
+#+end_example
 
 ** Plan
 

@@ -16,11 +16,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org443eaf7">A clock table</a></li>
-<li><a href="#org41d38fb">A Time Sheet</a></li>
-<li><a href="#orgef2711f">Current Open Issue</a></li>
-<li><a href="#org52d6220">Current Open PRs</a></li>
-<li><a href="#org9d43a76">Plan</a></li>
+<li><a href="#orga26068c">A clock table</a></li>
+<li><a href="#orgdca217c">A Time Sheet</a></li>
+<li><a href="#org96ca8fc">Current Open Issue</a></li>
+<li><a href="#org4b8738d">Current Open PRs</a></li>
+<li><a href="#org5c07700">Plan</a></li>
 </ul>
 </div>
 </div>
@@ -32,9 +32,9 @@ In general it has a clock table to keep track of tasks I've worked on, a time sh
 All of this lives in my <code>agenda.org</code> document under the heading <code>Journal</code> and then under a sub-heading for each week. That way, I can easily pull what I've worked on for particular week along with the hours I've worked and the workload of that week (e.g. Open Issues/PRs).
 </p>
 
-<div id="outline-container-org443eaf7" class="outline-2">
-<h2 id="org443eaf7">A clock table</h2>
-<div class="outline-text-2" id="text-org443eaf7">
+<div id="outline-container-orga26068c" class="outline-2">
+<h2 id="orga26068c">A clock table</h2>
+<div class="outline-text-2" id="text-orga26068c">
 <p>
 A clock table to keep track of what tasks that I've worked on during the week:
 </p>
@@ -47,9 +47,9 @@ A clock table to keep track of what tasks that I've worked on during the week:
 </div>
 </div>
 
-<div id="outline-container-org41d38fb" class="outline-2">
-<h2 id="org41d38fb">A Time Sheet</h2>
-<div class="outline-text-2" id="text-org41d38fb">
+<div id="outline-container-orgdca217c" class="outline-2">
+<h2 id="orgdca217c">A Time Sheet</h2>
+<div class="outline-text-2" id="text-orgdca217c">
 <p>
 A time sheet to keep track of the hours I've worked:
 </p>
@@ -70,7 +70,7 @@ A time sheet to keep track of the hours I've worked:
 along with a Python script to update a main Excel document:
 </p>
 
-<pre class="example" id="orgf057e19">
+<pre class="example" id="org8d3759d">
 """Export work times to shared excel sheet."""
 # Python imports
 from pathlib import Path
@@ -119,14 +119,14 @@ Crucially the Python script has the header:
 </div>
 </div>
 
-<div id="outline-container-orgef2711f" class="outline-2">
-<h2 id="orgef2711f">Current Open Issue</h2>
-<div class="outline-text-2" id="text-orgef2711f">
+<div id="outline-container-org96ca8fc" class="outline-2">
+<h2 id="org96ca8fc">Current Open Issue</h2>
+<div class="outline-text-2" id="text-org96ca8fc">
 <p>
 A little shell command that displays the currently open issues:
 </p>
 
-<pre class="example">
+<pre class="example" id="org56d8847">
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -134,21 +134,19 @@ A little shell command that displays the currently open issues:
      --sort updated \
      --json title,repository,url,updatedAt --template \
      '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
+#+end_src
 </pre>
-<p>
-#+end<sub>src</sub>
-</p>
 </div>
 </div>
 
-<div id="outline-container-org52d6220" class="outline-2">
-<h2 id="org52d6220">Current Open PRs</h2>
-<div class="outline-text-2" id="text-org52d6220">
+<div id="outline-container-org4b8738d" class="outline-2">
+<h2 id="org4b8738d">Current Open PRs</h2>
+<div class="outline-text-2" id="text-org4b8738d">
 <p>
 A similar shell command that displays the currently open PRs.
 </p>
 
-<pre class="example">
+<pre class="example" id="orge771c57">
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -156,16 +154,14 @@ A similar shell command that displays the currently open PRs.
      --sort updated \
      --json title,repository,url,updatedAt --template \
      '{{range .}}{{"|"}}{{.repository.nameWithOwner}}{{"|[["}}{{.url}}{{"]["}}{{.title}}{{"]]|"}}{{timeago .updatedAt}}{{"\n"}}{{end}}'
+#+end_src
 </pre>
-<p>
-#+end<sub>src</sub>
-</p>
 </div>
 </div>
 
-<div id="outline-container-org9d43a76" class="outline-2">
-<h2 id="org9d43a76">Plan</h2>
-<div class="outline-text-2" id="text-org9d43a76">
+<div id="outline-container-org5c07700" class="outline-2">
+<h2 id="org5c07700">Plan</h2>
+<div class="outline-text-2" id="text-org5c07700">
 <p>
 And finally a plan like this:
 </p>

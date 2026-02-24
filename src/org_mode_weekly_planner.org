@@ -1,4 +1,8 @@
 #+title: My Org-mode Weekly Planner
+#+author: Alex Drysdale
+#+date: <2026-02-24>
+#+export_date: Tue, 24 Feb 2026 00:00:01 GMT
+#+filetags: :emacs:
 
 In general it looks like the following (the source can be found [[https://github.com/abdrysdale/abdrysdale.github.io/blob/main/src/org_mode_weekly_planner.org][here]]):
 

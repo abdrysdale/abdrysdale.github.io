@@ -93,7 +93,7 @@ We'll take this template:
   Thank you for visiting my little patch of the internet.
   All views are my own and not that of my employer.
 
-  You can expect content on programming, Emacs, philosophy, ethics, magnets and bread.
+  You can expect content on programming, Emacs, philosophy, poetry, ethics, magnets and bread.
   In addition to this, I'll try to post explanations of papers that I publish. If I'm not the first author I'll do my best to explain the paper or, more likely, explain my contribution to paper.
 
   /This is site is intentially minimal and left as an exercise to the reader.../

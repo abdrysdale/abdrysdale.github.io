@@ -37,7 +37,7 @@ A time sheet to keep track of the hours I've worked:
 
  along with a Python script to update a main Excel document:
 
-#+begin_example python :var clock_data=clock-data :colnames no :results output
+#+begin_src python :var clock_data=clock-data :colnames no :results output
   """Export work times to shared excel sheet."""
   # Python imports
   from pathlib import Path
@@ -74,7 +74,7 @@ A time sheet to keep track of the hours I've worked:
       df.to_excel(writer, sheet_name=sheet_title, index=False)
 
   print(f"Data:\n{df}")
-#+end_example
+#+end_src
 
 Crucially the Python script has the header:
 

@@ -16,11 +16,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga26068c">A clock table</a></li>
-<li><a href="#orgdca217c">A Time Sheet</a></li>
-<li><a href="#org96ca8fc">Current Open Issue</a></li>
-<li><a href="#org4b8738d">Current Open PRs</a></li>
-<li><a href="#org5c07700">Plan</a></li>
+<li><a href="#orgde19a10">A clock table</a></li>
+<li><a href="#org63b3f50">A Time Sheet</a></li>
+<li><a href="#org6fa6500">Current Open Issue</a></li>
+<li><a href="#org4c23caf">Current Open PRs</a></li>
+<li><a href="#orga23f36a">Plan</a></li>
 </ul>
 </div>
 </div>
@@ -32,9 +32,9 @@ In general it has a clock table to keep track of tasks I've worked on, a time sh
 All of this lives in my <code>agenda.org</code> document under the heading <code>Journal</code> and then under a sub-heading for each week. That way, I can easily pull what I've worked on for particular week along with the hours I've worked and the workload of that week (e.g. Open Issues/PRs).
 </p>
 
-<div id="outline-container-orga26068c" class="outline-2">
-<h2 id="orga26068c">A clock table</h2>
-<div class="outline-text-2" id="text-orga26068c">
+<div id="outline-container-orgde19a10" class="outline-2">
+<h2 id="orgde19a10">A clock table</h2>
+<div class="outline-text-2" id="text-orgde19a10">
 <p>
 A clock table to keep track of what tasks that I've worked on during the week:
 </p>
@@ -47,9 +47,9 @@ A clock table to keep track of what tasks that I've worked on during the week:
 </div>
 </div>
 
-<div id="outline-container-orgdca217c" class="outline-2">
-<h2 id="orgdca217c">A Time Sheet</h2>
-<div class="outline-text-2" id="text-orgdca217c">
+<div id="outline-container-org63b3f50" class="outline-2">
+<h2 id="org63b3f50">A Time Sheet</h2>
+<div class="outline-text-2" id="text-org63b3f50">
 <p>
 A time sheet to keep track of the hours I've worked:
 </p>
@@ -70,44 +70,45 @@ A time sheet to keep track of the hours I've worked:
 along with a Python script to update a main Excel document:
 </p>
 
-<pre class="example" id="org8d3759d">
-"""Export work times to shared excel sheet."""
-# Python imports
-from pathlib import Path
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-style: italic;">"""Export work times to shared excel sheet."""</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Python imports
+</span><span style="font-weight: bold;">from</span> pathlib <span style="font-weight: bold;">import</span> Path
 
-# Module imports
-import pandas as pd
-import openpyxl
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Module imports
+</span><span style="font-weight: bold;">import</span> pandas <span style="font-weight: bold;">as</span> pd
+<span style="font-weight: bold;">import</span> openpyxl
 
-filename = (
-    Path("C:\\")
-    / "Users"
-    / "me"
-    / "documents"
-    / "hours.xlsx"
+<span style="font-weight: bold; font-style: italic;">filename</span> = (
+    Path(<span style="font-style: italic;">"C:</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">"</span>)
+    / <span style="font-style: italic;">"Users"</span>
+    / <span style="font-style: italic;">"me"</span>
+    / <span style="font-style: italic;">"documents"</span>
+    / <span style="font-style: italic;">"hours.xlsx"</span>
 )
 
-cols, data = clock_data[0], clock_data[1:]
-df = pd.DataFrame(data, columns=cols)
-sheet_title = df.iloc[0, 0]
+<span style="font-weight: bold; font-style: italic;">cols</span>, <span style="font-weight: bold; font-style: italic;">data</span> = clock_data[0], clock_data[1:]
+<span style="font-weight: bold; font-style: italic;">df</span> = pd.DataFrame(data, columns=cols)
+<span style="font-weight: bold; font-style: italic;">sheet_title</span> = df.iloc[0, 0]
 
-print(f"Saving data to {filename} in {sheet_title}")
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Saving data to </span>{filename}<span style="font-style: italic;"> in </span>{sheet_title}<span style="font-style: italic;">"</span>)
 
-wb = openpyxl.load_workbook(filename)
-if sheet_title not in wb.sheetnames:
+<span style="font-weight: bold; font-style: italic;">wb</span> = openpyxl.load_workbook(filename)
+<span style="font-weight: bold;">if</span> sheet_title <span style="font-weight: bold;">not</span> <span style="font-weight: bold;">in</span> wb.sheetnames:
     wb.create_sheet(title=sheet_title, index=0)
-    wb.active = wb[sheet_title]
+    wb.<span style="font-weight: bold; font-style: italic;">active</span> = wb[sheet_title]
     wb.save(filename)
-    print("Created a new sheet.")
+    <span style="font-weight: bold;">print</span>(<span style="font-style: italic;">"Created a new sheet."</span>)
 wb.close()
 
-with pd.ExcelWriter(
-        filename, engine="openpyxl", mode="a", if_sheet_exists="replace",
-) as writer:
-    df.to_excel(writer, sheet_name=sheet_title, index=False)
+<span style="font-weight: bold;">with</span> pd.ExcelWriter(
+        filename, engine=<span style="font-style: italic;">"openpyxl"</span>, mode=<span style="font-style: italic;">"a"</span>, if_sheet_exists=<span style="font-style: italic;">"replace"</span>,
+) <span style="font-weight: bold;">as</span> writer:
+    df.to_excel(writer, sheet_name=sheet_title, index=<span style="font-weight: bold; text-decoration: underline;">False</span>)
 
-print(f"Data:\n{df}")
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Data:</span><span style="font-weight: bold; text-decoration: underline;">\n</span>{df}<span style="font-style: italic;">"</span>)
 </pre>
+</div>
 
 <p>
 Crucially the Python script has the header:
@@ -119,14 +120,14 @@ Crucially the Python script has the header:
 </div>
 </div>
 
-<div id="outline-container-org96ca8fc" class="outline-2">
-<h2 id="org96ca8fc">Current Open Issue</h2>
-<div class="outline-text-2" id="text-org96ca8fc">
+<div id="outline-container-org6fa6500" class="outline-2">
+<h2 id="org6fa6500">Current Open Issue</h2>
+<div class="outline-text-2" id="text-org6fa6500">
 <p>
 A little shell command that displays the currently open issues:
 </p>
 
-<pre class="example" id="org56d8847">
+<pre class="example" id="org17d7537">
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -139,14 +140,14 @@ A little shell command that displays the currently open issues:
 </div>
 </div>
 
-<div id="outline-container-org4b8738d" class="outline-2">
-<h2 id="org4b8738d">Current Open PRs</h2>
-<div class="outline-text-2" id="text-org4b8738d">
+<div id="outline-container-org4c23caf" class="outline-2">
+<h2 id="org4c23caf">Current Open PRs</h2>
+<div class="outline-text-2" id="text-org4c23caf">
 <p>
 A similar shell command that displays the currently open PRs.
 </p>
 
-<pre class="example" id="orge771c57">
+<pre class="example" id="org533e9cf">
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -159,9 +160,9 @@ A similar shell command that displays the currently open PRs.
 </div>
 </div>
 
-<div id="outline-container-org5c07700" class="outline-2">
-<h2 id="org5c07700">Plan</h2>
-<div class="outline-text-2" id="text-org5c07700">
+<div id="outline-container-orga23f36a" class="outline-2">
+<h2 id="orga23f36a">Plan</h2>
+<div class="outline-text-2" id="text-orga23f36a">
 <p>
 And finally a plan like this:
 </p>

@@ -44,7 +44,12 @@ jobs:
         run: |
           git add docs/
           git commit -m "Built site" || echo "No changes to commit"
-        
+
+      - name: Setup git credentials
+        run: git config --global credential.helper store
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Push changes to current branch
         if: github.event_name == 'push'
         run: |

@@ -54,6 +54,11 @@
 <pubDate></pubDate>
 </item>
 <item>
+<title>ci</title>
+<link>https://abdrysdale.phd/tags-ci.html</link>
+<pubDate></pubDate>
+</item>
+<item>
 <title>emacs</title>
 <link>https://abdrysdale.phd/tags-emacs.html</link>
 <pubDate></pubDate>
@@ -61,6 +66,11 @@
 <item>
 <title>poetry</title>
 <link>https://abdrysdale.phd/tags-poetry.html</link>
+<pubDate></pubDate>
+</item>
+<item>
+<title>security</title>
+<link>https://abdrysdale.phd/tags-security.html</link>
 <pubDate></pubDate>
 </item>
 <item>
@@ -72,6 +82,11 @@
 <title>Uses</title>
 <link>https://abdrysdale.phd/uses.html</link>
 <pubDate>Tue, 22 Apr 2025 00:00:01 GMT</pubDate>
+</item>
+<item>
+<title>Zizmor</title>
+<link>https://abdrysdale.phd/zizmor.html</link>
+<pubDate>Tue, 10 Mar 2026 14:28:12 GMT</pubDate>
 </item>
 </channel>
 </rss>

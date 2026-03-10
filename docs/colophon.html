@@ -16,13 +16,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgffef7d2">Build output</a></li>
-<li><a href="#org7422a12">Installing required packages</a></li>
-<li><a href="#orgc73c035">Building the Home Page</a></li>
-<li><a href="#orgba3aa1e">Add an RSS feed</a></li>
-<li><a href="#orgb1b794d">Publishing the Site</a></li>
-<li><a href="#org15162a2">Git Hooks</a></li>
-<li><a href="#orgaeef147">Conclusion</a></li>
+<li><a href="#orgd7aff80">Build output</a></li>
+<li><a href="#orgda0c066">Installing required packages</a></li>
+<li><a href="#orgc068982">Building the Home Page</a></li>
+<li><a href="#org557370d">Add an RSS feed</a></li>
+<li><a href="#orgd4e5192">Publishing the Site</a></li>
+<li><a href="#org6739b05">Git Hooks</a></li>
+<li><a href="#orgc8109d9">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -37,15 +37,16 @@ GitHub pages expects only a single <code>index.html</code> file and builds the s
 <p>
 Naturally, as this site is purely static there's no user tracking or even a requirement for <code>https</code>!
 </p>
-<div id="outline-container-orgffef7d2" class="outline-2">
-<h2 id="orgffef7d2">Build output</h2>
-<div class="outline-text-2" id="text-orgffef7d2">
+
+<div id="outline-container-orgd7aff80" class="outline-2">
+<h2 id="orgd7aff80">Build output</h2>
+<div class="outline-text-2" id="text-orgd7aff80">
 <p>
 The build output will reside in <code>docs</code> to start we'll delete that directory and copy over the css files (that reside in <code>resources/</code> and tell GitHub that this isn't a Jekyll site.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp"><code><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Delete the docs directory
+<pre class="src src-elisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Delete the docs directory
 </span>(<span style="font-weight: bold;">when</span> (file-exists-p <span style="font-style: italic;">"docs"</span>)
   (delete-directory <span style="font-style: italic;">"docs"</span> t))
 
@@ -62,19 +63,21 @@ The build output will reside in <code>docs</code> to start we'll delete that dir
 </span>(<span style="font-weight: bold;">with-temp-file</span> (expand-file-name <span style="font-style: italic;">"docs/.nojekyll"</span>))
 (<span style="font-weight: bold;">with-temp-file</span> (expand-file-name <span style="font-style: italic;">"docs/CNAME"</span>)
   (insert <span style="font-style: italic;">"abdrysdale.phd"</span>))
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org7422a12" class="outline-2">
-<h2 id="org7422a12">Installing required packages</h2>
-<div class="outline-text-2" id="text-org7422a12">
+
+
+<div id="outline-container-orgda0c066" class="outline-2">
+<h2 id="orgda0c066">Installing required packages</h2>
+<div class="outline-text-2" id="text-orgda0c066">
 <p>
 We'll need to use an elisp package (<code>htmlize</code>) for the build process. The build process will work fine on my machine but I'll need this bit for continuous integration.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp"><code><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize package system
+<pre class="src src-elisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Initialize package system
 </span>(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">package</span>)
 (add-to-list 'package-archives '(<span style="font-style: italic;">"melpa"</span> . <span style="font-style: italic;">"https://melpa.org/packages/"</span>) t)
 (<span style="font-weight: bold;">unless</span> package--initialized (package-initialize))
@@ -82,13 +85,14 @@ We'll need to use an elisp package (<code>htmlize</code>) for the build process.
 (<span style="font-weight: bold;">unless</span> (package-installed-p 'htmlize)
   (package-refresh-contents)
   (package-install 'htmlize))
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc73c035" class="outline-2">
-<h2 id="orgc73c035">Building the Home Page</h2>
-<div class="outline-text-2" id="text-orgc73c035">
+
+<div id="outline-container-orgc068982" class="outline-2">
+<h2 id="orgc068982">Building the Home Page</h2>
+<div class="outline-text-2" id="text-orgc068982">
 <p>
 The first thing I want on the home page is a list of articles with the article title as the description.
 I'd also like a list of tags that are used on the articles so the user can search by topic - topics are stored in the <code>FILETAGS</code> property.
@@ -99,14 +103,14 @@ To do this, I create a cons list of <code>(title . path)</code> of each article 
 First things first, let's define a generic function for extracting properties from an org-mode document.
 </p>
 <div class="org-src-container">
-<pre class="src src-elisp"><code>(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-org-property</span> (prop file)
+<pre class="src src-elisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-org-property</span> (prop file)
   <span style="font-style: italic;">"Extract PROP from the org FILE."</span>
   (<span style="font-weight: bold;">when</span> (file-exists-p file)
     (<span style="font-weight: bold;">with-temp-buffer</span>
       (insert-file-contents file)
       <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">No need for error handling here as (cdr nil) and (car nil) return nil
 </span>      (car (cdr (car (org-collect-keywords `(,prop))))))))
-</code></pre>
+</pre>
 </div>
 
 <p>
@@ -114,7 +118,7 @@ Next we define a function that returns all of the articles in format <code>(file
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp"><code>(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-titles-from-org-files</span> (directory)
+<pre class="src src-elisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-titles-from-org-files</span> (directory)
   <span style="font-style: italic;">"Extract titles and dates from org files in DIRECTORY."</span>
   (<span style="font-weight: bold;">let</span> ((files (directory-files directory t <span style="font-style: italic;">"^[[:alnum:]-_]+.org$"</span>)))
     (mapcar (<span style="font-weight: bold;">lambda</span> (file)
@@ -125,7 +129,7 @@ Next we define a function that returns all of the articles in format <code>(file
                                 (get-org-property <span style="font-style: italic;">"DATE"</span> file)
                                 (get-org-property <span style="font-style: italic;">"FILETAGS"</span> file)))))
             files)))
-</code></pre>
+</pre>
 </div>
 
 <p>
@@ -136,7 +140,7 @@ Next the home page (<code>index.org</code>) is built. Currently this is really s
 We'll take this template:
 </p>
 <div class="org-src-container">
-<pre class="src src-org"><code>I'm Alex, a PhD candidate (haemodynamics + graph convolutional neural networks) and a trainee magnetic resonance physicist for NHS Wales.
+<pre class="src src-org">I'm Alex, a PhD candidate (haemodynamics + graph convolutional neural networks) and a trainee magnetic resonance physicist for NHS Wales.
 Thank you for visiting my little patch of the internet.
 All views are my own and not that of my employer.
 
@@ -149,7 +153,7 @@ In addition to this, I'll try to post explanations of papers that I publish. If 
 
 All material is in the website licensed under the the GNU/GPLv3 license - 
 which can be found <span style="text-decoration: underline;"><a href="https://github.com/abdrysdale/abdrysdale.github.io/blob/main/LICENSE">here</a></span>.
-</code></pre>
+</pre>
 </div>
 
 <p>
@@ -157,7 +161,7 @@ insert a title and then add the articles and tags.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp"><code>(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">build-index</span> (author)
+<pre class="src src-elisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">build-index</span> (author)
   <span style="font-style: italic;">"Build the index for the AUTHOR."</span>
   <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Copies the README.org to the index.
 </span>  (<span style="font-weight: bold;">let</span> ((dir <span style="font-style: italic;">"src"</span>)
@@ -232,15 +236,16 @@ insert a title and then add the articles and tags.
                     (file (cdr tag-info)))
                 (insert (format <span style="font-style: italic;">"- [[file:%s][%s]]\n"</span> file tag))))
             (save-buffer))))
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgba3aa1e" class="outline-2">
-<h2 id="orgba3aa1e">Add an RSS feed</h2>
-<div class="outline-text-2" id="text-orgba3aa1e">
+
+<div id="outline-container-org557370d" class="outline-2">
+<h2 id="org557370d">Add an RSS feed</h2>
+<div class="outline-text-2" id="text-org557370d">
 <div class="org-src-container">
-<pre class="src src-elisp"><code>(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-rss-feed-item</span> (title link date <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> desc)
+<pre class="src src-elisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">get-rss-feed-item</span> (title link date <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> desc)
   <span style="font-style: italic;">"Return an rss feed item with TITLE, LINK, DATE and DESCRIPTION."</span>
   (concat
    <span style="font-style: italic;">"&lt;item&gt;\n"</span>
@@ -248,11 +253,11 @@ insert a title and then add the articles and tags.
    <span style="font-style: italic;">"&lt;link&gt;"</span> link <span style="font-style: italic;">"&lt;/link&gt;\n"</span>
    <span style="font-style: italic;">"&lt;pubDate&gt;"</span> date <span style="font-style: italic;">"&lt;/pubDate&gt;\n"</span>
    <span style="font-style: italic;">"&lt;/item&gt;\n"</span>))
-</code></pre>
+</pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-elisp"><code>(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">build-rss-feed</span> (title link desc src out)
+<pre class="src src-elisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">build-rss-feed</span> (title link desc src out)
   <span style="font-style: italic;">"Build a rss feed for TITLE (DESC) at LINK using the posts in SRC to OUT."</span>
   (<span style="font-weight: bold;">with-current-buffer</span> (find-file-noselect (concat out <span style="font-style: italic;">"feed.xml"</span>))
     (erase-buffer)
@@ -272,13 +277,14 @@ insert a title and then add the articles and tags.
                                    date))))
     (insert <span style="font-style: italic;">"&lt;/channel&gt;\n&lt;/rss&gt;"</span>)
     (save-buffer)))
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb1b794d" class="outline-2">
-<h2 id="orgb1b794d">Publishing the Site</h2>
-<div class="outline-text-2" id="text-orgb1b794d">
+
+<div id="outline-container-orgd4e5192" class="outline-2">
+<h2 id="orgd4e5192">Publishing the Site</h2>
+<div class="outline-text-2" id="text-orgd4e5192">
 <p>
 Finally, the site is published using <code>ox-publish</code> with this article (the <code>README.org</code>) being copied as an article.
 </p>
@@ -288,7 +294,7 @@ One thing of note is that we always publish the articles under the same theme fo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-elisp"><code>(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-publish</span>)
+<pre class="src src-elisp">(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">ox-publish</span>)
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">whitespace</span>)
 (<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">htmlize</span>)
 (<span style="font-weight: bold;">let</span> ((current-theme (<span style="font-weight: bold;">if</span> custom-enabled-themes
@@ -337,36 +343,40 @@ One thing of note is that we always publish the articles under the same theme fo
   (load-theme current-theme)
   (message <span style="font-style: italic;">"Site built at %s"</span>
            (format-time-string <span style="font-style: italic;">"%Y-%m-%d %H:%M:%S"</span>)))
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org15162a2" class="outline-2">
-<h2 id="org15162a2">Git Hooks</h2>
-<div class="outline-text-2" id="text-org15162a2">
+
+
+<div id="outline-container-org6739b05" class="outline-2">
+<h2 id="org6739b05">Git Hooks</h2>
+<div class="outline-text-2" id="text-org6739b05">
 <p>
 This script is tangled into <code>.git/hooks/build.el</code> which means that we just need to create a <code>pre-commit</code> hook that runs the <code>build.el</code> file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><code><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">sh</span><span style="font-weight: bold; font-style: italic;">
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">sh</span><span style="font-weight: bold; font-style: italic;">
 </span>emacs --batch -Q --script build.el
 git add docs/*.html
-</code></pre>
+</pre>
 </div>
 
 <p>
 and make that file executable:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><code>chmod +x .git/hooks/pre-commit
-</code></pre>
+<pre class="src src-bash">chmod +x .git/hooks/pre-commit
+</pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgaeef147" class="outline-2">
-<h2 id="orgaeef147">Conclusion</h2>
-<div class="outline-text-2" id="text-orgaeef147">
+
+
+<div id="outline-container-orgc8109d9" class="outline-2">
+<h2 id="orgc8109d9">Conclusion</h2>
+<div class="outline-text-2" id="text-orgc8109d9">
 <p>
 Not the most beautiful blog, or the most elegant build solution but this allows me to just write without thinking about much each.
 </p>
@@ -375,9 +385,10 @@ Not the most beautiful blog, or the most elegant build solution but this allows 
 There's still a few things I'd like to implement in the build process namely:
 </p>
 </div>
+
 <ul class="org-ul">
-<li><a id="orga95883c"></a><span class="done DONE">DONE</span> Include the date in the article link title and sort by date - <i>newest first</i>.<br />
-<div class="outline-text-3" id="text-orga95883c">
+<li><a id="org4d16bb2"></a><span class="done DONE">DONE</span> Include the date in the article link title and sort by date - <i>newest first</i>.<br />
+<div class="outline-text-3" id="text-org4d16bb2">
 <ul class="org-ul">
 <li>State "DONE"       from "TODO"       <span class="timestamp-wrapper"><span class="timestamp">[2025-06-17 Tue 19:28]</span></span></li>
 </ul>
@@ -386,48 +397,48 @@ At this stage of the site, with the number of posts in the single digits, it's n
 </p>
 </div>
 </li>
-<li><a id="org56c5204"></a><span class="todo TODO">TODO</span> Have each blog have a link to the tags file of the associated <code>FILETAGS</code> in that blog.<br />
-<div class="outline-text-3" id="text-org56c5204">
+<li><a id="orgeb156e0"></a><span class="todo TODO">TODO</span> Have each blog have a link to the tags file of the associated <code>FILETAGS</code> in that blog.<br />
+<div class="outline-text-3" id="text-orgeb156e0">
 <p>
 Similar to above, this will need to be sorted when more posts come into existence.
 </p>
 </div>
 </li>
-<li><a id="orge621843"></a><span class="todo TODO">TODO</span> Include the following <a href="https://slashpages.net/">slashpages</a> in the index<br />
+<li><a id="org6551423"></a><span class="todo TODO">TODO</span> Include the following <a href="https://slashpages.net/">slashpages</a> in the index<br />
 <ul class="org-ul">
-<li><a id="org0fd3a52"></a><span class="todo TODO">TODO</span> <a href="https://blogroll.org/">blogroll</a><br />
-<div class="outline-text-4" id="text-org0fd3a52">
+<li><a id="org35b8f6a"></a><span class="todo TODO">TODO</span> <a href="https://blogroll.org/">blogroll</a><br />
+<div class="outline-text-4" id="text-org35b8f6a">
 <p>
 A list of blogs that I follow.
 </p>
 </div>
 </li>
-<li><a id="org92f89cc"></a><span class="todo TODO">TODO</span> <a href="https://bukmark.club/directory/">links</a><br />
-<div class="outline-text-4" id="text-org92f89cc">
+<li><a id="org25f83a4"></a><span class="todo TODO">TODO</span> <a href="https://bukmark.club/directory/">links</a><br />
+<div class="outline-text-4" id="text-org25f83a4">
 <p>
 Similar to blogroll but for specific posts.
 </p>
 </div>
 </li>
-<li><a id="org0b60daf"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/release_notes">changelog</a><br /></li>
-<li><a id="orge2fc8db"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/contact">contact</a><br /></li>
-<li><a id="org40d3ed1"></a><span class="todo TODO">TODO</span> <a href="https://thechels.uk/green">green</a><br />
-<div class="outline-text-4" id="text-org40d3ed1">
+<li><a id="org065ada1"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/release_notes">changelog</a><br /></li>
+<li><a id="org3d130a5"></a><span class="todo TODO">TODO</span> <a href="https://indieweb.org/contact">contact</a><br /></li>
+<li><a id="orgc645b4f"></a><span class="todo TODO">TODO</span> <a href="https://thechels.uk/green">green</a><br />
+<div class="outline-text-4" id="text-orgc645b4f">
 <p>
 Include some tangible targets and current status/metrics.
 </p>
 </div>
 </li>
-<li><a id="org8bdcb78"></a><span class="todo TODO">TODO</span> <a href="https://chrisburnell.com/note/slash-interests/">interests</a><br />
-<div class="outline-text-4" id="text-org8bdcb78">
+<li><a id="org6e53daa"></a><span class="todo TODO">TODO</span> <a href="https://chrisburnell.com/note/slash-interests/">interests</a><br />
+<div class="outline-text-4" id="text-org6e53daa">
 <p>
 Nice way to express the things I'm interested in.
 </p>
 </div>
 </li>
-<li><a id="org66d7c27"></a><span class="todo TODO">TODO</span> <a href="https://www.miriamsuzanne.com/why">why</a><br /></li>
-<li><a id="org4215e8d"></a><span class="done DONE">DONE</span> <a href="https://aboutideasnow.com/">ideas</a><br />
-<div class="outline-text-4" id="text-org4215e8d">
+<li><a id="org9cf1ff5"></a><span class="todo TODO">TODO</span> <a href="https://www.miriamsuzanne.com/why">why</a><br /></li>
+<li><a id="orgbe47ab1"></a><span class="done DONE">DONE</span> <a href="https://aboutideasnow.com/">ideas</a><br />
+<div class="outline-text-4" id="text-orgbe47ab1">
 <ul class="org-ul">
 <li>State "DONE"       from "TODO"       <span class="timestamp-wrapper"><span class="timestamp">[2025-06-17 Tue 22:11]</span></span></li>
 </ul>
@@ -436,15 +447,15 @@ A list of the half-baked ideas I have.
 </p>
 </div>
 </li>
-<li><a id="org79b7fa6"></a><span class="todo TODO">TODO</span> <a href="https://rknight.me/next">next</a> or <a href="https://fyr.io/yep">yep</a><br />
-<div class="outline-text-4" id="text-org79b7fa6">
+<li><a id="orgab3c718"></a><span class="todo TODO">TODO</span> <a href="https://rknight.me/next">next</a> or <a href="https://fyr.io/yep">yep</a><br />
+<div class="outline-text-4" id="text-orgab3c718">
 <p>
 The better ideas should hopefully go here after I've given some thought and deemed them worth my time.
 </p>
 </div>
 </li>
-<li><a id="org3bf961a"></a><span class="todo TODO">TODO</span> <a href="https://baty.net/nope">nope</a><br />
-<div class="outline-text-4" id="text-org3bf961a">
+<li><a id="org5a289ef"></a><span class="todo TODO">TODO</span> <a href="https://baty.net/nope">nope</a><br />
+<div class="outline-text-4" id="text-org5a289ef">
 <p>
 The not so good ideas will go here to remind myself not to keep thinking about them.
 </p>
@@ -452,13 +463,13 @@ The not so good ideas will go here to remind myself not to keep thinking about t
 </li>
 </ul>
 </li>
-<li><a id="org2c666a9"></a><span class="todo TODO">TODO</span> Include a link a page on projects that I've developed<br /></li>
+<li><a id="org1202850"></a><span class="todo TODO">TODO</span> Include a link a page on projects that I've developed<br /></li>
 </ul>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2025-04-19 Sat 00:00</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.2 (<a href="https://orgmode.org">Org</a> mode 9.8)</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</p>
 </div>
 </body>
 </html>

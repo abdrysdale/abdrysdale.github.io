@@ -16,11 +16,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga1be2ba">A clock table</a></li>
-<li><a href="#orga08b406">A Time Sheet</a></li>
-<li><a href="#org69812dc">Current Open Issue</a></li>
-<li><a href="#orgbc6b589">Current Open PRs</a></li>
-<li><a href="#org9cf8c23">Plan</a></li>
+<li><a href="#org65eb602">A clock table</a></li>
+<li><a href="#org3095dfe">A Time Sheet</a></li>
+<li><a href="#org58f243f">Current Open Issue</a></li>
+<li><a href="#org81d1067">Current Open PRs</a></li>
+<li><a href="#orgc3e1bc8">Plan</a></li>
 </ul>
 </div>
 </div>
@@ -31,30 +31,31 @@ In general it has a clock table to keep track of tasks I've worked on, a time sh
 <p>
 All of this lives in my <code>agenda.org</code> document under the heading <code>Journal</code> and then under a sub-heading for each week. That way, I can easily pull what I've worked on for particular week along with the hours I've worked and the workload of that week (e.g. Open Issues/PRs).
 </p>
-<div id="outline-container-orga1be2ba" class="outline-2">
-<h2 id="orga1be2ba">A clock table</h2>
-<div class="outline-text-2" id="text-orga1be2ba">
+
+<div id="outline-container-org65eb602" class="outline-2">
+<h2 id="org65eb602">A clock table</h2>
+<div class="outline-text-2" id="text-org65eb602">
 <p>
 A clock table to keep track of what tasks that I've worked on during the week:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-nil"><code>#+BEGIN: clocktable :scope agenda-with-archives :maxlevel 10 :block thisweek :link t :step day :formula % :fileskip0 t :stepskip0 t :emphasize t :indent t :filetitle t
+<pre class="example">
+#+BEGIN: clocktable :scope agenda-with-archives :maxlevel 10 :block thisweek :link t :step day :formula % :fileskip0 t :stepskip0 t :emphasize t :indent t :filetitle t
 
 #+END:
-</code></pre>
+</pre>
 </div>
 </div>
-</div>
-<div id="outline-container-orga08b406" class="outline-2">
-<h2 id="orga08b406">A Time Sheet</h2>
-<div class="outline-text-2" id="text-orga08b406">
+
+<div id="outline-container-org3095dfe" class="outline-2">
+<h2 id="org3095dfe">A Time Sheet</h2>
+<div class="outline-text-2" id="text-org3095dfe">
 <p>
 A time sheet to keep track of the hours I've worked:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-nil"><code>#+NAME:clock-data
+<pre class="example">
+#+NAME:clock-data
 |        Day | Clock In | Clock Out | Break Taken | Duration | Cumulative (Minus Breaks) |
 |------------+----------+-----------+-------------+----------+---------------------------|
 | 2026-02-23 |    09:00 |     17:00 |       00:30 |    08:00 |                     07:30 |
@@ -63,15 +64,14 @@ A time sheet to keep track of the hours I've worked:
 | 2026-02-26 |    09:00 |     17:00 |       00:30 |    08:00 |                     30:00 |
 | 2026-02-27 |    09:00 |     17:00 |       00:30 |    08:00 |                     37:30 |
 #+TBLFM: $5='(apply #'(lambda (a b) (if (and (&gt; a 0) (&gt; b 0)) (- a b) 0)) '($3 $2));U::$6=$5+@-1-$4;U
-</code></pre>
-</div>
+</pre>
 
 <p>
 along with a Python script to update a main Excel document:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><code><span style="font-style: italic;">"""Export work times to shared excel sheet."""</span>
+<pre class="src src-python"><span style="font-style: italic;">"""Export work times to shared excel sheet."""</span>
 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Python imports
 </span><span style="font-weight: bold;">from</span> pathlib <span style="font-weight: bold;">import</span> Path
 
@@ -107,27 +107,27 @@ wb.close()
     df.to_excel(writer, sheet_name=sheet_title, index=<span style="font-weight: bold; text-decoration: underline;">False</span>)
 
 <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Data:</span><span style="font-weight: bold; text-decoration: underline;">\n</span>{df}<span style="font-style: italic;">"</span>)
-</code></pre>
+</pre>
 </div>
 
 <p>
 Crucially the Python script has the header:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-nil"><code>#+begin_src python :var clock_data=clock-data :colnames no :results output
-</code></pre>
+<pre class="example">
+#+begin_src python :var clock_data=clock-data :colnames no :results output
+</pre>
 </div>
 </div>
-</div>
-<div id="outline-container-org69812dc" class="outline-2">
-<h2 id="org69812dc">Current Open Issue</h2>
-<div class="outline-text-2" id="text-org69812dc">
+
+<div id="outline-container-org58f243f" class="outline-2">
+<h2 id="org58f243f">Current Open Issue</h2>
+<div class="outline-text-2" id="text-org58f243f">
 <p>
 A little shell command that displays the currently open issues:
 </p>
 
-<pre class="example" id="org5bdd8e6">
+<pre class="example" id="orgdb96607">
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -139,14 +139,15 @@ A little shell command that displays the currently open issues:
 </pre>
 </div>
 </div>
-<div id="outline-container-orgbc6b589" class="outline-2">
-<h2 id="orgbc6b589">Current Open PRs</h2>
-<div class="outline-text-2" id="text-orgbc6b589">
+
+<div id="outline-container-org81d1067" class="outline-2">
+<h2 id="org81d1067">Current Open PRs</h2>
+<div class="outline-text-2" id="text-org81d1067">
 <p>
 A similar shell command that displays the currently open PRs.
 </p>
 
-<pre class="example" id="orgbddce68">
+<pre class="example" id="org674cda4">
 #+begin_src sh :results output drawer
   echo "| Repo | Title | Last Updated |"
   echo "|-|-|-|"
@@ -158,15 +159,16 @@ A similar shell command that displays the currently open PRs.
 </pre>
 </div>
 </div>
-<div id="outline-container-org9cf8c23" class="outline-2">
-<h2 id="org9cf8c23">Plan</h2>
-<div class="outline-text-2" id="text-org9cf8c23">
+
+<div id="outline-container-orgc3e1bc8" class="outline-2">
+<h2 id="orgc3e1bc8">Plan</h2>
+<div class="outline-text-2" id="text-orgc3e1bc8">
 <p>
 And finally a plan like this:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-nil"><code>*Core*
+<pre class="example">
+*Core*
 
 - [ ] Item 1.
 - [ ] Item 2.
@@ -177,15 +179,14 @@ And finally a plan like this:
 
 - [ ] Item 4.
 - [ ] Item 5.
-</code></pre>
-</div>
+</pre>
 
 <p>
 And a nifty keybinding to link to plan tasks to the root tasks agenda:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><code><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Source: https://gist.github.com/mmarshall540/61601368dbb6143c04aff59060096682
+<pre class="src src-emacs-lisp"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Source: https://gist.github.com/mmarshall540/61601368dbb6143c04aff59060096682
 </span>(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">my/org-id-insert-link-with-completion</span> ()
   <span style="font-style: italic;">"Insert a link to another heading using completion.
 Use the heading text as default description, but provide an
@@ -209,14 +210,14 @@ do that at the moment."</span>
 
 (keymap-set org-mode-map <span style="font-style: italic;">"C-c C-M-l"</span>
             'my/org-id-insert-link-with-completion)
-</code></pre>
+</pre>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2026-02-24 Tue 00:00</p>
-<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.2 (<a href="https://orgmode.org">Org</a> mode 9.8)</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</p>
 </div>
 </body>
 </html>

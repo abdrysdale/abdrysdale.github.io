@@ -13,18 +13,18 @@
 <div id="content" class="content">
 <h1 class="title">Zizmor</h1>
 <p>
-After learning about the compromise of <a href="https://github.com/kubernetes-el/kubernetes-el/issues/383">kubernetes.el</a><sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> through GitHub actions, I decided to rethink my own continuous integration usage.
+After learning about the compromise of <a href="https://github.com/kubernetes-el/kubernetes-el/issues/383">kubernetes.el</a> <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> through GitHub Actions, I decided to rethink my own continuous integration usage.
 </p>
 
 <p>
-The security aspects alluded me but thankfully I discovered a tool called <a href="https://docs.zizmor.sh/">zizmor</a> after several people endorsed it on the <a href="https://old.reddit.com/r/emacs/comments/1rowm5i/first_hacked_emacs_package/">reddit thread discussing the kubernetes.el hack</a>.
+The security aspects eluded me but thankfully I discovered a tool called <a href="https://docs.zizmor.sh/">zizmor</a> after several people endorsed it on the <a href="https://old.reddit.com/r/emacs/comments/1rowm5i/first_hacked_emacs_package/">reddit thread discussing the kubernetes.el hack</a>.
 </p>
 
 <p>
-Running it on the GitHub actions I use for building this site I get:
+Running it on the GitHub Actions I use for building this site I get:
 </p>
 
-<pre class="example" id="orgffd6646">
+<pre class="example" id="org16d4fd9">
 $ uvx zizmor .
 ðŸŒˆ zizmor v1.23.1
  INFO audit: zizmor: ðŸŒˆ completed .\.github\workflows\build.yaml
@@ -72,7 +72,7 @@ The output is clear and helpfully provides resources to learn more.
 Two errors are automatically fixed with:
 </p>
 
-<pre class="example" id="org038ed18">
+<pre class="example" id="orgbfd02cf">
 uvx zizmor . --fix=all
 </pre>
 
@@ -81,14 +81,14 @@ and the remaining version pinning error can be fixed with <a href="https://githu
 </p>
 
 <p>
-Incidents such as this make double down on my faith of minimising the number of external dependencies and inspire me to follow in the foot steps of <a href="https://github.com/LionyxML/emacs-solo/tree/main">Emacs Solo</a>.
+Incidents such as this make me double down on my faith in minimising the number of external dependencies and inspire me to follow in the footsteps of <a href="https://github.com/LionyxML/emacs-solo/tree/main">Emacs Solo</a>.
 </p>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-This exploit is not novel at all but merely came up on my RSS feed at a time when I'm re-evaluating my GitHub actions. For a more detailed explanation of a GitHub actions supply change attack see the thorough report by <a href="https://unit42.paloaltonetworks.com/github-actions-supply-chain-attack/">Omer Gil, Aviad Hahami, Asi Greenholts &amp; Yaron Avital from Unit 42 on the tj-actions compromise</a>.
+This exploit is not novel at all but merely came up on my RSS feed at a time when I'm re-evaluating my GitHub Actions. For a more detailed explanation of a GitHub actions supply change attack see the thorough report by <a href="https://unit42.paloaltonetworks.com/github-actions-supply-chain-attack/">Omer Gil, Aviad Hahami, Asi Greenholts &amp; Yaron Avital from Unit 42 on the tj-actions compromise</a>.
 </p></div></div>
 
 

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Zizmor</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet"href="resources/org.css"type="text/css" /><header><a href="index.html">Home</a>&emsp;<a href="about.html">About Me</a>&emsp;<a href="https://github.com/abdrysdale/abdrysdale.github.io">Source</a>&emsp;<a href="sitemap.html">Sitemap</a>&emsp;<a href="feed.xml">RSS</a></header>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Zizmor</h1>
+<p>
+After learning about the compromise of <a href="https://github.com/kubernetes-el/kubernetes-el/issues/383">kubernetes.el</a><sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> through GitHub actions, I decided to rethink my own continuous integration usage.
+</p>
+
+<p>
+The security aspects alluded me but thankfully I discovered a tool called <a href="https://docs.zizmor.sh/">zizmor</a> after several people endorsed it on the <a href="https://old.reddit.com/r/emacs/comments/1rowm5i/first_hacked_emacs_package/">reddit thread discussing the kubernetes.el hack</a>.
+</p>
+
+<p>
+Running it on the GitHub actions I use for building this site I get:
+</p>
+
+<pre class="example" id="orgffd6646">
+$ uvx zizmor .
+ðŸŒˆ zizmor v1.23.1
+ INFO audit: zizmor: ðŸŒˆ completed .\.github\workflows\build.yaml
+warning[artipacked]: credential persistence through GitHub Actions artifacts
+  --&gt; .\.github\workflows\build.yaml:18:9
+   |
+18 |         - name: Checkout code
+   |  _________^
+19 | |         uses: actions/checkout@v4
+   | |_________________________________^ does not set persist-credentials: false
+   |
+   = note: audit confidence â†’ Low
+   = note: this finding has an auto-fix
+   = help: audit documentation â†’ https://docs.zizmor.sh/audits/#artipacked
+
+error[template-injection]: code injection via template expansion
+  --&gt; .\.github\workflows\build.yaml:49:31
+   |
+48 |         run: |
+   |         --- this run block
+49 |           git push origin ${{ github.ref_name }}
+   |                               ^^^^^^^^^^^^^^^ may expand into attacker-controllable code
+   |
+   = note: audit confidence â†’ High
+   = note: this finding has an auto-fix
+   = help: audit documentation â†’ https://docs.zizmor.sh/audits/#template-injection
+
+error[unpinned-uses]: unpinned action reference
+  --&gt; .\.github\workflows\build.yaml:19:15
+   |
+19 |         uses: actions/checkout@v4
+   |               ^^^^^^^^^^^^^^^^^^^ action is not pinned to a hash (required by blanket policy)
+   |
+   = note: audit confidence â†’ High
+   = help: audit documentation â†’ https://docs.zizmor.sh/audits/#unpinned-uses
+
+6 findings (3 suppressed, 2 fixable): 0 informational, 0 low, 1 medium, 2 high
+</pre>
+
+<p>
+The output is clear and helpfully provides resources to learn more.
+</p>
+
+<p>
+Two errors are automatically fixed with:
+</p>
+
+<pre class="example" id="org038ed18">
+uvx zizmor . --fix=all
+</pre>
+
+<p>
+and the remaining version pinning error can be fixed with <a href="https://github.com/suzuki-shunsuke/pinact">pinact</a>.
+</p>
+
+<p>
+Incidents such as this make double down on my faith of minimising the number of external dependencies and inspire me to follow in the foot steps of <a href="https://github.com/LionyxML/emacs-solo/tree/main">Emacs Solo</a>.
+</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+This exploit is not novel at all but merely came up on my RSS feed at a time when I'm re-evaluating my GitHub actions. For a more detailed explanation of a GitHub actions supply change attack see the thorough report by <a href="https://unit42.paloaltonetworks.com/github-actions-supply-chain-attack/">Omer Gil, Aviad Hahami, Asi Greenholts &amp; Yaron Avital from Unit 42 on the tj-actions compromise</a>.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">Date: 2026-03-10 Tue 00:00</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 30.2 (<a href="https://orgmode.org">Org</a> mode 9.8)</p>
+</div>
+</body>
+</html>

@@ -3,16 +3,18 @@
 #+date: <2025-04-19>
 #+export_date: Sat, 19 Apr 2025 00:00:01 GMT
 
-I'm currently a trainee Magnetic Resonance Physicist for NHS Wales working with =Python=, =Elisp=, =SQL= and big magnets.
+Clinical Data Scientist / Forward Deployment Engineer at [[https://www.newtonstree.ai/][Newton's Tree]].
 
-Outwith employment, I dabble in many programming languages - mainly =Forth=, =Common Lisp=, =R=, =Fortran= and =Perl=.
+Previously a trainee Magnetic Resonance Physicist for NHS Wales working with =Python=, =Elisp=, =SQL= and big magnets.
+
+Outwith employment, I dabble in many programming languages - mainly =Forth=, =Common Lisp=, =R=, =Fortran=, =Rust= and =Perl=.
 
 In addition to turning coffee into bugs, I read a lot and bake bread.
 
 * Education
 
-- Physics BSc :: University of Glasgow -First Class Honours
-- PhD (candidate) :: Swansea University - Deep Residual Graph Convolutional Neural Networks for Real Time Uncertainty Quantification of 1D Haemodynamic Vessel System Metrics
+- Physics BSc :: University of Glasgow - First Class Honours
+- PhD (graduate) :: Swansea University - Deep Residual Graph Convolutional Neural Networks for Real Time Uncertainty Quantification of 1D Haemodynamic Vessel System Metrics
 
 * Papers
 

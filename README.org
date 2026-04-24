@@ -89,7 +89,7 @@ Next the home page (=index.org=) is built. Currently this is really simple and j
 
 We'll take this template:
 #+begin_src org :tangle index-template.org :eval no
-  I'm Alex, a PhD graduate (AI + haemodynamics) and a Clinical Data Scientist / Forward Deployment Engineer.
+  I'm Alex, a PhD graduate (AI + haemodynamics) and a Clinical Data Scientist / Forward Deployed Engineer.
   Thank you for visiting my little patch of the internet.
   All views are my own and not that of my employer.
 

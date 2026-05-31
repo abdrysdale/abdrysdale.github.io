@@ -1,0 +1,22 @@
+#+title: 80,000 Hours
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 22:01:47 GMT
+
+* 80,000 Hours --- Benjamin Todd
+
+** Rating
+
+3.5/5 ★★★½☆
+
+** Review
+
+I'm really behind the main message of effective altruism and, by extension, 80,000 hours. It's a concept I think everyone should be aware of and have spent some time thinking about.
+
+That being said, the main problem with a lot of the recommendations and "evidence" behind certain recommendations is the lack of statistical understanding by the authors. The effectiveness of different career choices is ultimately an interface between numerous areas (psychology, philosophy, statistics, economics, etc.) with a huge emphasis on being able to understand highly technical domains and statistically describe the philosophical impact. This work has primarily been undertaken by philosophers and their lack of statistical and mathematical background shows in this book.
+
+The core messages still stand but I'd take the recommendations with a pinch of salt.
+
+** Links
+
+- [[https://fable.co/book/80000-hours-by-benjamin-todd-DqzFa9Fjnp][View on Fable]]

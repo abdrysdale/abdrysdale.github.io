@@ -1,0 +1,19 @@
+#+title: Rust for Beginners
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 22:01:47 GMT
+
+* Rust for Beginners --- Hernando Abella
+
+** Rating
+
+1.0/5 ★☆☆☆☆
+
+** Review
+
+Lot's of redundancy, poor structure and code formatting was appalling. Reads like it was written by an LLM.
+
+The author's website doesn't even mention the book. I imagine it would be more effort to update their website than it was to write this book.
+
+** Links
+

@@ -1,0 +1,19 @@
+#+title: Fluent Python: Clear, Concise, and Effective Programming
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 22:01:47 GMT
+
+* Fluent Python: Clear, Concise, and Effective Programming --- Luciano Ramalho
+
+** Rating
+
+4.5/5 ★★★★½
+
+** Review
+
+A fantastic book on writing Pythonic code. I wouldn't recommend it as anyone's first Python book but a fantastic read nonetheless.
+
+Losses some marks for me as I felt it mentions Python 2 a little too much and could do with being updated to include more modern (but extremely useful) language features such as type hinting.
+
+** Links
+

@@ -1,0 +1,20 @@
+#+title: Kubernetes: Up & Running
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 22:01:47 GMT
+
+* Kubernetes: Up & Running --- Kelsey Hightower
+
+** Rating
+
+5.0/5 ★★★★★
+
+** Review
+
+I'm now a lot more uncertain about Kubernetes than I was before.
+
+Can't rate this book highly enough for an introduction.
+
+** Links
+
+- [[https://fable.co/book/kubernetes-up-running-by-kelsey-hightower-97][View on Fable]]

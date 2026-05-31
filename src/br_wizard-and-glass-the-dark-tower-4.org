@@ -1,7 +1,8 @@
 #+title: Wizard and Glass (The Dark Tower, #4)
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Wizard and Glass (The Dark Tower, #4) --- Stephen King
 
@@ -12,11 +13,6 @@
 ** Review
 
 Yet another incredible book in the Dark Tower series. For such a bizarre world to feel so real is a true achievement.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

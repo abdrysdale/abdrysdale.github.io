@@ -1,7 +1,8 @@
 #+title: Sunflower Sutra
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Sunflower Sutra --- Allen Ginsberg
 
@@ -14,11 +15,6 @@
 Absolutely brilliant. I love seeing how Ginsberg's style changed thought the decades. From dragging you by the eyeballs to ghost of Christmas past.
 
 Maybe not the best (or the best) collection to read on Christmas day.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

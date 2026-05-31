@@ -1,7 +1,8 @@
 #+title: 80,000 Hours
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * 80,000 Hours --- Benjamin Todd
 
@@ -16,11 +17,6 @@ I'm really behind the main message of effective altruism and, by extension, 80,0
 That being said, the main problem with a lot of the recommendations and "evidence" behind certain recommendations is the lack of statistical understanding by the authors. The effectiveness of different career choices is ultimately an interface between numerous areas (psychology, philosophy, statistics, economics, etc.) with a huge emphasis on being able to understand highly technical domains and statistically describe the philosophical impact. This work has primarily been undertaken by philosophers and their lack of statistical and mathematical background shows in this book.
 
 The core messages still stand but I'd take the recommendations with a pinch of salt.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

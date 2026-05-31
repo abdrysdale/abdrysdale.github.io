@@ -1,7 +1,8 @@
 #+title: Poems of the Sea
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Poems of the Sea --- Adam Nicolson
 
@@ -14,11 +15,6 @@
 A beautiful collection of poems. There's something primal and otherworldly about the sea, or more generally, water which is captured in each and every one of these poems.
 
 My only complaint is that I'd like a more diverse range of poets. Both ones that are currently alive (although this may not be feasible due to copyright) and ones from South America, Africa and Asia. I don't mind about excluding Antarctica it's poetry scene is a tad lacking.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

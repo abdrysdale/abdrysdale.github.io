@@ -1,7 +1,8 @@
 #+title: Small Gods
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Small Gods --- Terry Pratchett
 
@@ -12,11 +13,6 @@
 ** Review
 
 More profound than religious texts with classic Pratchett humour. One of my favourite so far.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

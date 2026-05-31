@@ -1,7 +1,8 @@
 #+title: Four Quartets
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Four Quartets --- T. S. Eliot
 
@@ -14,11 +15,6 @@
 This is my first foray into poetry and I am hooked. I've never read anything so beautifully written and yet with such profound meaning.
 
 It's like Eliot has taken a  beautifully written several thousand pages long book about religion, philosophy and life, before maturing and distilling it into the Four Quartets. I could spend hours pondering single phrases and still never truly grasp their significance.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

@@ -1,7 +1,8 @@
 #+title: Small Bodies of Water
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Small Bodies of Water --- Nina Mingya Powles
 
@@ -16,11 +17,6 @@ A beautiful collection of essays focusing on concepts of nationality, race, home
 My only criticism (and it may be because I've misunderstood the objective of the book) is that it lacked profoundness. That is, the main concepts and phrases that really resonated with me with were quotes from other poets rather than the author.
 
 That aside I loved the confessional roots of these essays and the beautifully eloquent prose.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

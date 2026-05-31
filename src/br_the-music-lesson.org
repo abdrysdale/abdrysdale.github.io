@@ -1,7 +1,8 @@
 #+title: The Music Lesson
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * The Music Lesson --- Victor L. Wooten
 
@@ -16,11 +17,6 @@ This is a very challenging book to rate. One hand Victor completely achieved his
 Overall the lessons are really clearly spelled out for the reader (as they should be) whilst leaving plenty of space for further thought.
 
 This book gets particularly interesting when thinking of ALL of the lessons as life lessons rather than a book about music with lessons that apply to life. With this point, I don't agree with the other reviews that you need to be a musician to glean insight from this book and it's one I'll definitely be reading again numerous times.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

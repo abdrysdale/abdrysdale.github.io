@@ -1,7 +1,8 @@
 #+title: Spiders of Britain and Northern Europe
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Spiders of Britain and Northern Europe --- Michael J. Roberts
 
@@ -14,11 +15,6 @@
 I would have liked a more thorough index. Additionally some of the drawings only had one sex.
 
 Apart from that, I found the book very helpful and insightful.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

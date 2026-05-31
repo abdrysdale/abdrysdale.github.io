@@ -1,7 +1,8 @@
 #+title: Brief Answers to the Big Questions
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Brief Answers to the Big Questions --- Stephen Hawking
 
@@ -18,11 +19,6 @@ The title "Brief Answers to the Big Questions" is not entirely correct. The resp
 Greater questions were also missed focusing on "should" rather than "how". That is, for space colonisation, as a species that has displayed a parasitic behaviour to our host planet, should we release ourselves to planets and moons further afield?
 
 The crux of my issues with this book come from the fact that Stephen is not an ethecist, nor a proponent of equality (feminist, anti-racist, etc.), nor an expert in AI but seems to potray himself as such. This would be perfectly fine if the responses were portrayed as "thoughts from a physicist" rather than "answers". Sadly, this book falls short on that well trodden path of "expert has answers to questions outside of their expertise".
-
-** Tags
-
-No tags.
-
 
 ** Links
 

@@ -1,7 +1,8 @@
 #+title: The Poetry Pharmacy: Tried-and-True Prescriptions for the Mind, Heart and Soul
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * The Poetry Pharmacy: Tried-and-True Prescriptions for the Mind, Heart and Soul --- William Sieghart
 
@@ -16,11 +17,6 @@ This book really helped springboard my interest in poetry and has helped me unde
 A lot of the suggested poetry was as a remedy to a certain feeling but I would have liked more poems where the poets validated a feeling.
 
 I would recommend this book to anyone wanting to explore poetry. I certainly jotted down a few poets that I look forward to exploring in more depth.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

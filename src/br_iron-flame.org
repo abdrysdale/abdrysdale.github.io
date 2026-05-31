@@ -1,7 +1,8 @@
 #+title: Iron Flame
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Iron Flame --- Rebecca Yarros
 
@@ -24,11 +25,6 @@ Another thing I struggled with was the 1 dimensional characters. It's only in th
 Overall I feel like I would potentially read  other books by Yarros but unlikely in fantasy world unless forced. The lack of depth in the world, 1 dimensional characters and shallow relationships left the book only being carried by it's pace and semi-decent plot.
 
 * As an aside, General Melgren's ability to predict the outcome of future battles negates free will. Perfectly fine and wouldn't change the story but I doubt this will ever be explore in the series. More of a side effect of the magic system being if Yarros thinks of it, it can happen.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

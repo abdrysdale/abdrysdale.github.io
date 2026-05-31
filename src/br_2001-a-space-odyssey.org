@@ -1,7 +1,8 @@
 #+title: 2001: A Space Odyssey
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * 2001: A Space Odyssey --- Arthur C. Clarke
 
@@ -16,11 +17,6 @@ Beautifully atmospheric book with a mind-bending ending. I can instantly see why
 Sexism. I know this book was written in a different time but nonetheless the sexism wasn't justified in any way. Considering the thought that must have been given to the beautiful prose, there are no excuses for the flagrant misogyny.
 
 For that and only that, this book loses a star.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

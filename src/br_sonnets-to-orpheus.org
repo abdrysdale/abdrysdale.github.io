@@ -1,7 +1,8 @@
 #+title: Sonnets to Orpheus
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Sonnets to Orpheus --- Rainer Maria Rilke
 
@@ -16,11 +17,6 @@ An absolutely masterpiece by Rilke. I can completely see why it's considered his
 Inspite of being translated the poems sound beautiful in English and each sonnet connects on such a deep level. Even though I'm separate by a century, a language and Rilke is discussing Greek mythology it feels like he's speaking to me.
 
 Ironically Rilke's beautiful words have left me lost for my own.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

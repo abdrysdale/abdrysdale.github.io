@@ -1,7 +1,8 @@
 #+title: Gnu Emacs Manual
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Gnu Emacs Manual --- Richard M. Stallman
 
@@ -12,11 +13,6 @@
 ** Review
 
 No review written.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

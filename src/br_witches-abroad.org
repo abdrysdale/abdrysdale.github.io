@@ -1,7 +1,8 @@
 #+title: Witches Abroad
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Witches Abroad --- Terry Pratchett
 
@@ -14,11 +15,6 @@
 My favourite of the witches series so far.
 
 I seem to be getting more philosophy from Granny Weatherwax than Plato.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

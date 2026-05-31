@@ -1,7 +1,8 @@
 #+title: The Restaurant at the End of the Universe
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * The Restaurant at the End of the Universe --- Douglas Adams
 
@@ -16,11 +17,6 @@ Unfortunately, I felt like this lost a lot of the momentum from the first. The s
 I will probably read more of Adam's work but more as a palate cleanser. In my eyes, Adam's hasn't nailed creating an absurdist series to nearly the same level as Terry Pratchett. The difference being that this book felt like a whitty absurdist book, whilst Terry's books are always so much more.
 
 A solid book but nothing particularly special.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

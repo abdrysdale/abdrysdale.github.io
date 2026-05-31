@@ -1,7 +1,8 @@
 #+title: Hyperion
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * Hyperion --- Dan Simmons
 
@@ -18,11 +19,6 @@ The plot is phenomenal, truly awesome in scope, detail and execution. The charac
 With all that aside, what Dan Simmons did best was have my emotions and mind like putty in his hand. I genuinely laughed out load, experienced tears of joy and fits of rage all before doing some mental gymnastics and then quietly pondering the morality of existence. My mind did what Dan Simmons wanted it to do.
 
 I cannot recommend this book enough. I'm itching to read the second book right now but I know that I will never get another chance to read it for the first time again so I am going to savour each and every installment in the Hyperion Cantos.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

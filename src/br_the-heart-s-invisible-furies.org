@@ -1,7 +1,8 @@
 #+title: The Heart's Invisible Furies
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * The Heart's Invisible Furies --- John Boyne
 
@@ -12,11 +13,6 @@
 ** Review
 
 No review written.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

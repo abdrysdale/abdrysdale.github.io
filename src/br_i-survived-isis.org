@@ -1,7 +1,8 @@
 #+title: I Survived ISIS
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * I Survived ISIS --- Roza Alomar
 
@@ -18,11 +19,6 @@ I have never read anything about anyone so brave as the people in this book. Not
 I will be buying and rereading this book to ensure my "1st world" problems remain grounded in reality.
 
 Moreover, I cannot fathom how suffering like this can exist whilst people of power and influence do nothing except sleep like a dragon, guarding their hoard.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

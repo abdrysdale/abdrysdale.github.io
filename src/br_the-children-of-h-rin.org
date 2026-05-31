@@ -1,7 +1,8 @@
 #+title: The Children Of Húrin
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:48:05 GMT
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
 
 * The Children Of Húrin --- J. R. R. Tolkien
 
@@ -16,11 +17,6 @@ A masterpiece from the father of fantasy. To quote Terry Pratchett:
 "J.R.R. Tolkien has become a sort of mountain, appearing in all subsequent fantasy in the way that Mt. Fuji appears so often in Japanese prints. Sometimes it's big and up close. Sometimes it's a shape on the horizon. Sometimes it's not there at all, which means that the artist either has made a deliberate decision against the mountain, which is interesting in itself, or is in fact standing on Mt. Fuji."
 
 Watching the creator himself build Mt. Fuji, stone by stone, is more beautiful than any depiction of the final formation.
-
-** Tags
-
-No tags.
-
 
 ** Links
 

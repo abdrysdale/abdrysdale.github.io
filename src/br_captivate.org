@@ -1,0 +1,27 @@
+#+title: Captivate
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
+
+* Captivate --- Vanessa Van Edwards
+
+** Rating
+
+2.5/5 ★★½☆☆
+
+** Review
+
+This could have been (and likely was in the beginning) a collection of blog posts; I felt like the book was created as a passive income rather to fill a gap in the literature.
+
+I have two main criticisms.
+
+The first is that the scientific expertise is shallow to say the least. The author has her own "lab" but crucial aspect of science is the peer reviews and the subsequent impact a study has on the literature. The sciencey bit of science is not the "lab". Based on this, the author's "experiments" have little credibility. Futhermore, the literature cited throughout this book is mostly other books and the scientific studies that are cited are just regurgitated with no critique provided. Both of which are a red flag for me.
+
+The second criticism is that the actual aim of the book is shallow. It feels to me like the author has managed to use these social hacks to help her with her insecurities, social anxieties and vulnerabilities. However, a deeper approach would be to address the underlying issues (rooted in lack of self love) rather than building up armour in the form of social hacks. That would be a book I would much rather read.
+
+Overall, this book was shallow in aim and execution but provided some useful bits of information that I may or may not used.
+
+** Links
+
+- [[https://fable.co/book/captivate-by-vanessa-van-edwards-97803995645][View on Fable]]

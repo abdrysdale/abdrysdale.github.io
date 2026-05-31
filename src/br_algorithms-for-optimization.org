@@ -1,0 +1,20 @@
+#+title: Algorithms for Optimization
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
+
+* Algorithms for Optimization --- Mykel J. Kochenderfer
+
+** Rating
+
+4.5/5 ★★★★½
+
+** Review
+
+Brilliant book and an excellent spring board into optimisation algorithms.
+
+I would have liked more information on multi-objective optimisation algorithms but this was enough to point to me in the right direction for further reading.
+
+** Links
+

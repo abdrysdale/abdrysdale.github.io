@@ -1,0 +1,24 @@
+#+title: Brief Answers to the Big Questions
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
+
+* Brief Answers to the Big Questions --- Stephen Hawking
+
+** Rating
+
+3.5/5 ★★★½☆
+
+** Review
+
+This is a difficult book to review.  It was an earlier book from Stephen and Lucy Hawking that cemented my early love of physics, and a latter book by Stephen Hawking that, inadvertently, set me on a path to explore faith. For me, this was a nostalgic book which I thoroughly enjoyed reading.  It also helped dust the cobwebs off some of the material from my Physics undergrad but I digress, on with actual review...
+
+The title "Brief Answers to the Big Questions" is not entirely correct. The responses certainly are brief and very clearly and intuitively explained in Stephen's concise and whitty manner. The questions are also big - both in scope and also font size. The term I dispute is answers and feel it should be replaced by thoughts or remove some of the questions. For the astrophysics questions, they are indeed answers and no one can doubt Stephen's extensive knowledge in this field. Outwith his expertise of astronomy (e.g. faith, AI, ethics) the answers are scant, incomplete and shallow. The response to "Is there a God?", doesn't discuss faith acting through quantum mechanics via the inherent uncertainty - which I would have liked to read Stephen's thoughts on. The AI response, although already dated, misses the greater concerns of AI on privacy, data quality and scale, and steering society to the will of a few mega companies. Additionally Stephen doesn't acknowledge that, currently, AI exacerbates inequality rather solves it. His knowledge of the "Kill Switch Problem"' in AI seems somewhat lacking and, to my knowledge, this problem was equally prevalent at Stephen's time of writing.
+
+Greater questions were also missed focusing on "should" rather than "how". That is, for space colonisation, as a species that has displayed a parasitic behaviour to our host planet, should we release ourselves to planets and moons further afield?
+
+The crux of my issues with this book come from the fact that Stephen is not an ethecist, nor a proponent of equality (feminist, anti-racist, etc.), nor an expert in AI but seems to potray himself as such. This would be perfectly fine if the responses were portrayed as "thoughts from a physicist" rather than "answers". Sadly, this book falls short on that well trodden path of "expert has answers to questions outside of their expertise".
+
+** Links
+

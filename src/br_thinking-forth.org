@@ -1,0 +1,18 @@
+#+title: Thinking Forth
+#+author: Alex Drysdale
+#+date: <2026-05-31>
+#+export_date: Sun, 31 May 2026 23:11:04 GMT
+#+filetags: :book-review:
+
+* Thinking Forth --- Leo Brodie
+
+** Rating
+
+5.0/5 ★★★★★
+
+** Review
+
+One of the best software books I've read. Opened my eyes not only to Forth but also changed my perspective on programming. I will be utilising the lessons I've learned here for the rest of my life.
+
+** Links
+

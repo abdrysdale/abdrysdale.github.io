@@ -1,7 +1,7 @@
 #+title: Turtles & Tortoises For Dummies
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Turtles & Tortoises For Dummies --- Liz Palika
 
@@ -22,6 +22,11 @@ Some sentences were outright incorrect. I'm looking at you "Most herbivores are 
 There were little to no references!
 
 The last point in particular lead me to believe this book was written with years of practical experience but ultimately limited to dozens, if not hundreds of tortoises in one particular climate, lacking any formal training in research. Practical experience for a book like this is a must but so is utilising academic research and, contrary to popular belief, the latter cannot be accounted for by merely looking stuff up online.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

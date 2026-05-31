@@ -1,7 +1,7 @@
 #+title: Stonewall: Breaking Out in the Fight for Gay Rights
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Stonewall: Breaking Out in the Fight for Gay Rights --- Ann Bausum
 
@@ -11,7 +11,16 @@
 
 ** Review
 
-clunkyhard to followhomophobiatransphobiaviolence
+No review written.
+
+** Tags
+
+- clunky
+- hard to follow
+- homophobia
+- transphobia
+- violence
+
 
 ** Links
 

@@ -1,7 +1,7 @@
 #+title: The Art of Stillness
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Art of Stillness --- Pico Iyer
 
@@ -17,6 +17,11 @@ One complaint for me is that this book felt too easily understood. Counterintuit
 I hear your retort already "But this is an introductory book?! A novella to wet the appetite!". If this was so, where were the practical applications average person? How can the single working mother find time for a hour of meditation?
 
 This complaint, however, does not detract from the timely and beautifully simple message of the book. Be still.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

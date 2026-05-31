@@ -1,7 +1,7 @@
 #+title: Pawn of Prophecy (The Belgariad, #1)
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Pawn of Prophecy (The Belgariad, #1) --- David Eddings
 
@@ -16,6 +16,11 @@ I'm aware that this book is a starter. Something to wet my appetite for the Belg
 Its clichéd but with not enough substance elsewhere to make up for that. It's like one of those romcoms that netflix churns out year after year. Nothing special but something to watch in that genre. I very much doubt I'll pick up the rest of the series but it wouldn't be the end of the world.
 
 I have no doubt of the historical significance of the book but compared to the other book from same decade that I'm reading (Hyperion) it's pales into insignificance.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

@@ -1,7 +1,7 @@
 #+title: The Twat Files: A hilarious sort-of memoir of mistakes, mishaps and mess-ups
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Twat Files: A hilarious sort-of memoir of mistakes, mishaps and mess-ups --- Dawn French
 
@@ -18,6 +18,11 @@ Considering this book is by a comic, I didn't really laugh out loud at any bits 
 I liked the general message of celebrating imperfections but it felt watered down by the need to end with some further funny stories.
 
 Overall, this book must have been very cathartic for Dawn French but nothing special to read.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

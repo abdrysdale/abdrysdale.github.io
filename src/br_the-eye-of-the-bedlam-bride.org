@@ -1,7 +1,7 @@
 #+title: The Eye of the Bedlam Bride
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Eye of the Bedlam Bride --- Matt Dinniman
 
@@ -12,6 +12,11 @@
 ** Review
 
 This has to be the best book yet by far. See my previous reviews for what an accolade that is.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

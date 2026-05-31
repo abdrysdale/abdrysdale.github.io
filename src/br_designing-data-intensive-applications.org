@@ -1,7 +1,7 @@
 #+title: Designing Data-Intensive Applications
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Designing Data-Intensive Applications --- Martin Kleppmann
 
@@ -14,6 +14,11 @@
 Absolutely brilliant book and one that I'm sure I will use a reference time and time again.
 
 I especially loved the (what should be mandatory) discussion of ethics in software engineering.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

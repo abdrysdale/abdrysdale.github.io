@@ -1,7 +1,7 @@
 #+title: Babel
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Babel --- R. F. Kuang
 
@@ -22,6 +22,11 @@ By primarily being a single POV narrative the book innately limited the suspense
 So I'm left with the impression that this book did a sub-par job at a lot of different areas because it couldn't decide what it was. At the beginning of the book I was sure this was going to be a 5 star read for me and the fact that it isn't highlights the overly ambitious and ultimately underdeveloped nature of the book.
 
 With that being said, it was beautifully written and I will likely read more of RF Kaung's work.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

@@ -1,7 +1,7 @@
 #+title: Be Useful
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Be Useful --- Arnold Schwarzenegger
 
@@ -30,6 +30,11 @@ Another thing that stood out for me is that Arnold doesn't acknowledge his own p
 A lot of his "inspirational" merely highlighted that Arnold is unaware of survival bias which explains his warped view of risk.
 
 It will come as no surprise that I do not recommend this book and 1 star was a generous rating. If you're interested in reading in this area, I would recommend reading Zen Mind, Beginners Mind or Getting things Done and staying away from this warped, outdated and macho piece of capitalist propaganda.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

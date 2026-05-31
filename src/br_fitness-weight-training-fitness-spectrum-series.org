@@ -1,7 +1,7 @@
 #+title: Fitness Weight Training (Fitness Spectrum Series)
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Fitness Weight Training (Fitness Spectrum Series) --- Thomas R. Baechle
 
@@ -16,6 +16,11 @@ Accessible, mostly scientific, well structured and fat phobic.
 I imagine that a lot of books in this style exhibit fat phobia as they believe that's what their readers want to read - or perhaps what they should read if they're going to spend more money on fitness products.
 
 Nonetheless, it's well structured and makes it very easy to construct a training plan.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

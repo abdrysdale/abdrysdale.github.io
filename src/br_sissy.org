@@ -1,7 +1,7 @@
 #+title: Sissy
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Sissy --- Jacob Tobia
 
@@ -20,6 +20,11 @@ This book has not only radically changed my perspective on sexuality, gender flu
 Jacob is a natural oritor and writer, and has a beautiful way of gliding from emotional depths, to humour, to fanatic empowerment. Allowing his experiences to resonate at an intellectual, emotional and soulful level.
 
 It's inspired me to create a list of books that have changed my perspective on life and the world. A list that I could hand to someone, say "read these before living your life" and their life would be richer for it. Or rather, their life would be poorer without it. This book would sit proudly as the debut to such a collection.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

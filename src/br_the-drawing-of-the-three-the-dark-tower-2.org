@@ -1,7 +1,7 @@
 #+title: The Drawing of the Three (The Dark Tower, #2)
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Drawing of the Three (The Dark Tower, #2) --- Stephen King
 
@@ -14,6 +14,11 @@
 What an absolutely fantastic book. If the remaining five books are as good as the first two this has a good chance of being my all time favourite series.
 
 I know Stephen King can write brilliant characters but the world building was truly mind blowing. I could not recommend enough for those who like grim dark epic fantasy.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

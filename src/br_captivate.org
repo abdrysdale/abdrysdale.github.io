@@ -1,7 +1,7 @@
 #+title: Captivate
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Captivate --- Vanessa Van Edwards
 
@@ -20,6 +20,11 @@ The first is that the scientific expertise is shallow to say the least. The auth
 The second criticism is that the actual aim of the book is shallow. It feels to me like the author has managed to use these social hacks to help her with her insecurities, social anxieties and vulnerabilities. However, a deeper approach would be to address the underlying issues (rooted in lack of self love) rather than building up armour in the form of social hacks. That would be a book I would much rather read.
 
 Overall, this book was shallow in aim and execution but provided some useful bits of information that I may or may not used.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

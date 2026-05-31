@@ -1,7 +1,7 @@
 #+title: Dungeon Crawler Carl
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Dungeon Crawler Carl --- Matt Dinniman
 
@@ -18,6 +18,11 @@ It has me genuinely laughing out load whilst minutes latter thinking hard about 
 I was genuinely addicted to this book. The closest feeling I've experienced to this was when I was a teen playing the Elder Scrolls series, I was just captivated by the world and story, and  instantly became fully immersed. The times I wasn't reading I was counting down the hours until I could read this again.
 
 I could not rate this book high enough to those who enjoy fantasy, humour, RPG and epic world building.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

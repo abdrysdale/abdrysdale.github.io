@@ -1,7 +1,7 @@
 #+title: Creativity
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Creativity --- John Cleese
 
@@ -18,6 +18,11 @@ There's a sprinkling of research and a smattering of accounts with experts which
 Overall, the subject of creativity was eloquently and humorously touched upon - yielding some very useful advice!
 
 If you've got a spare hour or so I'd recommend reading/listening to it to really get you thinking about how and what it means to be creative.  However, if you've read about the subject matter then I doubt this book will offer new content, rather a creative narrative.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

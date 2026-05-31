@@ -1,7 +1,7 @@
 #+title: The Dungeon Anarchist's Cookbook: Dungeon Crawler Carl Book 3
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Dungeon Anarchist's Cookbook: Dungeon Crawler Carl Book 3 --- Matt Dinniman
 
@@ -14,6 +14,11 @@
 An absolutely fantastic book. While not quite as funny as the previous book the character growth, relationships and politics took more a center stage.
 
 Absolutely fantastic story telling - I truly can't fault it.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

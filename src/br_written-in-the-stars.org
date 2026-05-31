@@ -1,7 +1,7 @@
 #+title: Written in the Stars
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Written in the Stars --- Aisha Saeed
 
@@ -20,6 +20,11 @@ The only thing that lets this book down for me is that some of the secondary cha
 Also, it's worth noting that even though this is a YA book there are definitely very hard themes in this book - be prepared.
 
 Will be recommending this to anyone who seems too cheerful.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

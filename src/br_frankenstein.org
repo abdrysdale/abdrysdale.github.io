@@ -1,7 +1,7 @@
 #+title: Frankenstein
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Frankenstein --- Mary Shelley
 
@@ -14,6 +14,11 @@
 That the eloquence of the Creature is frequently reduced to monosyllabic grunts is perhaps the greatest crime to literature.
 
 An absolutely faultless masterpiece.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

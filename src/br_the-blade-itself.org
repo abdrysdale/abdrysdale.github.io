@@ -1,7 +1,7 @@
 #+title: The Blade Itself
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Blade Itself --- Joe Abercrombie
 
@@ -14,6 +14,11 @@
 Absolutely fantastic entry to the series. Incrediblely strong characters featuring possibly one of my favourite (female - I comment on their gender purely because strong female characters are under represented in grim dark epic fantasy) fantasy characters.
 
 I would recommend to anyone who's enjoyed Song of Ice and Fire but wanted a bit more Gandalf going postal.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

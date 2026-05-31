@@ -1,7 +1,7 @@
 #+title: This Inevitable Ruin
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * This Inevitable Ruin --- Matt Dinniman
 
@@ -14,6 +14,11 @@
 You get to a point in a series whereby you've rated the previous six books 5 stars and you wander who is the review of the seventh book for? Has someone read all of the previous books and yet your predictable review (of someone who has consistently awarded top marks) is the deciding factor of whether they'll read the seventh?
 
 But alas, I loved the book but I'm bereft that I'll have to wait until book eight.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

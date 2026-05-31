@@ -1,7 +1,7 @@
 #+title: The Interior Design Handbook
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Interior Design Handbook --- Frida Ramstedt
 
@@ -12,6 +12,11 @@
 ** Review
 
 This book is a phenomenal and accessible reference manual. I can attest that even someone who aspires to be a novice can easily attain an adept level of interior design.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

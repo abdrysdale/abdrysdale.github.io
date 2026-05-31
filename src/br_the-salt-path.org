@@ -1,7 +1,7 @@
 #+title: The Salt Path
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Salt Path --- Raynor Winn
 
@@ -28,6 +28,11 @@ Ray's writing shines with insightful wit, perfectly balanced by somber reflectio
 
 Exceeding Expectations.
 I approach each book with a 5-star mindset, deducting for any shortcomings. Remarkably, this book surpassed my lofty expectations, earning a well-deserved perfect score. It's a treasure I'll revisit, and I eagerly look forward to reading more from Ray's pen.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

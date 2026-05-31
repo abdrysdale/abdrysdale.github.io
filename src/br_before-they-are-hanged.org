@@ -1,7 +1,7 @@
 #+title: Before They Are Hanged
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Before They Are Hanged --- Joe Abercrombie
 
@@ -12,6 +12,11 @@
 ** Review
 
 Say one thing for Joe Abercrombie, say he's a writer. Already becoming one of my favourite series and I'm only two books in. I loved it even more than the first.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

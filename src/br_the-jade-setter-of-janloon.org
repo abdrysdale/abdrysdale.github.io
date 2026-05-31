@@ -1,7 +1,7 @@
 #+title: The Jade Setter of Janloon
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Jade Setter of Janloon --- Fonda Lee
 
@@ -14,6 +14,11 @@
 It was lovely to return Janloon since reading the Green Bone Saga. This beautifully written novella sucks you into the green bone world with excellent characters following the solving of a mystery.
 
 If you loved the Green Bone Saga then you'll like love the nostalgia returning to Kekon to a time before Jade City.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

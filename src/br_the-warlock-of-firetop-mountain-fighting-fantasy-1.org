@@ -1,7 +1,7 @@
 #+title: The Warlock of Firetop Mountain (Fighting Fantasy #1)
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Warlock of Firetop Mountain (Fighting Fantasy #1) --- Steve Jackson
 
@@ -24,6 +24,11 @@ N.B. I'll try and rate future fighting fantasy books in a similar manner to this
 Plot: 3
 Difficulty: 3
 Gameplay: 3
+
+** Tags
+
+No tags.
+
 
 ** Links
 

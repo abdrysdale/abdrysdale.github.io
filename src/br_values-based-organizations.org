@@ -1,7 +1,7 @@
 #+title: Values Based Organizations
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Values Based Organizations --- Dr. Thomas Epperson
 
@@ -27,6 +27,11 @@ And it's a format that self-improvement books have tirelessly followed to turn b
 To top it off the main principals of the book where taken from another book published in 2003!
 
 Overall, I felt the key messages were really interesting but this short book was far too long for the content.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

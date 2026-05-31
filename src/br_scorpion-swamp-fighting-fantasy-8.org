@@ -1,7 +1,7 @@
 #+title: Scorpion Swamp (Fighting Fantasy #8)
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Scorpion Swamp (Fighting Fantasy #8) --- Steve Jackson
 
@@ -24,6 +24,11 @@ Ratings:
 Plot: 2
 Difficulty: 4
 Gameplay: 4
+
+** Tags
+
+No tags.
+
 
 ** Links
 

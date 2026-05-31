@@ -1,7 +1,7 @@
 #+title: Dear Reader
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Dear Reader --- Cathy Rentzenbrink
 
@@ -18,6 +18,11 @@ The reason for the book losing a star is that I feel like more authors from mino
 That aside, the biography was beautiful but I'd take the reading recommendations with a pinch of salald*.
 
 *I mistyped and my phone autocorrected salt to salad. I'm now coining that as a phrase to mean something is lacking ethnic and gender diversity.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

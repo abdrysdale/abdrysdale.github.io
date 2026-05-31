@@ -1,7 +1,7 @@
 #+title: The Switch
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Switch --- Beth O'Leary
 
@@ -14,6 +14,11 @@
 Very quaint and a few bits where I laughed out load.
 
 I felt like the book lost momentum in the end whilst the authored fulfilled the cliché. This cliché compulsion also meant that the book lacked and insight in the conclusion.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

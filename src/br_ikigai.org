@@ -1,7 +1,7 @@
 #+title: Ikigai
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Ikigai --- Héctor García
 
@@ -16,6 +16,11 @@ At best this was a shallow introduction into Ikigai. At worst this was a non-lin
 Unfortunately this book takes the well trodden path of losing the focus and purpose of the book - ironic for a book on Ikigai. Rather than talking about blue zones, secondary incomes and, walking the reader through yoga poses; they should have devoted the book to history, philosophy and adoption of Ikigai. Because of this distraction Ikigai was never really touched upon in any depth and the Ikigai content could have been distilled into a long blog post.
 
 The positives were that I did find some value in the messages of the book even if they were not about Ikigai.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

@@ -1,7 +1,7 @@
 #+title: Technology and Barbarism
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Technology and Barbarism --- Michel Nieva
 
@@ -20,6 +20,11 @@ Each essay in this collection is thoroughly researched and herein lies my only c
 Having said that, the writing style was funny, thoughtful, insightful, honest and personal whilst retain objectivity. I would recommend to any one who wants to do Brain Day at the gym.
 
 Also a note to the publisher, with scientific notation the indicie should be present in superscript. That is, with the 2 × 10 -6 on page 207 the -6 should be in superscript.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

@@ -1,7 +1,7 @@
 #+title: Still the Mind
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Still the Mind --- Alan Watts
 
@@ -12,6 +12,11 @@
 ** Review
 
 Whitty and insightful. I will definitely read more of Alan's work. For me, this book could have been more detailed as I felt a couple of minor steps in-between the formation of a few arguments were missed.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

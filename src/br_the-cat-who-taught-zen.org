@@ -1,7 +1,7 @@
 #+title: The Cat Who Taught Zen
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * The Cat Who Taught Zen --- James Norbury
 
@@ -18,6 +18,11 @@ In the last chapter the author explained the purpose of the book. To take existi
 The answer I arrived at is mostly. I get that Zen is concept that is, by it's nature, difficult to explain and can only be experienced. The books provides an accessible platform in which to spring board into some of the ideas of Zen - with the key messages spelled out for the reader. Where it falls short, is that it provides the reader with no next steps or tools to dig deeper. No real mention of breath, no mention of key writings and no mention of the little mind big mind.
 
 For this, it misses out on a 5 star rating but has achieved enough to secure a solid 4.25 stars.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

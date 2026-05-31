@@ -1,7 +1,7 @@
 #+title: Jurassic Park
 #+author: Alex Drysdale
 #+date: <2026-05-31>
-#+export_date: Sun, 31 May 2026 22:01:47 GMT
+#+export_date: Sun, 31 May 2026 22:48:05 GMT
 
 * Jurassic Park --- Michael Crichton
 
@@ -23,6 +23,11 @@ That said, this book does just hit right with the political ramifications, unwie
 Ultimately, I think that's why the film was such a success. They dropped the political backdrop along with some of the finer details of the world but crucially ditched Malcolm's monologues and the actors actually responded to terrifying situations with terror.
 
 Even though this was a 4 star review I'm gutted - as, for me, this could have been one of my favourite books but it was let down by it's execution.
+
+** Tags
+
+No tags.
+
 
 ** Links
 

@@ -7,6 +7,7 @@
 - [[file:ideas.org][Ideas]]
 - [[file:poems.org][Poems - A Collection of Poems That Have Resonated With Me]]
 - [[file:poetry_as_lossy_compression.org][Poetry is Lossy Compression of Human Emotions]]
+- [[file:exporting_fable_reading_data.org][Exporting Your Reading Data From Fable]]
 - [[file:uses.org][Uses]]
 - [[file:now.org][What I'm doing now]]
 - [[file:tags-emacs.org][emacs]]

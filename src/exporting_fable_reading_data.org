@@ -3,6 +3,8 @@
 #+date: <2026-06-01>
 #+filetags: :fable:python:playwright:web-scraping:
 
+/This problem was solved via an iterative process with my LLM agent. To save others the effort, the agent summarised the process as follows. I have checked and reviewed the output but it is ultimately not my own writing./
+
 * Exporting Your Reading Data From Fable
 
 Fable has no export function and no public API [fn:1].
@@ -291,7 +293,7 @@ For my profile:
 
 ** Limitations
 
-43 books had no publicly visible review text (either I never wrote one, or Fable considers it private).
+Note that the 43 books that had no publicly visible review text were just books that I had only left a star review for.
 The remaining 119 books have the full review text, not truncated snippets.
 Splitting on "See full review" cleanly separated review text from tags.
 

@@ -1,0 +1,325 @@
+#+title: Exporting Your Reading Data From Fable
+#+author: Alex Drysdale
+#+date: <2026-06-01>
+#+filetags: :fable:python:playwright:web-scraping:
+
+/This problem was solved via an iterative process with my LLM agent. To save others the effort, the agent summarised the process as follows. I have checked and reviewed the output but it is ultimately not my own writing./
+
+* Exporting Your Reading Data From Fable
+
+Fable has no export function and no public API [fn:1].
+Most of a user's profile is publicly visible without logging in.
+Unfortunately Fable is a single-page application (SPA) that renders everything dynamically --- standard HTTP requests or simple scraping won't work.
+The content is generated in the browser via JavaScript, and the list containers use virtualised scrolling with lazy loading.
+
+This post documents how I extracted my own reading data --- 162 books, 119 with review snippets, 120 distinct authors --- using Playwright and Firefox.
+
+** Prerequisites
+
+Install Playwright:
+
+#+begin_src bash
+  pip install playwright
+  playwright install firefox
+#+end_src
+
+Use Firefox, not Chromium.
+Fable's anti-bot measures are more aggressive against Chromium headless.
+Switching to Firefox solved blocked requests immediately.
+
+** Step 1: Extract the Book List
+
+The "Finished" list on Fable loads books in batches of roughly 20.
+Scrolling =window= does not trigger the lazy loader.
+Instead you must scroll the tallest inner =div= that holds the book cards.
+
+The extraction script:
+
+#+begin_src python
+  from playwright.sync_api import sync_playwright
+
+  URL = "https://fable.co/book-list/YOUR-LIST-UUID"
+
+  with sync_playwright() as p:
+      browser = p.firefox.launch(headless=True)
+      context = browser.new_context(
+          viewport={"width": 1280, "height": 3000},
+          user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; "
+                     "rv:128.0) Gecko/20100101 Firefox/128.0"
+      )
+      page = context.new_page()
+      page.goto(URL, wait_until="networkidle", timeout=60000)
+      page.wait_for_timeout(5000)
+
+      # Accept cookies if present
+      try:
+          btn = page.locator("button:has-text('Accept All Cookies')").first
+          if btn.count() > 0 and btn.is_visible():
+              btn.click()
+              page.wait_for_timeout(1000)
+      except Exception:
+          pass
+
+      # Find the tallest scrollable container
+      containers = []
+      for div in page.locator("div").all():
+          try:
+              h = div.evaluate("el => el.scrollHeight")
+              if h > 1000:
+                  containers.append((div, h))
+          except Exception:
+              pass
+      containers.sort(key=lambda x: x[1], reverse=True)
+      target = containers[0][0] if containers else None
+
+      # Scroll until no new books load
+      prev_count = 0
+      no_new_count = 0
+      for i in range(300):
+          titles = page.locator("[class*='book-title']").all_inner_texts()
+          authors = page.locator("[class*='book-author']").all_inner_texts()
+          current = []
+          for t, a in zip(titles, authors):
+              t = t.strip()
+              a = a.strip()
+              if a.startswith("By "):
+                  a = a[3:]
+              if t and a and (t, a) not in current:
+                  current.append((t, a))
+          if len(current) > prev_count:
+              print(f"  Step {i}: {len(current)} books")
+              prev_count = len(current)
+              no_new_count = 0
+          else:
+              no_new_count += 1
+          if no_new_count >= 20:
+              break
+          if target:
+              target.evaluate("el => { el.scrollBy(0, 500); }")
+          page.evaluate("window.scrollBy(0, 500)")
+          page.wait_for_timeout(600)
+
+      # Final extract --- also grab the Fable book URLs
+      cards = page.locator("[class*='book-card'], [class*='bookCard']").all()
+      books = []
+      for card in cards:
+          title_el = card.locator("[class*='book-title']").first
+          author_el = card.locator("[class*='book-author']").first
+          title = title_el.inner_text().strip() if title_el.count() > 0 else ""
+          author = author_el.inner_text().strip() if author_el.count() > 0 else ""
+          if author.startswith("By "):
+              author = author[3:]
+          # Extract the /book/... URL from the card HTML
+          html = card.inner_html()
+          m = __import__('re').search(r'href="(/book/[^"]+)"', html)
+          fable_url = f"https://fable.co{m.group(1)}" if m else ""
+          if title and author:
+              books.append({
+                  "title": title,
+                  "author": author,
+                  "fable_url": fable_url,
+                  "list_url": URL,
+                  "shelves": ["Finished"]
+              })
+
+      print(f"Extracted {len(books)} books")
+      browser.close()
+#+end_src
+
+** Step 2: Extract Reviews and Ratings
+
+The Reviews tab (=/fabler/USER-ID?tab=reviews=) contains star ratings and review text.
+It uses the same lazy-loaded virtualised list pattern.
+
+Star ratings are rendered as SVG elements with =aria-label="Full star"= or ="Half star"=, not as plain text.
+Count them to get the numeric rating:
+
+#+begin_src python
+  from playwright.sync_api import sync_playwright
+  import time, json, re
+
+  URL = "https://fable.co/fabler/YOUR-USER-ID?tab=reviews"
+
+  with sync_playwright() as p:
+      browser = p.firefox.launch(headless=True)
+      ctx = browser.new_context(
+          viewport={"width": 1366, "height": 768},
+          user_agent="Mozilla/5.0 (X11; Linux x86_64; rv:127.0) "
+                     "Gecko/20100101 Firefox/127.0"
+      )
+      page = ctx.new_page()
+      page.goto(URL, wait_until="domcontentloaded")
+      time.sleep(4)
+
+      # Ensure the Reviews tab is active
+      try:
+          page.locator('button:has-text("Reviews")').first.click(timeout=5000)
+          time.sleep(3)
+      except Exception:
+          pass
+
+      # Scroll until height stabilises
+      last_height = 0
+      stable = 0
+      for i in range(80):
+          page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+          time.sleep(1.2)
+          new_height = page.evaluate("document.body.scrollHeight")
+          if new_height == last_height:
+              stable += 1
+              if stable >= 3:
+                  break
+          else:
+              stable = 0
+          last_height = new_height
+
+      # Also scroll the tallest inner container
+      page.evaluate("""(() => {
+          let maxH=0, el=null;
+          document.querySelectorAll('div').forEach(d => {
+              if (d.scrollHeight > maxH && d.scrollHeight > 2000)
+                  { maxH = d.scrollHeight; el = d; }
+          });
+          if (el) { el.scrollTop = el.scrollHeight; return el.scrollHeight; }
+          return 0;
+      })()
+      """)
+      time.sleep(2)
+
+      # Settle
+      for _ in range(5):
+          page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+          time.sleep(1)
+
+      # Extract review cards
+      reviews = []
+      seen = set()
+      for b in page.locator('button').all():
+          aria = b.evaluate('el => el.getAttribute("aria-label") || ""')
+          if not aria.startswith("View review for "):
+              continue
+          title = aria.replace("View review for ", "").strip()
+          if title in seen:
+              continue
+          seen.add(title)
+          text = b.text_content().strip()
+          parts = text.split("See full review", 1)
+          snippet = parts[0].strip() if parts else ""
+          tags_raw = parts[1].strip() if len(parts) > 1 else ""
+          html = b.inner_html()
+          full = html.count('aria-label="Full star"')
+          half = html.count('aria-label="Half star"')
+          rating = full + (0.5 * half)
+          reviews.append({
+              "book": title,
+              "rating": rating,
+              "snippet": snippet,
+              "tags_raw": tags_raw
+          })
+
+      print(f"Extracted {len(reviews)} reviews")
+      for r in reviews[:5]:
+          print(f"  [{r['rating']}★] {r['book']}")
+
+      browser.close()
+#+end_src
+
+The ="See full review"= split is a practical heuristic.
+Fable renders each review card as a single text blob where the review text is followed by the "See full review" link, then the tags.
+Splitting on that anchor text cleanly separates the three fields.
+
+** Step 3: Merge and Clean
+
+The two extractions produce separate datasets that must be merged by book title.
+Tags also need cleaning --- Fable concatenates them with no delimiter (="originalaction-packedclever plotting"= becomes =["original", "action-packed", "clever plotting"]=):
+
+#+begin_src python
+  import json, re
+
+  with open("fable_books_base.json") as f:
+      books = json.load(f)
+  with open("fable_reviews.json") as f:
+      reviews = json.load(f)
+
+  review_map = { r["book"].lower().strip(): r for r in reviews }
+
+  for b in books:
+      key = b["title"].lower().strip()
+      r = review_map.get(key)
+      if r:
+          b["rating"] = r["rating"]
+          b["review_snippet"] = r["snippet"]
+          b["tags_raw"] = r["tags_raw"]
+          # Naive tag split: break on word boundary before uppercase
+          raw = r["tags_raw"].strip()
+          if raw:
+              tags = []
+              cur = ""
+              for token in re.split(r'(?=\b[A-Z])', raw):
+                  token = token.strip()
+                  if not token:
+                      continue
+                  if cur and token and token[0].isupper():
+                      tags.append(cur)
+                      cur = token
+                  else:
+                      cur += token
+              if cur:
+                  tags.append(cur)
+              if not tags:
+                  tags = [t for t in raw.split("  ") if t]
+              b["tags"] = tags
+          else:
+              b["tags"] = []
+
+  with open("fable_final_export.json", "w") as f:
+      json.dump(books, f, indent=2)
+
+  print(f"Merged {len(reviews)} reviews into {len(books)} books")
+  rated_books = [b for b in books if b.get("rating") is not None]
+  print(f"Books with ratings: {len(rated_books)}")
+  print(f"Books without ratings: {len(books) - len(rated_books)}")
+#+end_src
+
+** Results
+
+For my profile:
+
+- 162 books extracted
+- 119 with review snippets
+- 43 without public review text (no review written, or review hidden)
+- 120 distinct authors
+- Average rating: 4.25/5
+
+** Limitations
+
+Note that the 43 books that had no publicly visible review text were just books that I had only left a star review for.
+The remaining 119 books have the full review text, not truncated snippets.
+Splitting on "See full review" cleanly separated review text from tags.
+
+Fable's API returns 403 without authentication tokens.
+GraphQL introspection returns 405.
+This approach relies entirely on public page rendering.
+
+Dates (started/finished) are not publicly visible without login.
+All dates in my export are null.
+
+** The Full Script
+
+The complete pipeline is available in my Fable scraping skill [fn:2].
+It is a single Python script that runs the three steps sequentially and produces a JSON file ready for further processing.
+
+** Links
+
+- [[https://fable.co][Fable]]
+- [[https://playwright.dev][Playwright]]
+- [[https://github.com/abdrysdale/abdrysdale.github.io][This site's source]]
+
+* Footnotes
+
+[fn:1] Fable's API endpoints (=api.fable.co=) return 403 "permission_denied" without authentication.
+GraphQL introspection returns 405.
+The API is real but not public.
+
+[fn:2] I use Hermes, a programmable agent, to run this pipeline on demand.
+The skill definition lives in my local skills directory and triggers whenever I mention Fable or book exports.

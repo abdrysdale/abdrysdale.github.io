@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exporting Your Reading Data From Fable</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet"href="resources/org.css"type="text/css" /><header><a href="index.html">Home</a>&emsp;<a href="about.html">About Me</a>&emsp;<a href="https://github.com/abdrysdale/abdrysdale.github.io">Source</a>&emsp;<a href="sitemap.html">Sitemap</a>&emsp;<a href="feed.xml">RSS</a></header>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Exporting Your Reading Data From Fable</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0bf9ec7">Exporting Your Reading Data From Fable</a></li>
+</ul>
+</div>
+</div>
+<p>
+<i>This problem was solved via an iterative process with my LLM agent. To save others the effort, the agent summarised the process as follows. I have checked and reviewed the output but it is ultimately not my own writing.</i>
+</p>
+
+<div id="outline-container-org0bf9ec7" class="outline-2">
+<h2 id="org0bf9ec7">Exporting Your Reading Data From Fable</h2>
+<div class="outline-text-2" id="text-org0bf9ec7">
+<p>
+Fable has no export function and no public API <sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>.
+Most of a user's profile is publicly visible without logging in.
+Unfortunately Fable is a single-page application (SPA) that renders everything dynamically &#x2014; standard HTTP requests or simple scraping won't work.
+The content is generated in the browser via JavaScript, and the list containers use virtualised scrolling with lazy loading.
+</p>
+
+<p>
+This post documents how I extracted my own reading data &#x2014; 162 books, 119 with review snippets, 120 distinct authors &#x2014; using Playwright and Firefox.
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a id="org49590d0"></a>Prerequisites<br />
+<div class="outline-text-3" id="text-org49590d0">
+<p>
+Install Playwright:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">pip install playwright
+playwright install firefox
+</pre>
+</div>
+
+<p>
+Use Firefox, not Chromium.
+Fable's anti-bot measures are more aggressive against Chromium headless.
+Switching to Firefox solved blocked requests immediately.
+</p>
+</div>
+</li>
+
+<li><a id="org221e313"></a>Step 1: Extract the Book List<br />
+<div class="outline-text-3" id="text-org221e313">
+<p>
+The "Finished" list on Fable loads books in batches of roughly 20.
+Scrolling <code>window</code> does not trigger the lazy loader.
+Instead you must scroll the tallest inner <code>div</code> that holds the book cards.
+</p>
+
+<p>
+The extraction script:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> playwright.sync_api <span style="font-weight: bold;">import</span> sync_playwright
+
+<span style="font-weight: bold; font-style: italic;">URL</span> = <span style="font-style: italic;">"https://fable.co/book-list/YOUR-LIST-UUID"</span>
+
+<span style="font-weight: bold;">with</span> sync_playwright() <span style="font-weight: bold;">as</span> p:
+    <span style="font-weight: bold; font-style: italic;">browser</span> = p.firefox.launch(headless=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+    <span style="font-weight: bold; font-style: italic;">context</span> = browser.new_context(
+        viewport={<span style="font-style: italic;">"width"</span>: 1280, <span style="font-style: italic;">"height"</span>: 3000},
+        user_agent=<span style="font-style: italic;">"Mozilla/5.0 (Windows NT 10.0; Win64; x64; "</span>
+                   <span style="font-style: italic;">"rv:128.0) Gecko/20100101 Firefox/128.0"</span>
+    )
+    <span style="font-weight: bold; font-style: italic;">page</span> = context.new_page()
+    page.goto(URL, wait_until=<span style="font-style: italic;">"networkidle"</span>, timeout=60000)
+    page.wait_for_timeout(5000)
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Accept cookies if present
+</span>    <span style="font-weight: bold;">try</span>:
+        <span style="font-weight: bold; font-style: italic;">btn</span> = page.locator(<span style="font-style: italic;">"button:has-text('Accept All Cookies')"</span>).first
+        <span style="font-weight: bold;">if</span> btn.count() &gt; 0 <span style="font-weight: bold;">and</span> btn.is_visible():
+            btn.click()
+            page.wait_for_timeout(1000)
+    <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>:
+        <span style="font-weight: bold;">pass</span>
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Find the tallest scrollable container
+</span>    <span style="font-weight: bold; font-style: italic;">containers</span> = []
+    <span style="font-weight: bold;">for</span> div <span style="font-weight: bold;">in</span> page.locator(<span style="font-style: italic;">"div"</span>).<span style="font-weight: bold;">all</span>():
+        <span style="font-weight: bold;">try</span>:
+            <span style="font-weight: bold; font-style: italic;">h</span> = div.evaluate(<span style="font-style: italic;">"el =&gt; el.scrollHeight"</span>)
+            <span style="font-weight: bold;">if</span> h &gt; 1000:
+                containers.append((div, h))
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>:
+            <span style="font-weight: bold;">pass</span>
+    containers.sort(key=<span style="font-weight: bold;">lambda</span> x: x[1], reverse=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+    <span style="font-weight: bold; font-style: italic;">target</span> = containers[0][0] <span style="font-weight: bold;">if</span> containers <span style="font-weight: bold;">else</span> <span style="font-weight: bold; text-decoration: underline;">None</span>
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Scroll until no new books load
+</span>    <span style="font-weight: bold; font-style: italic;">prev_count</span> = 0
+    <span style="font-weight: bold; font-style: italic;">no_new_count</span> = 0
+    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(300):
+        <span style="font-weight: bold; font-style: italic;">titles</span> = page.locator(<span style="font-style: italic;">"[class*='book-title']"</span>).all_inner_texts()
+        <span style="font-weight: bold; font-style: italic;">authors</span> = page.locator(<span style="font-style: italic;">"[class*='book-author']"</span>).all_inner_texts()
+        <span style="font-weight: bold; font-style: italic;">current</span> = []
+        <span style="font-weight: bold;">for</span> t, a <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(titles, authors):
+            <span style="font-weight: bold; font-style: italic;">t</span> = t.strip()
+            <span style="font-weight: bold; font-style: italic;">a</span> = a.strip()
+            <span style="font-weight: bold;">if</span> a.startswith(<span style="font-style: italic;">"By "</span>):
+                <span style="font-weight: bold; font-style: italic;">a</span> = a[3:]
+            <span style="font-weight: bold;">if</span> t <span style="font-weight: bold;">and</span> a <span style="font-weight: bold;">and</span> (t, a) <span style="font-weight: bold;">not</span> <span style="font-weight: bold;">in</span> current:
+                current.append((t, a))
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">len</span>(current) &gt; prev_count:
+            <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"  Step </span>{i}<span style="font-style: italic;">: </span>{<span style="font-weight: bold;">len</span>(current)}<span style="font-style: italic;"> books"</span>)
+            <span style="font-weight: bold; font-style: italic;">prev_count</span> = <span style="font-weight: bold;">len</span>(current)
+            <span style="font-weight: bold; font-style: italic;">no_new_count</span> = 0
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold; font-style: italic;">no_new_count</span> += 1
+        <span style="font-weight: bold;">if</span> no_new_count &gt;= 20:
+            <span style="font-weight: bold;">break</span>
+        <span style="font-weight: bold;">if</span> target:
+            target.evaluate(<span style="font-style: italic;">"el =&gt; { el.scrollBy(0, 500); }"</span>)
+        page.evaluate(<span style="font-style: italic;">"window.scrollBy(0, 500)"</span>)
+        page.wait_for_timeout(600)
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Final extract --- also grab the Fable book URLs
+</span>    <span style="font-weight: bold; font-style: italic;">cards</span> = page.locator(<span style="font-style: italic;">"[class*='book-card'], [class*='bookCard']"</span>).<span style="font-weight: bold;">all</span>()
+    <span style="font-weight: bold; font-style: italic;">books</span> = []
+    <span style="font-weight: bold;">for</span> card <span style="font-weight: bold;">in</span> cards:
+        <span style="font-weight: bold; font-style: italic;">title_el</span> = card.locator(<span style="font-style: italic;">"[class*='book-title']"</span>).first
+        <span style="font-weight: bold; font-style: italic;">author_el</span> = card.locator(<span style="font-style: italic;">"[class*='book-author']"</span>).first
+        <span style="font-weight: bold; font-style: italic;">title</span> = title_el.inner_text().strip() <span style="font-weight: bold;">if</span> title_el.count() &gt; 0 <span style="font-weight: bold;">else</span> <span style="font-style: italic;">""</span>
+        <span style="font-weight: bold; font-style: italic;">author</span> = author_el.inner_text().strip() <span style="font-weight: bold;">if</span> author_el.count() &gt; 0 <span style="font-weight: bold;">else</span> <span style="font-style: italic;">""</span>
+        <span style="font-weight: bold;">if</span> author.startswith(<span style="font-style: italic;">"By "</span>):
+            <span style="font-weight: bold; font-style: italic;">author</span> = author[3:]
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Extract the /book/... URL from the card HTML
+</span>        <span style="font-weight: bold; font-style: italic;">html</span> = card.inner_html()
+        <span style="font-weight: bold; font-style: italic;">m</span> = <span style="font-weight: bold;">__import__</span>(<span style="font-style: italic;">'re'</span>).search(r<span style="font-style: italic;">'href="(/book/[^"]+)"'</span>, html)
+        <span style="font-weight: bold; font-style: italic;">fable_url</span> = f<span style="font-style: italic;">"https://fable.co</span>{m.group(1)}<span style="font-style: italic;">"</span> <span style="font-weight: bold;">if</span> m <span style="font-weight: bold;">else</span> <span style="font-style: italic;">""</span>
+        <span style="font-weight: bold;">if</span> title <span style="font-weight: bold;">and</span> author:
+            books.append({
+                <span style="font-style: italic;">"title"</span>: title,
+                <span style="font-style: italic;">"author"</span>: author,
+                <span style="font-style: italic;">"fable_url"</span>: fable_url,
+                <span style="font-style: italic;">"list_url"</span>: URL,
+                <span style="font-style: italic;">"shelves"</span>: [<span style="font-style: italic;">"Finished"</span>]
+            })
+
+    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Extracted </span>{<span style="font-weight: bold;">len</span>(books)}<span style="font-style: italic;"> books"</span>)
+    browser.close()
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org1a74ff5"></a>Step 2: Extract Reviews and Ratings<br />
+<div class="outline-text-3" id="text-org1a74ff5">
+<p>
+The Reviews tab (<code>/fabler/USER-ID?tab=reviews</code>) contains star ratings and review text.
+It uses the same lazy-loaded virtualised list pattern.
+</p>
+
+<p>
+Star ratings are rendered as SVG elements with <code>aria-label</code>"Full star"= or <code>"Half star"</code>, not as plain text.
+Count them to get the numeric rating:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">from</span> playwright.sync_api <span style="font-weight: bold;">import</span> sync_playwright
+<span style="font-weight: bold;">import</span> time, json, re
+
+<span style="font-weight: bold; font-style: italic;">URL</span> = <span style="font-style: italic;">"https://fable.co/fabler/YOUR-USER-ID?tab=reviews"</span>
+
+<span style="font-weight: bold;">with</span> sync_playwright() <span style="font-weight: bold;">as</span> p:
+    <span style="font-weight: bold; font-style: italic;">browser</span> = p.firefox.launch(headless=<span style="font-weight: bold; text-decoration: underline;">True</span>)
+    <span style="font-weight: bold; font-style: italic;">ctx</span> = browser.new_context(
+        viewport={<span style="font-style: italic;">"width"</span>: 1366, <span style="font-style: italic;">"height"</span>: 768},
+        user_agent=<span style="font-style: italic;">"Mozilla/5.0 (X11; Linux x86_64; rv:127.0) "</span>
+                   <span style="font-style: italic;">"Gecko/20100101 Firefox/127.0"</span>
+    )
+    <span style="font-weight: bold; font-style: italic;">page</span> = ctx.new_page()
+    page.goto(URL, wait_until=<span style="font-style: italic;">"domcontentloaded"</span>)
+    time.sleep(4)
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Ensure the Reviews tab is active
+</span>    <span style="font-weight: bold;">try</span>:
+        page.locator(<span style="font-style: italic;">'button:has-text("Reviews")'</span>).first.click(timeout=5000)
+        time.sleep(3)
+    <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>:
+        <span style="font-weight: bold;">pass</span>
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Scroll until height stabilises
+</span>    <span style="font-weight: bold; font-style: italic;">last_height</span> = 0
+    <span style="font-weight: bold; font-style: italic;">stable</span> = 0
+    <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(80):
+        page.evaluate(<span style="font-style: italic;">"window.scrollTo(0, document.body.scrollHeight)"</span>)
+        time.sleep(1.2)
+        <span style="font-weight: bold; font-style: italic;">new_height</span> = page.evaluate(<span style="font-style: italic;">"document.body.scrollHeight"</span>)
+        <span style="font-weight: bold;">if</span> new_height == last_height:
+            <span style="font-weight: bold; font-style: italic;">stable</span> += 1
+            <span style="font-weight: bold;">if</span> stable &gt;= 3:
+                <span style="font-weight: bold;">break</span>
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold; font-style: italic;">stable</span> = 0
+        <span style="font-weight: bold; font-style: italic;">last_height</span> = new_height
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Also scroll the tallest inner container
+</span>    page.evaluate(<span style="font-style: italic;">"""(() =&gt; {
+        let maxH=0, el=null;
+        document.querySelectorAll('div').forEach(d =&gt; {
+            if (d.scrollHeight &gt; maxH &amp;&amp; d.scrollHeight &gt; 2000)
+                { maxH = d.scrollHeight; el = d; }
+        });
+        if (el) { el.scrollTop = el.scrollHeight; return el.scrollHeight; }
+        return 0;
+    })()
+    """</span>)
+    time.sleep(2)
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Settle
+</span>    <span style="font-weight: bold;">for</span> _ <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(5):
+        page.evaluate(<span style="font-style: italic;">"window.scrollTo(0, document.body.scrollHeight)"</span>)
+        time.sleep(1)
+
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Extract review cards
+</span>    <span style="font-weight: bold; font-style: italic;">reviews</span> = []
+    <span style="font-weight: bold; font-style: italic;">seen</span> = <span style="font-weight: bold;">set</span>()
+    <span style="font-weight: bold;">for</span> b <span style="font-weight: bold;">in</span> page.locator(<span style="font-style: italic;">'button'</span>).<span style="font-weight: bold;">all</span>():
+        <span style="font-weight: bold; font-style: italic;">aria</span> = b.evaluate(<span style="font-style: italic;">'el =&gt; el.getAttribute("aria-label") || ""'</span>)
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> aria.startswith(<span style="font-style: italic;">"View review for "</span>):
+            <span style="font-weight: bold;">continue</span>
+        <span style="font-weight: bold; font-style: italic;">title</span> = aria.replace(<span style="font-style: italic;">"View review for "</span>, <span style="font-style: italic;">""</span>).strip()
+        <span style="font-weight: bold;">if</span> title <span style="font-weight: bold;">in</span> seen:
+            <span style="font-weight: bold;">continue</span>
+        seen.add(title)
+        <span style="font-weight: bold; font-style: italic;">text</span> = b.text_content().strip()
+        <span style="font-weight: bold; font-style: italic;">parts</span> = text.split(<span style="font-style: italic;">"See full review"</span>, 1)
+        <span style="font-weight: bold; font-style: italic;">snippet</span> = parts[0].strip() <span style="font-weight: bold;">if</span> parts <span style="font-weight: bold;">else</span> <span style="font-style: italic;">""</span>
+        <span style="font-weight: bold; font-style: italic;">tags_raw</span> = parts[1].strip() <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">len</span>(parts) &gt; 1 <span style="font-weight: bold;">else</span> <span style="font-style: italic;">""</span>
+        <span style="font-weight: bold; font-style: italic;">html</span> = b.inner_html()
+        <span style="font-weight: bold; font-style: italic;">full</span> = html.count(<span style="font-style: italic;">'aria-label="Full star"'</span>)
+        <span style="font-weight: bold; font-style: italic;">half</span> = html.count(<span style="font-style: italic;">'aria-label="Half star"'</span>)
+        <span style="font-weight: bold; font-style: italic;">rating</span> = full + (0.5 * half)
+        reviews.append({
+            <span style="font-style: italic;">"book"</span>: title,
+            <span style="font-style: italic;">"rating"</span>: rating,
+            <span style="font-style: italic;">"snippet"</span>: snippet,
+            <span style="font-style: italic;">"tags_raw"</span>: tags_raw
+        })
+
+    <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Extracted </span>{<span style="font-weight: bold;">len</span>(reviews)}<span style="font-style: italic;"> reviews"</span>)
+    <span style="font-weight: bold;">for</span> r <span style="font-weight: bold;">in</span> reviews[:5]:
+        <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"  [</span>{r['rating']}<span style="font-style: italic;">&#9733;] </span>{r['book']}<span style="font-style: italic;">"</span>)
+
+    browser.close()
+</pre>
+</div>
+
+<p>
+The <code>"See full review"</code> split is a practical heuristic.
+Fable renders each review card as a single text blob where the review text is followed by the "See full review" link, then the tags.
+Splitting on that anchor text cleanly separates the three fields.
+</p>
+</div>
+</li>
+
+<li><a id="orgd5e16bc"></a>Step 3: Merge and Clean<br />
+<div class="outline-text-3" id="text-orgd5e16bc">
+<p>
+The two extractions produce separate datasets that must be merged by book title.
+Tags also need cleaning &#x2014; Fable concatenates them with no delimiter (<code>"originalaction-packedclever plotting"</code> becomes <code>["original", "action-packed", "clever plotting"]</code>):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">import</span> json, re
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">open</span>(<span style="font-style: italic;">"fable_books_base.json"</span>) <span style="font-weight: bold;">as</span> f:
+    <span style="font-weight: bold; font-style: italic;">books</span> = json.load(f)
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">open</span>(<span style="font-style: italic;">"fable_reviews.json"</span>) <span style="font-weight: bold;">as</span> f:
+    <span style="font-weight: bold; font-style: italic;">reviews</span> = json.load(f)
+
+<span style="font-weight: bold; font-style: italic;">review_map</span> = { r[<span style="font-style: italic;">"book"</span>].lower().strip(): r <span style="font-weight: bold;">for</span> r <span style="font-weight: bold;">in</span> reviews }
+
+<span style="font-weight: bold;">for</span> b <span style="font-weight: bold;">in</span> books:
+    <span style="font-weight: bold; font-style: italic;">key</span> = b[<span style="font-style: italic;">"title"</span>].lower().strip()
+    <span style="font-weight: bold; font-style: italic;">r</span> = review_map.get(key)
+    <span style="font-weight: bold;">if</span> r:
+        <span style="font-weight: bold; font-style: italic;">b</span>[<span style="font-style: italic;">"rating"</span>] = r[<span style="font-style: italic;">"rating"</span>]
+        <span style="font-weight: bold; font-style: italic;">b</span>[<span style="font-style: italic;">"review_snippet"</span>] = r[<span style="font-style: italic;">"snippet"</span>]
+        <span style="font-weight: bold; font-style: italic;">b</span>[<span style="font-style: italic;">"tags_raw"</span>] = r[<span style="font-style: italic;">"tags_raw"</span>]
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Naive tag split: break on word boundary before uppercase
+</span>        <span style="font-weight: bold; font-style: italic;">raw</span> = r[<span style="font-style: italic;">"tags_raw"</span>].strip()
+        <span style="font-weight: bold;">if</span> raw:
+            <span style="font-weight: bold; font-style: italic;">tags</span> = []
+            <span style="font-weight: bold; font-style: italic;">cur</span> = <span style="font-style: italic;">""</span>
+            <span style="font-weight: bold;">for</span> token <span style="font-weight: bold;">in</span> re.split(r<span style="font-style: italic;">'(?=\b[A-Z])'</span>, raw):
+                <span style="font-weight: bold; font-style: italic;">token</span> = token.strip()
+                <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> token:
+                    <span style="font-weight: bold;">continue</span>
+                <span style="font-weight: bold;">if</span> cur <span style="font-weight: bold;">and</span> token <span style="font-weight: bold;">and</span> token[0].isupper():
+                    tags.append(cur)
+                    <span style="font-weight: bold; font-style: italic;">cur</span> = token
+                <span style="font-weight: bold;">else</span>:
+                    <span style="font-weight: bold; font-style: italic;">cur</span> += token
+            <span style="font-weight: bold;">if</span> cur:
+                tags.append(cur)
+            <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">not</span> tags:
+                <span style="font-weight: bold; font-style: italic;">tags</span> = [t <span style="font-weight: bold;">for</span> t <span style="font-weight: bold;">in</span> raw.split(<span style="font-style: italic;">"  "</span>) <span style="font-weight: bold;">if</span> t]
+            <span style="font-weight: bold; font-style: italic;">b</span>[<span style="font-style: italic;">"tags"</span>] = tags
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold; font-style: italic;">b</span>[<span style="font-style: italic;">"tags"</span>] = []
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">open</span>(<span style="font-style: italic;">"fable_final_export.json"</span>, <span style="font-style: italic;">"w"</span>) <span style="font-weight: bold;">as</span> f:
+    json.dump(books, f, indent=2)
+
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Merged </span>{<span style="font-weight: bold;">len</span>(reviews)}<span style="font-style: italic;"> reviews into </span>{<span style="font-weight: bold;">len</span>(books)}<span style="font-style: italic;"> books"</span>)
+<span style="font-weight: bold; font-style: italic;">rated_books</span> = [b <span style="font-weight: bold;">for</span> b <span style="font-weight: bold;">in</span> books <span style="font-weight: bold;">if</span> b.get(<span style="font-style: italic;">"rating"</span>) <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>]
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Books with ratings: </span>{<span style="font-weight: bold;">len</span>(rated_books)}<span style="font-style: italic;">"</span>)
+<span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"Books without ratings: </span>{<span style="font-weight: bold;">len</span>(books) - <span style="font-weight: bold;">len</span>(rated_books)}<span style="font-style: italic;">"</span>)
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org8358c23"></a>Results<br />
+<div class="outline-text-3" id="text-org8358c23">
+<p>
+For my profile:
+</p>
+
+<ul class="org-ul">
+<li>162 books extracted</li>
+<li>119 with review snippets</li>
+<li>43 without public review text (no review written, or review hidden)</li>
+<li>120 distinct authors</li>
+<li>Average rating: 4.25/5</li>
+</ul>
+</div>
+</li>
+
+<li><a id="orgf63589d"></a>Limitations<br />
+<div class="outline-text-3" id="text-orgf63589d">
+<p>
+Note that the 43 books that had no publicly visible review text were just books that I had only left a star review for.
+The remaining 119 books have the full review text, not truncated snippets.
+Splitting on "See full review" cleanly separated review text from tags.
+</p>
+
+<p>
+Fable's API returns 403 without authentication tokens.
+GraphQL introspection returns 405.
+This approach relies entirely on public page rendering.
+</p>
+
+<p>
+Dates (started/finished) are not publicly visible without login.
+All dates in my export are null.
+</p>
+</div>
+</li>
+
+<li><a id="orgf651432"></a>The Full Script<br />
+<div class="outline-text-3" id="text-orgf651432">
+<p>
+The complete pipeline is available in my Fable scraping skill <sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>.
+It is a single Python script that runs the three steps sequentially and produces a JSON file ready for further processing.
+</p>
+</div>
+</li>
+
+<li><a id="org2d5c563"></a>Links<br />
+<div class="outline-text-3" id="text-org2d5c563">
+<ul class="org-ul">
+<li><a href="https://fable.co">Fable</a></li>
+<li><a href="https://playwright.dev">Playwright</a></li>
+<li><a href="https://github.com/abdrysdale/abdrysdale.github.io">This site's source</a></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Fable's API endpoints (<code>api.fable.co</code>) return 403 "permission<sub>denied</sub>" without authentication.
+GraphQL introspection returns 405.
+The API is real but not public.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+I use Hermes, a programmable agent, to run this pipeline on demand.
+The skill definition lives in my local skills directory and triggers whenever I mention Fable or book exports.</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="date">Date: 2026-06-01 Mon 00:00</p>
+<p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.3 (<a href="https://orgmode.org">Org</a> mode 9.6.15)</p>
+</div>
+</body>
+</html>
